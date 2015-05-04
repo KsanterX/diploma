@@ -1,0 +1,9 @@
+C:\Users\Artem\Documents\Visual Studio 2013\Projects\diploma\Diploma\bin\Debug\Diploma.exe.config
+C:\Users\Artem\Documents\Visual Studio 2013\Projects\diploma\Diploma\bin\Debug\Diploma.exe
+C:\Users\Artem\Documents\Visual Studio 2013\Projects\diploma\Diploma\bin\Debug\Diploma.pdb
+C:\Users\Artem\Documents\Visual Studio 2013\Projects\diploma\Diploma\obj\Debug\Diploma.MainForm.resources
+C:\Users\Artem\Documents\Visual Studio 2013\Projects\diploma\Diploma\obj\Debug\Diploma.Properties.Resources.resources
+C:\Users\Artem\Documents\Visual Studio 2013\Projects\diploma\Diploma\obj\Debug\Diploma.csproj.GenerateResource.Cache
+C:\Users\Artem\Documents\Visual Studio 2013\Projects\diploma\Diploma\obj\Debug\Diploma.exe
+C:\Users\Artem\Documents\Visual Studio 2013\Projects\diploma\Diploma\obj\Debug\Diploma.pdb
+C:\Users\Artem\Documents\Visual Studio 2013\Projects\diploma\Diploma\obj\Debug\Diploma.csprojResolveAssemblyReference.cache

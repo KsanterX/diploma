@@ -4,3 +4,9 @@ d:\users\artem\documents\visual studio 2013\Projects\ConsoleApplication1\Console
 d:\users\artem\documents\visual studio 2013\Projects\ConsoleApplication1\ConsoleApplication1\bin\Debug\ConsoleApplication1.pdb
 d:\users\artem\documents\visual studio 2013\Projects\ConsoleApplication1\ConsoleApplication1\obj\Debug\ConsoleApplication1.exe
 d:\users\artem\documents\visual studio 2013\Projects\ConsoleApplication1\ConsoleApplication1\obj\Debug\ConsoleApplication1.pdb
+C:\Users\Artem\Documents\Visual Studio 2013\Projects\diploma\ConsoleApplication1\bin\Debug\ConsoleApplication1.exe.config
+C:\Users\Artem\Documents\Visual Studio 2013\Projects\diploma\ConsoleApplication1\obj\Debug\ConsoleApplication1.exe
+C:\Users\Artem\Documents\Visual Studio 2013\Projects\diploma\ConsoleApplication1\obj\Debug\ConsoleApplication1.pdb
+C:\Users\Artem\Documents\Visual Studio 2013\Projects\diploma\ConsoleApplication1\bin\Debug\ConsoleApplication1.exe
+C:\Users\Artem\Documents\Visual Studio 2013\Projects\diploma\ConsoleApplication1\bin\Debug\ConsoleApplication1.pdb
+C:\Users\Artem\Documents\Visual Studio 2013\Projects\diploma\ConsoleApplication1\obj\Debug\ConsoleApplication1.csprojResolveAssemblyReference.cache
