@@ -8,27 +8,18 @@ namespace Diploma
 {
     class Issled
     {
-        private string name;
-        private int id;
-        private int diap;
+        //имя исследования
+        string name;
+        //id исследования
+        byte id;
+        //массив вероятностей исследования
+        double[][] probability = new double[18][];
 
-        public void Diap(int id)
-        {
-            switch (id)
-            {
-                case 1:
-                    diap = 202;
-                    break;
-                default:
-                    break;
-            }
-        }
-
-
-        public Issled(int id, string name)
+        public Issled(byte id, string name, double[][] probability)
         {
             this.name = name;
             this.id = id;
+            this.probability = probability;            
         }
 
         public string Name
@@ -37,10 +28,19 @@ namespace Diploma
             set { name = value; }
         }
 
-        public int Id
+        public byte Id
         {
             get { return id; }
             set { id = value; }
+        }
+
+        public double[][] Probability
+        {
+            get { return probability; }
+            set
+            { 
+                probability = value;
+            }
         }
     }
 }
