@@ -71,15 +71,16 @@
             this.issledBox18 = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.richTextBox2 = new System.Windows.Forms.RichTextBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(810, 555);
+            this.button1.Location = new System.Drawing.Point(955, 276);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.Size = new System.Drawing.Size(92, 51);
             this.button1.TabIndex = 0;
             this.button1.Text = "Старт";
             this.button1.UseVisualStyleBackColor = true;
@@ -90,7 +91,7 @@
             this.richTextBox1.Location = new System.Drawing.Point(12, 12);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.ReadOnly = true;
-            this.richTextBox1.Size = new System.Drawing.Size(430, 283);
+            this.richTextBox1.Size = new System.Drawing.Size(309, 283);
             this.richTextBox1.TabIndex = 1;
             this.richTextBox1.Text = "";
             // 
@@ -439,18 +440,28 @@
             // pictureBox1
             // 
             this.pictureBox1.Image = global::Diploma.Properties.Resources.lQqTC_SXYoU;
-            this.pictureBox1.Location = new System.Drawing.Point(291, 12);
+            this.pictureBox1.Location = new System.Drawing.Point(891, 12);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(343, 402);
+            this.pictureBox1.Size = new System.Drawing.Size(208, 240);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 41;
             this.pictureBox1.TabStop = false;
+            // 
+            // richTextBox2
+            // 
+            this.richTextBox2.Location = new System.Drawing.Point(328, 12);
+            this.richTextBox2.Name = "richTextBox2";
+            this.richTextBox2.ReadOnly = true;
+            this.richTextBox2.Size = new System.Drawing.Size(306, 283);
+            this.richTextBox2.TabIndex = 42;
+            this.richTextBox2.Text = "";
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(886, 577);
+            this.ClientSize = new System.Drawing.Size(1104, 577);
+            this.Controls.Add(this.richTextBox2);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.issledBox18);
@@ -547,6 +558,7 @@
         private System.Windows.Forms.TextBox issledBox18;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.RichTextBox richTextBox2;
     }
 }
 
