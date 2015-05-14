@@ -20,6 +20,8 @@ namespace Diploma
             Application.SetCompatibleTextRenderingDefault(false);
             MyForm = new MainForm();
             Application.Run(MyForm);
+
+
             
         }
 

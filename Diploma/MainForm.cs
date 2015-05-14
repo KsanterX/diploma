@@ -16,6 +16,8 @@ namespace Diploma
         public MainForm()
         {
             InitializeComponent();
+
+
         }
 
         //при нажатии на кнопку, вызов функции проверки статуса запуска программы
@@ -43,8 +45,6 @@ namespace Diploma
         //главная программа
         public void MainProg()
         {
-            
-            
             //список названий исследований и их id
             List<KeyValuePair<string, byte>> IssledElements = new List<KeyValuePair<string, byte>>
                                                           {
@@ -66,37 +66,28 @@ namespace Diploma
                                                               new KeyValuePair<string, byte>("Мочевая кислота", 15),
                                                               new KeyValuePair<string, byte>("Щелочной фосфотазы", 16),
                                                               new KeyValuePair<string, byte>("ГГТП", 17)
+            
                                                           };
+            
             //массив объектов
             IDictionary<string, Issled> issl = new Dictionary<string, Issled>();
             for (int i = 0; i < IssledElements.Count; i++)
             {
                 issl[IssledElements[i].Key] = new Issled(IssledElements[i].Value, IssledElements[i].Key);
             }
+
+            //PrintRichTxt(issl[IssledElements[0].Key].ProbArray[0].Length.ToString());
             
-            /*
             //выводим на экран
             foreach (var x in issl.Values)
             {
                 richTextBox1.Text += "\n" + "ID: " + x.Id.ToString() + " || " + "Имя: " + x.Name.ToString();
-                    for (int i = 0; i < x.ProbArray[x.Id].Length; i++)
+                    for (int i = 0; i < x.ProbArray[x.Id].GetLength(0); i++)
                     {
-                        PrintRichTxt(x.ProbArray[x.Id][i].ToString());
+                        PrintRichTxt(x.ProbArray[x.Id][i,0].ToString());
                     }
             }
-            */
-            
-            string selectedElement;
 
-            //генератор
-            Random r = new Random(DateTime.Now.Millisecond);
-            double diceRoll;
-
-            //переменная для подсчета кумулятивной вероятности
-            double cumulative = 0.0;
-            int ind;
-            int z;
-            Random a = new Random(DateTime.Now.Millisecond);
 
             //создаём массив с названиями текстовых форм для вывода количества каждого исследования
             TextBox[] tbs = new TextBox[] { issledBox1, issledBox2, issledBox3, issledBox4, issledBox5, issledBox6, issledBox7, issledBox8, issledBox9, issledBox10, issledBox11, issledBox12, issledBox13, issledBox14, issledBox15, issledBox16, issledBox17, issledBox18 };
@@ -104,615 +95,36 @@ namespace Diploma
             //выводим число проб в поле на форме, переводя его в текстовый вид
             int probe = ProbeGen(50, 536);
             probeBox1.Text = probe.ToString();
+            
+            //переменная для подсчета кумулятивной вероятности
+            double cumulative = 0.0;
+            int ind;
+            int z;
+            string selectedElement;
+
+            //генератор
+            Random r = new Random();
+            double diceRoll;
 
             //цикл подсчета кумулятивной вероятности и сравнения с вероятностью из списка
             foreach (var x in issl.Values)
             {
                 diceRoll = r.NextDouble();
-                for (int i = 0; i < x.ProbArray[x.Id].Length; i++)
+
+                for (int i = 0; i < x.ProbArray[x.Id].GetLength(0); i++)
                 {
                     //кумулятивная вероятность = кумулятивная вероятность + вероятность элемента списка
-                    cumulative += x.ProbArray[x.Id][i];
+                    cumulative += x.ProbArray[x.Id][i,0];
                     //если сгенерированная вероятность меньше кумулятивной вероятности элемента списка
                     if (diceRoll < cumulative)
                     {
                         //выводим отладочную информацию                        
-                        selectedElement = "\n" + x.Id + " " + x.Name + " = " + x.ProbArray[x.Id][i].ToString() + " & " + x.Diap[i].ToString();
+                        selectedElement = "\n" + x.Id + " || " + x.Name + " || " + " || " +  i + " || ";
                         richTextBox2.Text += selectedElement;
                         
-                        //дополнительные расчеты в зависимости от исследования (проверка по ID)
-                        switch (x.Id)
-                        {
-                            case 0:
-                                //если индекс элемента массива не равен 0 И значение верхней границы диапазона больше количества проб
-                                if (x.Diap[i] > probe)
-                                {
-                                    
-                                    //присваиваем переменной значение верхнего диапазона
-                                    z = x.Diap[i];
-                                    //пока переменная больше количества проб, уменьшаем её
-                                    while (z > probe)
-                                    {
-                                        z--;
-                                    }                                   
-                                    //генерируем новое число из диапазона
-                                    ind = a.Next(z - 20, z);
-                                    //выводим в поле формы
-                                    tbs[x.Id].Text = ind.ToString();
-                                    
-                                }
-                                //если индекс элемента массива не равен 0
-                                else if (i != 0)
-                                {                                    
-                                    //генерируем число из диапазона
-                                        ind = a.Next(x.Diap[i-1], x.Diap[i]);
-                                    //выводим в поле формы
-                                    tbs[x.Id].Text = ind.ToString();    
-                                }
-                                //если индекс элемента массива равен 0
-                                else
-                                {
-                                    ind = a.Next(x.Diap[i], x.Diap[i++]);
-                                    tbs[x.Id].Text = ind.ToString();
-                                }
-                                break;
-                            case 1:
-                                //если индекс элемента массива не равен 0 И значение верхней границы диапазона больше количества проб
-                                if (x.Diap[i] > probe)
-                                {
-                                    //присваиваем переменной значение верхнего диапазона
-                                    z = x.Diap[i];
-                                    //пока переменная больше количества проб, уменьшаем её
-                                    while (z > probe)
-                                    {
-                                        z--;
-                                    }                                    
-                                    //генерируем новое число из диапазона
-                                    ind = a.Next(z - 20, z);
-                                    //выводим в поле формы
-                                    tbs[x.Id].Text = ind.ToString();
-
-                                }
-                                //если индекс элемента массива не равен 0
-                                else if (i != 0)
-                                {                                    
-                                    //генерируем число из диапазона
-                                    ind = a.Next(x.Diap[i-1], x.Diap[i]);
-                                    //выводим в поле формы
-                                    tbs[x.Id].Text = ind.ToString();
-                                }
-                                //если индекс элемента массива равен 0
-                                else
-                                {
-                                    ind = a.Next(x.Diap[i], x.Diap[i++]);
-                                    tbs[x.Id].Text = ind.ToString();
-                                }
-                                break;
-                            case 2:
-                                //если индекс элемента массива не равен 0 И значение верхней границы диапазона больше количества проб
-                                if (x.Diap[i] > probe)
-                                {
-
-                                    //присваиваем переменной значение верхнего диапазона
-                                    z = x.Diap[i];
-                                    //пока переменная больше количества проб, уменьшаем её
-                                    while (z > probe)
-                                    {
-                                        z--;
-                                    }
-                                    //генерируем новое число из диапазона
-                                    ind = a.Next(z - 20, z);
-                                    //выводим в поле формы
-                                    tbs[x.Id].Text = ind.ToString();
-
-                                }
-                                //если индекс элемента массива не равен 0
-                                else if (i != 0)
-                                {
-                                    //генерируем число из диапазона
-                                    ind = a.Next(x.Diap[i-1], x.Diap[i]);
-                                    //выводим в поле формы
-                                    tbs[x.Id].Text = ind.ToString();
-                                }
-                                //если индекс элемента массива равен 0
-                                else
-                                {
-                                    ind = a.Next(x.Diap[i], x.Diap[i++]);
-                                    tbs[x.Id].Text = ind.ToString();
-                                }
-                                break;
-                            case 3:
-                                //если индекс элемента массива не равен 0 И значение верхней границы диапазона больше количества проб
-                                if (x.Diap[i] > probe)
-                                {
-                                    //присваиваем переменной значение верхнего диапазона
-                                    z = x.Diap[i];
-                                    //пока переменная больше количества проб, уменьшаем её
-                                    while (z > probe)
-                                    {
-                                        z--;
-                                    }
-                                    //генерируем новое число из диапазона
-                                    ind = a.Next(z - 20, z);
-                                    //выводим в поле формы
-                                    tbs[x.Id].Text = ind.ToString();
-
-                                }
-                                //если индекс элемента массива не равен 0
-                                else if (i != 0)
-                                {
-                                    //генерируем число из диапазона
-                                    ind = a.Next(x.Diap[i-1], x.Diap[i]);
-                                    //выводим в поле формы
-                                    tbs[x.Id].Text = ind.ToString();
-                                }
-                                //если индекс элемента массива равен 0
-                                else
-                                {
-                                    ind = a.Next(x.Diap[i], x.Diap[i++]);
-                                    tbs[x.Id].Text = ind.ToString();
-                                }
-                                break;
-                            case 4:
-                                //если индекс элемента массива не равен 0 И значение верхней границы диапазона больше количества проб
-                                if (x.Diap[i] > probe)
-                                {
-
-                                    //присваиваем переменной значение верхнего диапазона
-                                    z = x.Diap[i];
-                                    //пока переменная больше количества проб, уменьшаем её
-                                    while (z > probe)
-                                    {
-                                        z--;
-                                    }
-                                    //генерируем новое число из диапазона
-                                    ind = a.Next(z - 20, z);
-                                    //выводим в поле формы
-                                    tbs[x.Id].Text = ind.ToString();
-
-                                }
-                                //если индекс элемента массива не равен 0
-                                else if (i != 0)
-                                {
-                                    //генерируем число из диапазона
-                                    ind = a.Next(x.Diap[i-1], x.Diap[i]);
-                                    //выводим в поле формы
-                                    tbs[x.Id].Text = ind.ToString();
-                                }
-                                //если индекс элемента массива равен 0
-                                else
-                                {
-                                    ind = a.Next(x.Diap[i], x.Diap[i++]);
-                                    tbs[x.Id].Text = ind.ToString();
-                                }
-                                break;
-                            case 5:
-                                //если индекс элемента массива не равен 0 И значение верхней границы диапазона больше количества проб
-                                if (x.Diap[i] > probe)
-                                {
-                                    //присваиваем переменной значение верхнего диапазона
-                                    z = x.Diap[i];
-                                    //пока переменная больше количества проб, уменьшаем её
-                                    while (z > probe)
-                                    {
-                                        z--;
-                                    }
-                                    //генерируем новое число из диапазона
-                                    ind = a.Next(z - 20, z);
-                                    //выводим в поле формы
-                                    tbs[x.Id].Text = ind.ToString();
-
-                                }
-                                //если индекс элемента массива не равен 0
-                                else if (i != 0)
-                                {
-                                    //генерируем число из диапазона
-                                    ind = a.Next(x.Diap[i-1], x.Diap[i]);
-                                    //выводим в поле формы
-                                    tbs[x.Id].Text = ind.ToString();
-                                }
-                                //если индекс элемента массива равен 0
-                                else
-                                {
-                                    ind = a.Next(x.Diap[i], x.Diap[i++]);
-                                    tbs[x.Id].Text = ind.ToString();
-                                }
-                                break;
-                            case 6:
-                                //если индекс элемента массива не равен 0 И значение верхней границы диапазона больше количества проб
-                                if (x.Diap[i] > probe)
-                                {
-
-                                    //присваиваем переменной значение верхнего диапазона
-                                    z = x.Diap[i];
-                                    //пока переменная больше количества проб, уменьшаем её
-                                    while (z > probe)
-                                    {
-                                        z--;
-                                    }
-                                    //генерируем новое число из диапазона
-                                    ind = a.Next(z - 20, z);
-                                    //выводим в поле формы
-                                    tbs[x.Id].Text = ind.ToString();
-
-                                }
-                                //если индекс элемента массива не равен 0
-                                else if (i != 0)
-                                {
-                                    //генерируем число из диапазона
-                                    ind = a.Next(x.Diap[i-1], x.Diap[i]);
-                                    //выводим в поле формы
-                                    tbs[x.Id].Text = ind.ToString();
-                                }
-                                //если индекс элемента массива равен 0
-                                else
-                                {
-                                    ind = a.Next(x.Diap[i], x.Diap[i++]);
-                                    tbs[x.Id].Text = ind.ToString();
-                                }
-                                break;
-                            case 7:
-                                //если индекс элемента массива не равен 0 И значение верхней границы диапазона больше количества проб
-                                if (x.Diap[i] > probe)
-                                {
-                                    //присваиваем переменной значение верхнего диапазона
-                                    z = x.Diap[i];
-                                    //пока переменная больше количества проб, уменьшаем её
-                                    while (z > probe)
-                                    {
-                                        z--;
-                                    }
-                                    //генерируем новое число из диапазона
-                                    ind = a.Next(z - 20, z);
-                                    //выводим в поле формы
-                                    tbs[x.Id].Text = ind.ToString();
-
-                                }
-                                //если индекс элемента массива не равен 0
-                                else if (i != 0)
-                                {
-                                    //генерируем число из диапазона
-                                    ind = a.Next(x.Diap[i-1], x.Diap[i]);
-                                    //выводим в поле формы
-                                    tbs[x.Id].Text = ind.ToString();
-                                }
-                                //если индекс элемента массива равен 0
-                                else
-                                {
-                                    ind = a.Next(x.Diap[i], x.Diap[i++]);
-                                    tbs[x.Id].Text = ind.ToString();
-                                }
-                                break;
-                            case 8:
-                                //если индекс элемента массива не равен 0 И значение верхней границы диапазона больше количества проб
-                                if (x.Diap[i] > probe)
-                                {
-
-                                    //присваиваем переменной значение верхнего диапазона
-                                    z = x.Diap[i];
-                                    //пока переменная больше количества проб, уменьшаем её
-                                    while (z > probe)
-                                    {
-                                        z--;
-                                    }
-                                    //генерируем новое число из диапазона
-                                    ind = a.Next(z - 20, z);
-                                    //выводим в поле формы
-                                    tbs[x.Id].Text = ind.ToString();
-
-                                }
-                                //если индекс элемента массива не равен 0
-                                else if (i != 0)
-                                {
-                                    //генерируем число из диапазона
-                                    ind = a.Next(x.Diap[i-1], x.Diap[i]);
-                                    //выводим в поле формы
-                                    tbs[x.Id].Text = ind.ToString();
-                                }
-                                //если индекс элемента массива равен 0
-                                else
-                                {
-                                    ind = a.Next(x.Diap[i], x.Diap[i++]);
-                                    tbs[x.Id].Text = ind.ToString();
-                                }
-                                break;
-                            case 9:
-                                //если индекс элемента массива не равен 0 И значение верхней границы диапазона больше количества проб
-                                if (x.Diap[i] > probe)
-                                {
-                                    //присваиваем переменной значение верхнего диапазона
-                                    z = x.Diap[i];
-                                    //пока переменная больше количества проб, уменьшаем её
-                                    while (z > probe)
-                                    {
-                                        z--;
-                                    }
-                                    //генерируем новое число из диапазона
-                                    ind = a.Next(z - 20, z);
-                                    //выводим в поле формы
-                                    tbs[x.Id].Text = ind.ToString();
-
-                                }
-                                //если индекс элемента массива не равен 0
-                                else if (i != 0)
-                                {
-                                    //генерируем число из диапазона
-                                    ind = a.Next(x.Diap[i-1], x.Diap[i]);
-                                    //выводим в поле формы
-                                    tbs[x.Id].Text = ind.ToString();
-                                }
-                                //если индекс элемента массива равен 0
-                                else
-                                {
-                                    ind = a.Next(x.Diap[i], x.Diap[i++]);
-                                    tbs[x.Id].Text = ind.ToString();
-                                }
-                                break;
-                            case 10:
-                                //если индекс элемента массива не равен 0 И значение верхней границы диапазона больше количества проб
-                                if (x.Diap[i] > probe)
-                                {
-
-                                    //присваиваем переменной значение верхнего диапазона
-                                    z = x.Diap[i];
-                                    //пока переменная больше количества проб, уменьшаем её
-                                    while (z > probe)
-                                    {
-                                        z--;
-                                    }
-                                    //генерируем новое число из диапазона
-                                    ind = a.Next(z - 20, z);
-                                    //выводим в поле формы
-                                    tbs[x.Id].Text = ind.ToString();
-
-                                }
-                                //если индекс элемента массива не равен 0
-                                else if (i != 0)
-                                {
-                                    //генерируем число из диапазона
-                                    ind = a.Next(x.Diap[i-1], x.Diap[i]);
-                                    //выводим в поле формы
-                                    tbs[x.Id].Text = ind.ToString();
-                                }
-                                //если индекс элемента массива равен 0
-                                else
-                                {
-                                    ind = a.Next(x.Diap[i], x.Diap[i++]);
-                                    tbs[x.Id].Text = ind.ToString();
-                                }
-                                break;
-                            case 11:
-                                //если индекс элемента массива не равен 0 И значение верхней границы диапазона больше количества проб
-                                if (x.Diap[i] > probe)
-                                {
-                                    //присваиваем переменной значение верхнего диапазона
-                                    z = x.Diap[i];
-                                    //пока переменная больше количества проб, уменьшаем её
-                                    while (z > probe)
-                                    {
-                                        z--;
-                                    }
-                                    //генерируем новое число из диапазона
-                                    ind = a.Next(z - 20, z);
-                                    //выводим в поле формы
-                                    tbs[x.Id].Text = ind.ToString();
-
-                                }
-                                //если индекс элемента массива не равен 0
-                                else if (i != 0)
-                                {
-                                    //генерируем число из диапазона
-                                    ind = a.Next(x.Diap[i-1], x.Diap[i]);
-                                    //выводим в поле формы
-                                    tbs[x.Id].Text = ind.ToString();
-                                }
-                                //если индекс элемента массива равен 0
-                                else
-                                {
-                                    ind = a.Next(x.Diap[i], x.Diap[i++]);
-                                    tbs[x.Id].Text = ind.ToString();
-                                }
-                                break;
-                            case 12:
-                                //если индекс элемента массива не равен 0 И значение верхней границы диапазона больше количества проб
-                                if (x.Diap[i] > probe)
-                                {
-
-                                    //присваиваем переменной значение верхнего диапазона
-                                    z = x.Diap[i];
-                                    //пока переменная больше количества проб, уменьшаем её
-                                    while (z > probe)
-                                    {
-                                        z--;
-                                    }
-                                    //генерируем новое число из диапазона
-                                    ind = a.Next(z - 20, z);
-                                    //выводим в поле формы
-                                    tbs[x.Id].Text = ind.ToString();
-
-                                }
-                                //если индекс элемента массива не равен 0
-                                else if (i != 0)
-                                {
-                                    //генерируем число из диапазона
-                                    ind = a.Next(x.Diap[i-1], x.Diap[i]);
-                                    //выводим в поле формы
-                                    tbs[x.Id].Text = ind.ToString();
-                                }
-                                //если индекс элемента массива равен 0
-                                else
-                                {
-                                    ind = a.Next(x.Diap[i], x.Diap[i++]);
-                                    tbs[x.Id].Text = ind.ToString();
-                                }
-                                break;
-                            case 13:
-                                //если индекс элемента массива не равен 0 И значение верхней границы диапазона больше количества проб
-                                if (x.Diap[i] > probe)
-                                {
-                                    //присваиваем переменной значение верхнего диапазона
-                                    z = x.Diap[i];
-                                    //пока переменная больше количества проб, уменьшаем её
-                                    while (z > probe)
-                                    {
-                                        z--;
-                                    }
-                                    //генерируем новое число из диапазона
-                                    ind = a.Next(z - 20, z);
-                                    //выводим в поле формы
-                                    tbs[x.Id].Text = ind.ToString();
-
-                                }
-                                //если индекс элемента массива не равен 0
-                                else if (i != 0)
-                                {
-                                    //генерируем число из диапазона
-                                    ind = a.Next(x.Diap[i-1], x.Diap[i]);
-                                    //выводим в поле формы
-                                    tbs[x.Id].Text = ind.ToString();
-                                }
-                                //если индекс элемента массива равен 0
-                                else
-                                {
-                                    ind = a.Next(x.Diap[i], x.Diap[i++]);
-                                    tbs[x.Id].Text = ind.ToString();
-                                }
-                                break;
-                            case 14:
-                                //если индекс элемента массива не равен 0 И значение верхней границы диапазона больше количества проб
-                                if (x.Diap[i] > probe)
-                                {
-
-                                    //присваиваем переменной значение верхнего диапазона
-                                    z = x.Diap[i];
-                                    //пока переменная больше количества проб, уменьшаем её
-                                    while (z > probe)
-                                    {
-                                        z--;
-                                    }
-                                    //генерируем новое число из диапазона
-                                    ind = a.Next(z - 20, z);
-                                    //выводим в поле формы
-                                    tbs[x.Id].Text = ind.ToString();
-
-                                }
-                                //если индекс элемента массива не равен 0
-                                else if (i != 0)
-                                {
-                                    //генерируем число из диапазона
-                                    ind = a.Next(x.Diap[i-1], x.Diap[i]);
-                                    //выводим в поле формы
-                                    tbs[x.Id].Text = ind.ToString();
-                                }
-                                //если индекс элемента массива равен 0
-                                else
-                                {
-                                    ind = a.Next(x.Diap[i], x.Diap[i++]);
-                                    tbs[x.Id].Text = ind.ToString();
-                                }
-                                break;
-                            case 15:
-                                //если индекс элемента массива не равен 0 И значение верхней границы диапазона больше количества проб
-                                if (x.Diap[i] > probe)
-                                {
-                                    //присваиваем переменной значение верхнего диапазона
-                                    z = x.Diap[i];
-                                    //пока переменная больше количества проб, уменьшаем её
-                                    while (z > probe)
-                                    {
-                                        z--;
-                                    }
-                                    //генерируем новое число из диапазона
-                                    ind = a.Next(z - 20, z);
-                                    //выводим в поле формы
-                                    tbs[x.Id].Text = ind.ToString();
-
-                                }
-                                //если индекс элемента массива не равен 0
-                                else if (i != 0)
-                                {
-                                    //генерируем число из диапазона
-                                    ind = a.Next(x.Diap[i-1], x.Diap[i]);
-                                    //выводим в поле формы
-                                    tbs[x.Id].Text = ind.ToString();
-                                }
-                                //если индекс элемента массива равен 0
-                                else
-                                {
-                                    ind = a.Next(x.Diap[i], x.Diap[i++]);
-                                    tbs[x.Id].Text = ind.ToString();
-                                }
-                                break;
-                            case 16:
-                                //если индекс элемента массива не равен 0 И значение верхней границы диапазона больше количества проб
-                                if (x.Diap[i] > probe)
-                                {
-
-                                    //присваиваем переменной значение верхнего диапазона
-                                    z = x.Diap[i];
-                                    //пока переменная больше количества проб, уменьшаем её
-                                    while (z > probe)
-                                    {
-                                        z--;
-                                    }
-                                    //генерируем новое число из диапазона
-                                    ind = a.Next(z - 20, z);
-                                    //выводим в поле формы
-                                    tbs[x.Id].Text = ind.ToString();
-
-                                }
-                                //если индекс элемента массива не равен 0
-                                else if (i != 0)
-                                {
-                                    //генерируем число из диапазона
-                                    ind = a.Next(x.Diap[i-1], x.Diap[i]);
-                                    //выводим в поле формы
-                                    tbs[x.Id].Text = ind.ToString();
-                                }
-                                //если индекс элемента массива равен 0
-                                else
-                                {
-                                    ind = a.Next(x.Diap[i], x.Diap[i++]);
-                                    tbs[x.Id].Text = ind.ToString();
-                                }
-                                break;
-                            case 17:
-                                //если индекс элемента массива не равен 0 И значение верхней границы диапазона больше количества проб
-                                if (x.Diap[i] > probe)
-                                {
-                                    //присваиваем переменной значение верхнего диапазона
-                                    z = x.Diap[i];
-                                    //пока переменная больше количества проб, уменьшаем её
-                                    while (z > probe)
-                                    {
-                                        z--;
-                                    }
-                                    //генерируем новое число из диапазона
-                                    ind = a.Next(z - 20, z);
-                                    //выводим в поле формы
-                                    tbs[x.Id].Text = ind.ToString();
-
-                                }
-                                //если индекс элемента массива не равен 0
-                                else if (i != 0)
-                                {
-                                    //генерируем число из диапазона
-                                    ind = a.Next(x.Diap[i-1], x.Diap[i]);
-                                    //выводим в поле формы
-                                    tbs[x.Id].Text = ind.ToString();
-                                }
-                                //если индекс элемента массива равен 0
-                                else
-                                {
-                                    ind = a.Next(x.Diap[i], x.Diap[i++]);
-                                    tbs[x.Id].Text = ind.ToString();
-                                }
-                                break;
-                            default:
-                                richTextBox2.Text += "\n" + "ERROR WTF????!!!!!";
-                                break;
-                        }
+                        //обнуление переменных
                         cumulative = 0;
+                        selectedElement = null;
                         break;
                     }
                 }              
@@ -730,7 +142,7 @@ namespace Diploma
                     {
                         //генерируем новое число от 1 до 3 и выбираем какому элементу присвоить выпадение
                         Random a = new Random(DateTime.Now.Millisecond);
-                        int ind = a.Next(1, 3);
+                        int ind = r.Next(1, 3);
                         switch (ind)
                         {
                             case 1:
