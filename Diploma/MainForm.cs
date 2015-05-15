@@ -82,10 +82,10 @@ namespace Diploma
             foreach (var x in issl.Values)
             {
                 richTextBox1.Text += "\n" + "ID: " + x.Id.ToString() + " || " + "Имя: " + x.Name.ToString();
-                    for (int i = 0; i < x.ProbArray[x.Id].GetLength(0); i++)
+                   /* for (int i = 0; i < x.ProbArray[x.Id].GetLength(0); i++)
                     {
                         PrintRichTxt(x.ProbArray[x.Id][i,0].ToString());
-                    }
+                    }*/
             }
 
 
@@ -98,7 +98,7 @@ namespace Diploma
             
             //переменная для подсчета кумулятивной вероятности
             double cumulative = 0.0;
-            int ind;
+            int ind = 0;
             int z;
             string selectedElement;
 
@@ -110,22 +110,127 @@ namespace Diploma
             foreach (var x in issl.Values)
             {
                 diceRoll = r.NextDouble();
+                cumulative = 0;
 
                 for (int i = 0; i < x.ProbArray[x.Id].GetLength(0); i++)
                 {
                     //кумулятивная вероятность = кумулятивная вероятность + вероятность элемента списка
-                    cumulative += x.ProbArray[x.Id][i,0];
+                    cumulative += x.ProbArray[x.Id][i];
                     //если сгенерированная вероятность меньше кумулятивной вероятности элемента списка
                     if (diceRoll < cumulative)
                     {
+
                         //выводим отладочную информацию                        
-                        selectedElement = "\n" + x.Id + " || " + x.Name + " || " + " || " +  i + " || ";
+                        selectedElement = "\n" + x.Id + " || " + x.Name;
                         richTextBox2.Text += selectedElement;
+                        //генерируем число из диапазона
+                        if (x.ProbAmount[x.Id][i] > 1)
+                        {
+                            z = r.Next(1,x.ProbAmount[x.Id][i]+1);
+                            switch (x.Id)
+                            {
+                                case 0:
+                                    switch (z)
+                                    {
+                                        case 1:
+                                            ind = r.Next(x.Diap[x.Id][1], x.Diap[x.Id][2]);
+                                            break;
+                                        case 2:
+                                            ind = r.Next(x.ProbAmount[x.Id][4], x.ProbAmount[x.Id][5]);
+                                            break;
+                                        case 3:
+                                            ind = r.Next(x.ProbAmount[x.Id][9], x.ProbAmount[x.Id][10]);
+                                            break;
+                                        default:
+                                            break;
+                                    }
+                                    break;
+                                case 1:
+                                    switch (z)
+                                    {
+                                        case 1:
+                                            ind = r.Next(x.ProbAmount[x.Id][6], x.ProbAmount[x.Id][7]);
+                                            break;
+                                        case 2:
+                                            ind = r.Next(x.ProbAmount[x.Id][7], x.ProbAmount[x.Id][8]);
+                                            break;
+                                        case 3:
+                                            ind = r.Next(x.ProbAmount[x.Id][10], x.ProbAmount[x.Id][11]);
+                                            break;
+                                        default:
+                                            break;
+                                    }
+                                    break;
+                                case 2:
+                                    switch (z)
+                                    {
+                                        case 1:
+                                            ind = r.Next(x.ProbAmount[x.Id][9], x.ProbAmount[x.Id][10]);
+                                            break;
+                                        case 2:
+                                            ind = r.Next(x.ProbAmount[x.Id][10], x.ProbAmount[x.Id][11]);
+                                            break;
+                                        default:
+                                            break;
+                                    }
+                                    break;
+                                case 3:
+                                    switch (z)
+                                    {
+                                        case 1:
+                                            ind = r.Next(x.ProbAmount[x.Id][1], x.ProbAmount[x.Id][2]);
+                                            break;
+                                        case 2:
+                                            ind = r.Next(x.ProbAmount[x.Id][4], x.ProbAmount[x.Id][5]);
+                                            break;
+                                        default:
+                                            break;
+                                    }
+                                    break;
+                                case 4:
+                                    switch (z)
+                                    {
+                                        case 1:
+                                            ind = r.Next(x.ProbAmount[x.Id][1], x.ProbAmount[x.Id][2]);
+                                            break;
+                                        case 2:
+                                            ind = r.Next(x.ProbAmount[x.Id][4], x.ProbAmount[x.Id][5]);
+                                            break;
+                                        default:
+                                            break;
+                                    }
+                                    break;
+                                default:
+                                    ind = 5959;
+                                    break;
+                                     
+                            }
+                            
+                        }
+                        else if (i>0)
+                        {
+                            ind = r.Next(x.Diap[x.Id][i-1], x.Diap[x.Id][i]);
+                        }
+                        else
+                        {
+                            ind = r.Next(x.Diap[x.Id][i], x.Diap[x.Id][i + 1]);
+                        }
+                      
+                        //выводим в поле формы
+                        if (ind > probe)
+                        {
+                            while (ind > probe)
+                            {
+                                ind--;
+                            }
+                        }
+                        tbs[x.Id].Text = ind.ToString();
                         
-                        //обнуление переменных
-                        cumulative = 0;
-                        selectedElement = null;
                         break;
+                    }
+                    else
+                    {
+                        continue;
                     }
                 }              
             }
@@ -242,18 +347,7 @@ namespace Diploma
 
         public void IssledGen()
         {
-            /*//создаём список диапазонов и вероятностей
-            List<KeyValuePair<string, double>> elements = new List<KeyValuePair<string, double>>
-                                                         {
-                                                             new KeyValuePair<string, double>("20,2-40,4 или 80,8-101 или 181,8-202", 0.014),
-                                                             new KeyValuePair<string, double>("60,6-80,8", 0.043),
-                                                             new KeyValuePair<string, double>("161,6-181,8", 0.057),
-                                                             new KeyValuePair<string, double>("141,4-161,6", 0.100),
-                                                             new KeyValuePair<string, double>("101-121,2", 0.157),
-                                                             new KeyValuePair<string, double>("121,2-141,4", 0.186),
-                                                             new KeyValuePair<string, double>("0-20.2", 0.414)
-                                                         };*/
-            
+
         }
 
         //переменная для определения статуса программы
