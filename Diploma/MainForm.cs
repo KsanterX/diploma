@@ -78,15 +78,15 @@ namespace Diploma
 
             //PrintRichTxt(issl[IssledElements[0].Key].ProbArray[0].Length.ToString());
             
-            //выводим на экран
+            /*//выводим на экран
             foreach (var x in issl.Values)
             {
                 richTextBox1.Text += "\n" + "ID: " + x.Id.ToString() + " || " + "Имя: " + x.Name.ToString();
                    /* for (int i = 0; i < x.ProbArray[x.Id].GetLength(0); i++)
                     {
                         PrintRichTxt(x.ProbArray[x.Id][i,0].ToString());
-                    }*/
-            }
+                    }
+            }*/
 
 
             //создаём массив с названиями текстовых форм для вывода количества каждого исследования
@@ -99,7 +99,8 @@ namespace Diploma
             //переменная для подсчета кумулятивной вероятности
             double cumulative = 0.0;
             int ind = 0;
-            int z;
+            int z = 0;
+            int c = 0;
             string selectedElement;
 
             //генератор
@@ -111,110 +112,47 @@ namespace Diploma
             {
                 diceRoll = r.NextDouble();
                 cumulative = 0;
+                z = 0;
+                c = 0;
 
                 for (int i = 0; i < x.ProbArray[x.Id].GetLength(0); i++)
                 {
                     //кумулятивная вероятность = кумулятивная вероятность + вероятность элемента списка
-                    cumulative += x.ProbArray[x.Id][i];
+                    cumulative += x.ProbArray[x.Id][i,0];
                     //если сгенерированная вероятность меньше кумулятивной вероятности элемента списка
                     if (diceRoll < cumulative)
                     {
 
-                        //выводим отладочную информацию                        
-                        selectedElement = "\n" + x.Id + " || " + x.Name;
-                        richTextBox2.Text += selectedElement;
-                        //генерируем число из диапазона
-                        if (x.ProbAmount[x.Id][i] > 1)
+                        if (x.ProbArray[x.Id][i, 1] != 1)
                         {
-                            z = r.Next(1,x.ProbAmount[x.Id][i]+1);
-                            switch (x.Id)
-                            {
-                                case 0:
-                                    switch (z)
-                                    {
-                                        case 1:
-                                            ind = r.Next(x.Diap[x.Id][1], x.Diap[x.Id][2]);
-                                            break;
-                                        case 2:
-                                            ind = r.Next(x.ProbAmount[x.Id][4], x.ProbAmount[x.Id][5]);
-                                            break;
-                                        case 3:
-                                            ind = r.Next(x.ProbAmount[x.Id][9], x.ProbAmount[x.Id][10]);
-                                            break;
-                                        default:
-                                            break;
-                                    }
-                                    break;
-                                case 1:
-                                    switch (z)
-                                    {
-                                        case 1:
-                                            ind = r.Next(x.ProbAmount[x.Id][6], x.ProbAmount[x.Id][7]);
-                                            break;
-                                        case 2:
-                                            ind = r.Next(x.ProbAmount[x.Id][7], x.ProbAmount[x.Id][8]);
-                                            break;
-                                        case 3:
-                                            ind = r.Next(x.ProbAmount[x.Id][10], x.ProbAmount[x.Id][11]);
-                                            break;
-                                        default:
-                                            break;
-                                    }
-                                    break;
-                                case 2:
-                                    switch (z)
-                                    {
-                                        case 1:
-                                            ind = r.Next(x.ProbAmount[x.Id][9], x.ProbAmount[x.Id][10]);
-                                            break;
-                                        case 2:
-                                            ind = r.Next(x.ProbAmount[x.Id][10], x.ProbAmount[x.Id][11]);
-                                            break;
-                                        default:
-                                            break;
-                                    }
-                                    break;
-                                case 3:
-                                    switch (z)
-                                    {
-                                        case 1:
-                                            ind = r.Next(x.ProbAmount[x.Id][1], x.ProbAmount[x.Id][2]);
-                                            break;
-                                        case 2:
-                                            ind = r.Next(x.ProbAmount[x.Id][4], x.ProbAmount[x.Id][5]);
-                                            break;
-                                        default:
-                                            break;
-                                    }
-                                    break;
-                                case 4:
-                                    switch (z)
-                                    {
-                                        case 1:
-                                            ind = r.Next(x.ProbAmount[x.Id][1], x.ProbAmount[x.Id][2]);
-                                            break;
-                                        case 2:
-                                            ind = r.Next(x.ProbAmount[x.Id][4], x.ProbAmount[x.Id][5]);
-                                            break;
-                                        default:
-                                            break;
-                                    }
-                                    break;
-                                default:
-                                    ind = 5959;
-                                    break;
-                                     
-                            }
                             
+                            z = r.Next(1,(int)x.ProbArray[x.Id][i,1]+1);
+
+                            selectedElement = "\n" + x.Id + " || " + x.Name + " | i = " + i + " | z = " + z;
+                            richTextBox2.Text += selectedElement;
+
+                                for (int j = 0; j < x.Diap[x.Id].GetLength(0); j++)
+                                {
+                                    if (c < z)
+                                    {
+                                        c += x.Diap[x.Id][j, 1];
+                                    }
+                                    else
+                                    {
+                                        ind = r.Next(x.Diap[x.Id][j - 2, 0], x.Diap[x.Id][j - 1, 0]);
+                                        break;
+                                    }
+                                }
                         }
-                        else if (i>0)
+                        else if (i > 0 && x.Diap[x.Id][i,0] > 0)
                         {
-                            ind = r.Next(x.Diap[x.Id][i-1], x.Diap[x.Id][i]);
+                            ind = r.Next(x.Diap[x.Id][i - 1, 0], x.Diap[x.Id][i, 0]);
                         }
                         else
                         {
-                            ind = r.Next(x.Diap[x.Id][i], x.Diap[x.Id][i + 1]);
-                        }
+                             ind = r.Next(x.Diap[x.Id][i, 0], x.Diap[x.Id][i + 1, 0]);
+                        }                    
+                        
                       
                         //выводим в поле формы
                         if (ind > probe)
@@ -224,8 +162,7 @@ namespace Diploma
                                 ind--;
                             }
                         }
-                        tbs[x.Id].Text = ind.ToString();
-                        
+                        tbs[x.Id].Text = ind.ToString();                      
                         break;
                     }
                     else
