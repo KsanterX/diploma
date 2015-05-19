@@ -89,6 +89,9 @@ namespace Diploma
             int z = 0;
             int c = 0;
 
+            Probe pr = new Probe();
+            pr.probeCount = new int[probe, 18];
+
             //генератор
             Random r = new Random();
             double diceRoll;
@@ -126,8 +129,6 @@ namespace Diploma
                             {
                                 c = i;
                             }
-                            
-                            richTextBox1.Text = "\n" + " >1 || i: " + i + " || Name: " + x.Name + " || c: " + c + " || z: " + z;
                             //генерируем число анализов    
                             ind = r.Next(x.Diap[x.Id][c + z, 0], x.Diap[x.Id][c + z, 1]);
                         }
@@ -159,13 +160,24 @@ namespace Diploma
                                 ind--;
                             }
                         }
-                        tbs[x.Id].Text = ind.ToString();                      
-                        
+
+                        tbs[x.Id].Text = ind.ToString();
+                        pr.probeC(probe, x.Id, ind);
+
                         break;
                     }
                 }              
             }
-
+            for(int j = 0; j < 17; j++)
+            {
+                richTextBox2.Text += "\n ID: " + j + " || ";
+                for (int i = 0; i < pr.probeCount.GetLength(0);i++)
+                {
+                     richTextBox2.Text += pr.probeCount[i,j].ToString();
+                }
+            }
+            
+                        
                 //меняем текст на кнопке
                 button1.Text = "Reset";
         }
@@ -187,32 +199,28 @@ namespace Diploma
 
         private int ProbeGen()
         {
-            //массив кумулятивной вероятности проб
+            //массив подсчета кумулятивной вероятности проб
             double[,] probeArr = new double[7, 2] { {0.027,2},{0.041,1}, {0.068,1}, {0.095,2}, {0.122,2}, {0.135,1}, {0.270,1} };
             int[,] probeDiap = new int[10, 2] { {391,440}, {488,537}, {439,489}, {50,100}, {99,149}, {293,343}, {148,197}, {245,294}, {342,392}, {196,246} };
             double cumulative = 0.0;
             int z = 0;
             int c = 0;
             int probeAmount = 0;
-            richTextBox2.Text += "\n cum, z, c: " + cumulative + z + c + " || probeAmount: " + probeAmount;
+
             //генератор исследований на день для каждой пробы
             //инициализация генератора случайных чисел
             Random rndProbe = new Random();
             //объявляем переменную для хранения числа проб и генерируем её значение
             double diceRoll = rndProbe.NextDouble();
-            richTextBox2.Text += "\n Dice: " + diceRoll;
 
             for (int i = 0; i < probeArr.GetLength(0); i++)
             {
                 cumulative += probeArr[i, 0]*probeArr[i,1];
-                richTextBox2.Text += "\n cumulative process: " + cumulative + " || i: " + i;
                 if (diceRoll < cumulative)
                 {
-                    richTextBox2.Text += "\n probeArr[i,1]: " + probeArr[i,1];
                     if (probeArr[i, 1] != 1)
                     {
                         z = rndProbe.Next(0, (int)probeArr[i, 1]);
-                        richTextBox2.Text += "\n z: " + z + " || i: " + i;
 
                         if (i != 0)
                         {
