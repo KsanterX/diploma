@@ -76,24 +76,11 @@ namespace Diploma
                 issl[IssledElements[i].Key] = new Issled(IssledElements[i].Value, IssledElements[i].Key);
             }
 
-            //PrintRichTxt(issl[IssledElements[0].Key].ProbArray[0].Length.ToString());
-            
-            /*//выводим на экран
-            foreach (var x in issl.Values)
-            {
-                richTextBox1.Text += "\n" + "ID: " + x.Id.ToString() + " || " + "Имя: " + x.Name.ToString();
-                   /* for (int i = 0; i < x.ProbArray[x.Id].GetLength(0); i++)
-                    {
-                        PrintRichTxt(x.ProbArray[x.Id][i,0].ToString());
-                    }
-            }*/
-
-
             //создаём массив с названиями текстовых форм для вывода количества каждого исследования
             TextBox[] tbs = new TextBox[] { issledBox1, issledBox2, issledBox3, issledBox4, issledBox5, issledBox6, issledBox7, issledBox8, issledBox9, issledBox10, issledBox11, issledBox12, issledBox13, issledBox14, issledBox15, issledBox16, issledBox17, issledBox18 };
 
             //выводим число проб в поле на форме, переводя его в текстовый вид
-            int probe = ProbeGen(50, 536);
+            int probe = ProbeGen();
             probeBox1.Text = probe.ToString();
             
             //переменная для подсчета кумулятивной вероятности
@@ -101,7 +88,6 @@ namespace Diploma
             int ind = 0;
             int z = 0;
             int c = 0;
-            string selectedElement;
 
             //генератор
             Random r = new Random();
@@ -122,38 +108,31 @@ namespace Diploma
                     //если сгенерированная вероятность меньше кумулятивной вероятности элемента списка
                     if (diceRoll < cumulative)
                     {
-
+                        //если случаев вероятности больше 1
                         if (x.ProbArray[x.Id][i, 1] != 1)
                         {
-                            
-                            z = r.Next(1,(int)x.ProbArray[x.Id][i,1]+1);
-
-                            selectedElement = "\n" + x.Id + " || " + x.Name + " | i = " + i + " | z = " + z;
-                            richTextBox2.Text += selectedElement;
-
-                                for (int j = 0; j < x.Diap[x.Id].GetLength(0); j++)
+                            //генерируем конкретный номер случая
+                            z = r.Next(0,(int)x.ProbArray[x.Id][i,1]);
+                                //определяем начальный индекс таблицы диапазонов
+                                for (int j = 0; j < i; j++)
                                 {
-                                    if (c < z)
-                                    {
-                                        c += x.Diap[x.Id][j, 1];
-                                    }
-                                    else
-                                    {
-                                        ind = r.Next(x.Diap[x.Id][j - 2, 0], x.Diap[x.Id][j - 1, 0]);
-                                        break;
-                                    }
+                                    c += (int)x.ProbArray[x.Id][j, 1];
                                 }
+                            //генерируем число анализов    
+                            ind = r.Next(x.Diap[x.Id][c + z, 0], x.Diap[x.Id][c + z, 1]);
                         }
-                        else if (i > 0 && x.Diap[x.Id][i,0] > 0)
-                        {
-                            ind = r.Next(x.Diap[x.Id][i - 1, 0], x.Diap[x.Id][i, 0]);
-                        }
+                        //если есть только один случай вероятности
                         else
                         {
-                             ind = r.Next(x.Diap[x.Id][i, 0], x.Diap[x.Id][i + 1, 0]);
-                        }                    
+                            //определяем индекс элемента для массива диапазонов
+                            for (int j = 0; j < i; j++)
+                            {
+                                c += (int)x.ProbArray[x.Id][j, 1];
+                            }
+                            //генерируем число анализов
+                            ind = r.Next(x.Diap[x.Id][c, 0], x.Diap[x.Id][c, 1]);
+                        }
                         
-                      
                         //выводим в поле формы
                         if (ind > probe)
                         {
@@ -163,96 +142,12 @@ namespace Diploma
                             }
                         }
                         tbs[x.Id].Text = ind.ToString();                      
+                        
                         break;
-                    }
-                    else
-                    {
-                        continue;
                     }
                 }              
             }
 
-            
-            
-            
-           /*
-                //если сгенерированная вероятность меньше кумулятивной вероятности элемента списка
-                if (diceRoll < cumulative)
-                {
-                    //добавил дополнительную проверку, поскольку три элемента в списке имеют одинаковую вероятность
-                    if (elements[i].Value == 0.014)
-                    {
-                        //генерируем новое число от 1 до 3 и выбираем какому элементу присвоить выпадение
-                        Random a = new Random(DateTime.Now.Millisecond);
-                        int ind = r.Next(1, 3);
-                        switch (ind)
-                        {
-                            case 1:
-                                selectedElement = elements[i].Key;
-                                PrintRichTxt(selectedElement);
-                                PrintRichTxt("Точнее 20,2-40,4");
-                                button1.Text = "Reset!";
-                                break;
-                            case 2:
-                                selectedElement = elements[i].Key;
-                                PrintRichTxt(selectedElement);
-                                PrintRichTxt("Точнее 80,8-101");
-                                button1.Text = "Reset!";
-                                break;
-                            default:
-                                selectedElement = elements[i].Key;
-                                PrintRichTxt(selectedElement);
-                                PrintRichTxt("Точнее 181,8-202");
-                                button1.Text = "Reset!";
-                                break;
-                        }
-                    }
-                    else
-                    {
-                        //иначе указываем диапазон, в который попадает сгенерированное число
-                        selectedElement = elements[i].Key;
-                        PrintRichTxt(selectedElement);
-                        button1.Text = "Reset!";
-                        break;
-                    }
-                }
-            }*/
-            
-            
-            /*//создаём 2D массив для определения исследований на каждую пробу
-                int[,] issledArr = new int[18,probe];
-                //инициализация генератора случайных чисел
-                Random rnd = new Random();
-                //запускаем цикл для заполнения 2D массива
-                for (int j = 0; j < 18; j++)
-                {
-                    for (int i = 0; i < probe; i++)
-                    {
-                        //заполняем массив случайным образом числами 0 и 1
-                        issledArr[j, i] = rnd.Next(0,2);
-                    }
-                }
-
-                //создаём массив для хранения общего числа конкретных 18-ти исследований
-                int[] a = new int[18];
-                //вывод 2D массива в текстовое поле для проверки 
-                string matrixString = "";
-                for (int i = 0; i < issledArr.GetLength(0); i++)
-                {
-                    for (int j = 0; j < issledArr.GetLength(1); j++)
-                    {
-                        matrixString += issledArr[i, j].ToString();
-                        matrixString += " ";
-                        //складываем все числа по строкам и сохраняем общее число для каждого исследования
-                        a[i] += issledArr[i, j];
-                    }
-
-                    matrixString += Environment.NewLine;
-                }
-                //вызываем функцию для печати строк из 2D массива в текстовом поле
-               richTextBox2.Text = matrixString;*/
-
-                
                 //меняем текст на кнопке
                 button1.Text = "Reset";
         }
@@ -272,14 +167,50 @@ namespace Diploma
             richTextBox1.Text += "\n" + s;
         }
 
-        private int ProbeGen(int min, int max)
+        private int ProbeGen()
         {
+            //массив кумулятивной вероятности проб
+            double[,] probeArr = new double[7, 2] { {0.027,2},{0.041,1}, {0.068,1}, {0.095,2}, {0.122,2}, {0.135,1}, {0.270,1} };
+            int[,] probeDiap = new int[10, 2] { {391,440}, {488,537}, {439,489}, {50,100}, {99,149}, {293,343}, {148,197}, {245,294}, {342,392}, {196,246} };
+            double cumulative = 0;
+            int z = 0;
+            int c = 0;
+            int probeAmount = 0;
             //генератор исследований на день для каждой пробы
-                //инициализация генератора случайных чисел
-                Random rndProbe = new Random();
-                //объявляем переменную для хранения числа проб и генерируем её значение
-                int diceRollProbe = rndProbe.Next(min, max);
-                return diceRollProbe;
+            //инициализация генератора случайных чисел
+            Random rndProbe = new Random();
+            //объявляем переменную для хранения числа проб и генерируем её значение
+            double diceRoll = rndProbe.NextDouble();
+
+            for (int i = 0; i < probeArr.GetLength(0); i++)
+            {
+                cumulative += probeArr[i, 0];
+                if (diceRoll < cumulative)
+                {
+                    if (probeArr[i, 1] != 1)
+                    {
+                        z = rndProbe.Next(0, (int)probeArr[i, 1]);
+                        
+                        for (int j = 0; j < i; j++)
+                        {
+                            c += (int)probeArr[j, 1];
+                        }
+
+                        probeAmount = rndProbe.Next(probeDiap[c + z, 0], probeDiap[c + z, 1]);
+                    }
+                    else
+                    {
+                        for (int j = 0; j < i; j++)
+                        {
+                            c += (int)probeArr[j, 1];
+                        }
+
+                        probeAmount = rndProbe.Next(probeDiap[c + z, 0], probeDiap[c + z, 1]);
+                    }
+                    break;
+                }
+            }
+            return probeAmount;
         }
 
         public void IssledGen()
