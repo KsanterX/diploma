@@ -104,20 +104,30 @@ namespace Diploma
                 for (int i = 0; i < x.ProbArray[x.Id].GetLength(0); i++)
                 {
                     //кумулятивная вероятность = кумулятивная вероятность + вероятность элемента списка
-                    cumulative += x.ProbArray[x.Id][i,0];
+                    cumulative += x.ProbArray[x.Id][i,0]*x.ProbArray[x.Id][i,1];
                     //если сгенерированная вероятность меньше кумулятивной вероятности элемента списка
                     if (diceRoll < cumulative)
                     {
                         //если случаев вероятности больше 1
                         if (x.ProbArray[x.Id][i, 1] != 1)
                         {
+                            
                             //генерируем конкретный номер случая
                             z = r.Next(0,(int)x.ProbArray[x.Id][i,1]);
                                 //определяем начальный индекс таблицы диапазонов
+                            if (i != 0)
+                            {
                                 for (int j = 0; j < i; j++)
                                 {
                                     c += (int)x.ProbArray[x.Id][j, 1];
                                 }
+                            }
+                            else
+                            {
+                                c = i;
+                            }
+                            
+                            richTextBox1.Text = "\n" + " >1 || i: " + i + " || Name: " + x.Name + " || c: " + c + " || z: " + z;
                             //генерируем число анализов    
                             ind = r.Next(x.Diap[x.Id][c + z, 0], x.Diap[x.Id][c + z, 1]);
                         }
@@ -125,10 +135,18 @@ namespace Diploma
                         else
                         {
                             //определяем индекс элемента для массива диапазонов
-                            for (int j = 0; j < i; j++)
+                            if (i != 0)
                             {
-                                c += (int)x.ProbArray[x.Id][j, 1];
+                                for (int j = 0; j < i; j++)
+                                {
+                                    c += (int)x.ProbArray[x.Id][j, 1];
+                                }
                             }
+                            else
+                            {
+                                c = i;
+                            }
+                            
                             //генерируем число анализов
                             ind = r.Next(x.Diap[x.Id][c, 0], x.Diap[x.Id][c, 1]);
                         }
@@ -172,39 +190,58 @@ namespace Diploma
             //массив кумулятивной вероятности проб
             double[,] probeArr = new double[7, 2] { {0.027,2},{0.041,1}, {0.068,1}, {0.095,2}, {0.122,2}, {0.135,1}, {0.270,1} };
             int[,] probeDiap = new int[10, 2] { {391,440}, {488,537}, {439,489}, {50,100}, {99,149}, {293,343}, {148,197}, {245,294}, {342,392}, {196,246} };
-            double cumulative = 0;
+            double cumulative = 0.0;
             int z = 0;
             int c = 0;
             int probeAmount = 0;
+            richTextBox2.Text += "\n cum, z, c: " + cumulative + z + c + " || probeAmount: " + probeAmount;
             //генератор исследований на день для каждой пробы
             //инициализация генератора случайных чисел
             Random rndProbe = new Random();
             //объявляем переменную для хранения числа проб и генерируем её значение
             double diceRoll = rndProbe.NextDouble();
+            richTextBox2.Text += "\n Dice: " + diceRoll;
 
             for (int i = 0; i < probeArr.GetLength(0); i++)
             {
-                cumulative += probeArr[i, 0];
+                cumulative += probeArr[i, 0]*probeArr[i,1];
+                richTextBox2.Text += "\n cumulative process: " + cumulative + " || i: " + i;
                 if (diceRoll < cumulative)
                 {
+                    richTextBox2.Text += "\n probeArr[i,1]: " + probeArr[i,1];
                     if (probeArr[i, 1] != 1)
                     {
                         z = rndProbe.Next(0, (int)probeArr[i, 1]);
-                        
-                        for (int j = 0; j < i; j++)
-                        {
-                            c += (int)probeArr[j, 1];
-                        }
+                        richTextBox2.Text += "\n z: " + z + " || i: " + i;
 
+                        if (i != 0)
+                        {
+                            for (int j = 0; j < i; j++)
+                            {
+                                c += (int)probeArr[j, 1];
+                            }
+                        }
+                        else
+                        {
+                            c = i;
+                        }
+                        
                         probeAmount = rndProbe.Next(probeDiap[c + z, 0], probeDiap[c + z, 1]);
                     }
                     else
                     {
-                        for (int j = 0; j < i; j++)
+                        if (i != 0)
                         {
-                            c += (int)probeArr[j, 1];
+                            for (int j = 0; j < i; j++)
+                            {
+                                c += (int)probeArr[j, 1];
+                            }
                         }
-
+                        else
+                        {
+                            c = i;
+                        }
+                        
                         probeAmount = rndProbe.Next(probeDiap[c + z, 0], probeDiap[c + z, 1]);
                     }
                     break;
