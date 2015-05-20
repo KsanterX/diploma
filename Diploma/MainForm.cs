@@ -20,10 +20,22 @@ namespace Diploma
 
         }
 
+        AlertForm alert;
+
+        
         //при нажатии на кнопку, вызов функции проверки статуса запуска программы
         private void button1_Click(object sender, EventArgs e)
         {
-            ProgCheck(progRun);
+            if (backgroundWorker1.IsBusy != true)
+            {
+                // create a new instance of the alert form
+                alert = new AlertForm();
+                
+                // Start the asynchronous operation.
+                backgroundWorker1.RunWorkerAsync();
+
+                ProgCheck(progRun);
+            }
             
         }
         //проверка статуса программы.
@@ -163,12 +175,16 @@ namespace Diploma
 
                         tbs[x.Id].Text = ind.ToString();
                         pr.probeC(probe, x.Id, ind);
+                        
 
                         break;
                     }
                 }              
             }
-            for(int j = 0; j < 17; j++)
+
+            
+
+            for(int j = 0; j < 18; j++)
             {
                 richTextBox2.Text += "\n ID: " + j + " || ";
                 for (int i = 0; i < pr.probeCount.GetLength(0);i++)
@@ -265,5 +281,25 @@ namespace Diploma
 
         //переменная для определения статуса программы
         public bool progRun;
+
+        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
+        {
+            
+        }
+
+        private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            
+            // Pass the progress to AlertForm label and progressbar
+            alert.Message = "In progress, please wait... " + e.ProgressPercentage.ToString() + "%";
+            alert.ProgressValue = e.ProgressPercentage;
+        }
+
+        private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            
+            // Close the AlertForm
+            alert.Close();
+        }
     }
 }

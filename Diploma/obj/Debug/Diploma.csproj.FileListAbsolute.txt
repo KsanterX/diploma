@@ -16,3 +16,4 @@ D:\Users\Artem\Documents\Visual Studio 2013\Projects\diploma\Diploma\obj\Debug\D
 D:\Users\Artem\Documents\Visual Studio 2013\Projects\diploma\Diploma\obj\Debug\Diploma.MainForm.resources
 D:\Users\Artem\Documents\Visual Studio 2013\Projects\diploma\Diploma\obj\Debug\Diploma.Properties.Resources.resources
 D:\Users\Artem\Documents\Visual Studio 2013\Projects\diploma\Diploma\obj\Debug\Diploma.csproj.GenerateResource.Cache
+D:\Users\Artem\Documents\Visual Studio 2013\Projects\diploma\Diploma\obj\Debug\Diploma.AlertForm.resources

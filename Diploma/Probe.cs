@@ -10,7 +10,6 @@ namespace Diploma
     {
         int[,] probecount;
         Random r = new Random();
-        int z = 0;
         int c = 0;
 
         public Probe()
