@@ -22,26 +22,26 @@ namespace Diploma
         {
             for (int i=0; i < probecount.GetLength(0); i++)
             {
-                if (z <= issl && probecount.GetLength(0)-z >= issl)
+                if (issl > 0)
                 {
                     c = r.Next(0,2);
-                    z += c;
-                    probecount[i,id] = c;
-                }
-                else if (z <= issl && probecount.GetLength(0)-z < issl)
-                {
-                    probecount[i,id] = 1;
-                    z += 1;
-                }
-                else if(z == issl && probecount.GetLength(0)-z > 0)
-                {
-                    probecount[i,id] = 0;
+                    issl -= c;
+
+                    if (probe - i > issl)
+                    {
+                        probecount[i, id] = c;
+                    }
+                    else
+                    {
+                        probecount[i, id] = 1;
+                        issl--;
+                    }
+                    
                 }
                 else
                 {
-                    break;
-                }
-                
+                    probecount[i,id] = 0;
+                }                
             }        
         }
 
