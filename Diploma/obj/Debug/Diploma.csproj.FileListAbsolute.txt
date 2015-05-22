@@ -17,3 +17,13 @@ D:\Users\Artem\Documents\Visual Studio 2013\Projects\diploma\Diploma\obj\Debug\D
 D:\Users\Artem\Documents\Visual Studio 2013\Projects\diploma\Diploma\obj\Debug\Diploma.Properties.Resources.resources
 D:\Users\Artem\Documents\Visual Studio 2013\Projects\diploma\Diploma\obj\Debug\Diploma.csproj.GenerateResource.Cache
 D:\Users\Artem\Documents\Visual Studio 2013\Projects\diploma\Diploma\obj\Debug\Diploma.AlertForm.resources
+E:\Users\Artem\Documents\Visual Studio 2013\Projects\diploma\Diploma\bin\Debug\Diploma.exe.config
+E:\Users\Artem\Documents\Visual Studio 2013\Projects\diploma\Diploma\obj\Debug\Diploma.exe
+E:\Users\Artem\Documents\Visual Studio 2013\Projects\diploma\Diploma\obj\Debug\Diploma.pdb
+E:\Users\Artem\Documents\Visual Studio 2013\Projects\diploma\Diploma\bin\Debug\Diploma.exe
+E:\Users\Artem\Documents\Visual Studio 2013\Projects\diploma\Diploma\bin\Debug\Diploma.pdb
+E:\Users\Artem\Documents\Visual Studio 2013\Projects\diploma\Diploma\obj\Debug\Diploma.csprojResolveAssemblyReference.cache
+E:\Users\Artem\Documents\Visual Studio 2013\Projects\diploma\Diploma\obj\Debug\Diploma.AlertForm.resources
+E:\Users\Artem\Documents\Visual Studio 2013\Projects\diploma\Diploma\obj\Debug\Diploma.MainForm.resources
+E:\Users\Artem\Documents\Visual Studio 2013\Projects\diploma\Diploma\obj\Debug\Diploma.Properties.Resources.resources
+E:\Users\Artem\Documents\Visual Studio 2013\Projects\diploma\Diploma\obj\Debug\Diploma.csproj.GenerateResource.Cache

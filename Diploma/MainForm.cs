@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Threading;
 
 namespace Diploma
 {
@@ -54,30 +55,49 @@ namespace Diploma
             }
         }
 
+        void Doctor1()
+        {
+            IDictionary<int, Machine> mach = new Dictionary<int, Machine>();
+            for (int i = 0; i < 3; i++)
+            {
+                mach[i] = new Machine(i);
+            }
+
+            foreach (var m in mach.Values)
+            {
+                PrintRichTxt(m.Name);
+            }
+        }
+
+        void Doctor2()
+        {
+
+        }
+
         //главная программа
         public void MainProg()
         {
             //список названий исследований и их id
             List<KeyValuePair<string, byte>> IssledElements = new List<KeyValuePair<string, byte>>
                                                           {
-                                                              new KeyValuePair<string, byte>("ПТИ", 0),
-                                                              new KeyValuePair<string, byte>("К,NA", 1),
-                                                              new KeyValuePair<string, byte>("СРБ ,АСо", 2),
-                                                              new KeyValuePair<string, byte>("Глюкоза", 3),
-                                                              new KeyValuePair<string, byte>("Холестерин", 4),
-                                                              new KeyValuePair<string, byte>("Бетта-липопротеиды,триглицириды", 5),
-                                                              new KeyValuePair<string, byte>("ЛПНП,ЛПВП", 6),
-                                                              new KeyValuePair<string, byte>("Билирубин общий", 7),
-                                                              new KeyValuePair<string, byte>("Билирубин прямой", 8),
-                                                              new KeyValuePair<string, byte>("АЛТ, АСТ", 9),
-                                                              new KeyValuePair<string, byte>("Тимоловая проба", 10),
-                                                              new KeyValuePair<string, byte>("Мочевина, Креатинин", 11),
-                                                              new KeyValuePair<string, byte>("Общий белок", 12),
-                                                              new KeyValuePair<string, byte>("Fe, ЖСС", 13),
-                                                              new KeyValuePair<string, byte>("Альфа амил", 14),
-                                                              new KeyValuePair<string, byte>("Мочевая кислота", 15),
-                                                              new KeyValuePair<string, byte>("Щелочной фосфотазы", 16),
-                                                              new KeyValuePair<string, byte>("ГГТП", 17)
+                                                              
+                                                              new KeyValuePair<string, byte>("К,NA", 0),
+                                                              
+                                                              new KeyValuePair<string, byte>("Глюкоза", 1),
+                                                              new KeyValuePair<string, byte>("Холестерин", 2),
+                                                              new KeyValuePair<string, byte>("Бетта-липопротеиды,триглицириды", 3),
+                                                              
+                                                              new KeyValuePair<string, byte>("Билирубин общий", 4),
+                                                              
+                                                              new KeyValuePair<string, byte>("АЛТ, АСТ", 5),
+                                                              new KeyValuePair<string, byte>("Тимоловая проба", 6),
+                                                              new KeyValuePair<string, byte>("Мочевина, Креатинин", 7),
+                                                              new KeyValuePair<string, byte>("Общий белок", 8),
+                                                              
+                                                              new KeyValuePair<string, byte>("Альфа амил", 9),
+                                                              new KeyValuePair<string, byte>("Мочевая кислота", 10),
+                                                              new KeyValuePair<string, byte>("Щелочной фосфотазы", 11),
+                                                              new KeyValuePair<string, byte>("ГГТП", 12)
             
                                                           };
             
@@ -89,7 +109,7 @@ namespace Diploma
             }
 
             //создаём массив с названиями текстовых форм для вывода количества каждого исследования
-            TextBox[] tbs = new TextBox[] { issledBox1, issledBox2, issledBox3, issledBox4, issledBox5, issledBox6, issledBox7, issledBox8, issledBox9, issledBox10, issledBox11, issledBox12, issledBox13, issledBox14, issledBox15, issledBox16, issledBox17, issledBox18 };
+            TextBox[] tbs = new TextBox[] { issledBox1, issledBox2, issledBox3, issledBox4, issledBox5, issledBox6, issledBox7, issledBox8, issledBox9, issledBox10, issledBox11, issledBox12, issledBox13};
 
             //выводим число проб в поле на форме, переводя его в текстовый вид
             int probe = ProbeGen();
@@ -102,7 +122,7 @@ namespace Diploma
             int c = 0;
 
             Probe pr = new Probe();
-            pr.probeCount = new int[probe, 18];
+            pr.probeCount = new int[probe, 13];
 
             //генератор
             Random r = new Random();
@@ -163,7 +183,7 @@ namespace Diploma
                             //генерируем число анализов
                             ind = r.Next(x.Diap[x.Id][c, 0], x.Diap[x.Id][c, 1]);
                         }
-                        
+
                         //выводим в поле формы
                         if (ind > probe)
                         {
@@ -175,16 +195,40 @@ namespace Diploma
 
                         tbs[x.Id].Text = ind.ToString();
                         pr.probeC(probe, x.Id, ind);
-                        
-
                         break;
                     }
-                }              
+                }
+
+                //переменная для хранения общего времени
+                TimeSpan time = new TimeSpan();
+                
+                //смотрим сколько раз будет запускаться центрифуга
+                z = probe / 20;
+                if (probe % 20 > 0)
+                {
+                    z++;
+                }
+                
+                //запускаем центрифугу
+                for (int i = 0; i < z; i++)
+                {
+                    time += TimeSpan.FromMinutes(5) + TimeSpan.FromSeconds(r.Next(1, 31));
+                }
+                
+                richTextBox1.Text += "\n Время центрифугирования: " + time;
+
+                //machines
+                
+
+                Thread doc1 = new Thread(new ThreadStart(Doctor1));
+                Thread doc2 = new Thread(Doctor2);
+                doc1.Start();
+                doc2.Start();
             }
 
             
 
-            for(int j = 0; j < 18; j++)
+            for(int j = 0; j < 13; j++)
             {
                 richTextBox2.Text += "\n ID: " + j + " || ";
                 for (int i = 0; i < pr.probeCount.GetLength(0);i++)
@@ -192,9 +236,7 @@ namespace Diploma
                      richTextBox2.Text += pr.probeCount[i,j].ToString();
                 }
             }
-            
-                        
-                //меняем текст на кнопке
+                 //меняем текст на кнопке
                 button1.Text = "Reset";
         }
 
