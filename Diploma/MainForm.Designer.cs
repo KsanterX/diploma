@@ -35,8 +35,7 @@
             this.issledBox2 = new System.Windows.Forms.TextBox();
             this.issledBox3 = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.probeBox1 = new System.Windows.Forms.TextBox();
-            this.probelabel1 = new System.Windows.Forms.Label();
+            this.dayBox = new System.Windows.Forms.TextBox();
             this.issledBox6 = new System.Windows.Forms.TextBox();
             this.issledBox5 = new System.Windows.Forms.TextBox();
             this.issledBox4 = new System.Windows.Forms.TextBox();
@@ -70,7 +69,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(955, 276);
+            this.button1.Location = new System.Drawing.Point(949, 314);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(92, 51);
             this.button1.TabIndex = 0;
@@ -83,7 +82,7 @@
             this.richTextBox1.Location = new System.Drawing.Point(12, 12);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.ReadOnly = true;
-            this.richTextBox1.Size = new System.Drawing.Size(309, 283);
+            this.richTextBox1.Size = new System.Drawing.Size(309, 553);
             this.richTextBox1.TabIndex = 1;
             this.richTextBox1.Text = "";
             // 
@@ -98,77 +97,70 @@
             // 
             // issledBox1
             // 
-            this.issledBox1.Location = new System.Drawing.Point(846, 12);
+            this.issledBox1.Location = new System.Drawing.Point(837, 12);
             this.issledBox1.Name = "issledBox1";
             this.issledBox1.ReadOnly = true;
-            this.issledBox1.Size = new System.Drawing.Size(28, 20);
+            this.issledBox1.Size = new System.Drawing.Size(42, 20);
             this.issledBox1.TabIndex = 5;
             // 
             // issledBox2
             // 
-            this.issledBox2.Location = new System.Drawing.Point(846, 44);
+            this.issledBox2.Location = new System.Drawing.Point(837, 44);
             this.issledBox2.Name = "issledBox2";
             this.issledBox2.ReadOnly = true;
-            this.issledBox2.Size = new System.Drawing.Size(28, 20);
+            this.issledBox2.Size = new System.Drawing.Size(42, 20);
             this.issledBox2.TabIndex = 6;
             // 
             // issledBox3
             // 
-            this.issledBox3.Location = new System.Drawing.Point(846, 75);
+            this.issledBox3.Location = new System.Drawing.Point(837, 75);
             this.issledBox3.Name = "issledBox3";
             this.issledBox3.ReadOnly = true;
-            this.issledBox3.Size = new System.Drawing.Size(28, 20);
+            this.issledBox3.Size = new System.Drawing.Size(42, 20);
             this.issledBox3.TabIndex = 7;
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.probeBox1);
-            this.groupBox1.Controls.Add(this.probelabel1);
-            this.groupBox1.Location = new System.Drawing.Point(12, 317);
+            this.groupBox1.Controls.Add(this.dayBox);
+            this.groupBox1.Location = new System.Drawing.Point(895, 260);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(204, 41);
+            this.groupBox1.Size = new System.Drawing.Size(197, 41);
             this.groupBox1.TabIndex = 8;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Пробы";
+            this.groupBox1.Text = "Количество дней";
             // 
-            // probeBox1
+            // dayBox
             // 
-            this.probeBox1.Location = new System.Drawing.Point(79, 17);
-            this.probeBox1.Name = "probeBox1";
-            this.probeBox1.Size = new System.Drawing.Size(100, 20);
-            this.probeBox1.TabIndex = 1;
-            // 
-            // probelabel1
-            // 
-            this.probelabel1.AutoSize = true;
-            this.probelabel1.Location = new System.Drawing.Point(7, 20);
-            this.probelabel1.Name = "probelabel1";
-            this.probelabel1.Size = new System.Drawing.Size(66, 13);
-            this.probelabel1.TabIndex = 0;
-            this.probelabel1.Text = "Количество";
+            this.dayBox.Location = new System.Drawing.Point(6, 15);
+            this.dayBox.Name = "dayBox";
+            this.dayBox.Size = new System.Drawing.Size(185, 20);
+            this.dayBox.TabIndex = 1;
+            this.dayBox.Text = "1";
+            this.dayBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.dayBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.dayBox_KeyPress);
             // 
             // issledBox6
             // 
-            this.issledBox6.Location = new System.Drawing.Point(846, 164);
+            this.issledBox6.Location = new System.Drawing.Point(197, 160);
             this.issledBox6.Name = "issledBox6";
             this.issledBox6.ReadOnly = true;
-            this.issledBox6.Size = new System.Drawing.Size(28, 20);
+            this.issledBox6.Size = new System.Drawing.Size(42, 20);
             this.issledBox6.TabIndex = 14;
             // 
             // issledBox5
             // 
-            this.issledBox5.Location = new System.Drawing.Point(846, 137);
+            this.issledBox5.Location = new System.Drawing.Point(197, 129);
             this.issledBox5.Name = "issledBox5";
             this.issledBox5.ReadOnly = true;
-            this.issledBox5.Size = new System.Drawing.Size(28, 20);
+            this.issledBox5.Size = new System.Drawing.Size(42, 20);
             this.issledBox5.TabIndex = 13;
             // 
             // issledBox4
             // 
-            this.issledBox4.Location = new System.Drawing.Point(846, 101);
+            this.issledBox4.Location = new System.Drawing.Point(837, 101);
             this.issledBox4.Name = "issledBox4";
             this.issledBox4.ReadOnly = true;
-            this.issledBox4.Size = new System.Drawing.Size(28, 20);
+            this.issledBox4.Size = new System.Drawing.Size(42, 20);
             this.issledBox4.TabIndex = 12;
             // 
             // label4
@@ -200,26 +192,26 @@
             // 
             // issledBox12
             // 
-            this.issledBox12.Location = new System.Drawing.Point(846, 342);
+            this.issledBox12.Location = new System.Drawing.Point(837, 342);
             this.issledBox12.Name = "issledBox12";
             this.issledBox12.ReadOnly = true;
-            this.issledBox12.Size = new System.Drawing.Size(28, 20);
+            this.issledBox12.Size = new System.Drawing.Size(42, 20);
             this.issledBox12.TabIndex = 26;
             // 
             // issledBox11
             // 
-            this.issledBox11.Location = new System.Drawing.Point(846, 307);
+            this.issledBox11.Location = new System.Drawing.Point(837, 307);
             this.issledBox11.Name = "issledBox11";
             this.issledBox11.ReadOnly = true;
-            this.issledBox11.Size = new System.Drawing.Size(28, 20);
+            this.issledBox11.Size = new System.Drawing.Size(42, 20);
             this.issledBox11.TabIndex = 25;
             // 
             // issledBox10
             // 
-            this.issledBox10.Location = new System.Drawing.Point(846, 279);
+            this.issledBox10.Location = new System.Drawing.Point(837, 279);
             this.issledBox10.Name = "issledBox10";
             this.issledBox10.ReadOnly = true;
-            this.issledBox10.Size = new System.Drawing.Size(28, 20);
+            this.issledBox10.Size = new System.Drawing.Size(42, 20);
             this.issledBox10.TabIndex = 24;
             // 
             // label8
@@ -242,32 +234,32 @@
             // 
             // issledBox9
             // 
-            this.issledBox9.Location = new System.Drawing.Point(846, 253);
+            this.issledBox9.Location = new System.Drawing.Point(837, 253);
             this.issledBox9.Name = "issledBox9";
             this.issledBox9.ReadOnly = true;
-            this.issledBox9.Size = new System.Drawing.Size(28, 20);
+            this.issledBox9.Size = new System.Drawing.Size(42, 20);
             this.issledBox9.TabIndex = 20;
             // 
             // issledBox8
             // 
-            this.issledBox8.Location = new System.Drawing.Point(846, 222);
+            this.issledBox8.Location = new System.Drawing.Point(837, 222);
             this.issledBox8.Name = "issledBox8";
             this.issledBox8.ReadOnly = true;
-            this.issledBox8.Size = new System.Drawing.Size(28, 20);
+            this.issledBox8.Size = new System.Drawing.Size(42, 20);
             this.issledBox8.TabIndex = 19;
             // 
             // issledBox7
             // 
-            this.issledBox7.Location = new System.Drawing.Point(846, 190);
+            this.issledBox7.Location = new System.Drawing.Point(197, 189);
             this.issledBox7.Name = "issledBox7";
             this.issledBox7.ReadOnly = true;
-            this.issledBox7.Size = new System.Drawing.Size(28, 20);
+            this.issledBox7.Size = new System.Drawing.Size(42, 20);
             this.issledBox7.TabIndex = 18;
             // 
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(13, 170);
+            this.label10.Location = new System.Drawing.Point(13, 167);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(56, 13);
             this.label10.TabIndex = 17;
@@ -276,7 +268,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(13, 143);
+            this.label12.Location = new System.Drawing.Point(13, 136);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(97, 13);
             this.label12.TabIndex = 15;
@@ -311,10 +303,10 @@
             // 
             // issledBox13
             // 
-            this.issledBox13.Location = new System.Drawing.Point(846, 368);
+            this.issledBox13.Location = new System.Drawing.Point(837, 368);
             this.issledBox13.Name = "issledBox13";
             this.issledBox13.ReadOnly = true;
-            this.issledBox13.Size = new System.Drawing.Size(28, 20);
+            this.issledBox13.Size = new System.Drawing.Size(42, 20);
             this.issledBox13.TabIndex = 28;
             // 
             // label16
@@ -346,16 +338,19 @@
             this.groupBox2.Controls.Add(this.label10);
             this.groupBox2.Controls.Add(this.label9);
             this.groupBox2.Controls.Add(this.label13);
+            this.groupBox2.Controls.Add(this.issledBox7);
             this.groupBox2.Controls.Add(this.label8);
+            this.groupBox2.Controls.Add(this.issledBox6);
             this.groupBox2.Controls.Add(this.label14);
+            this.groupBox2.Controls.Add(this.issledBox5);
             this.groupBox2.Controls.Add(this.label16);
             this.groupBox2.Controls.Add(this.label15);
             this.groupBox2.Location = new System.Drawing.Point(640, 1);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(245, 548);
+            this.groupBox2.Size = new System.Drawing.Size(245, 397);
             this.groupBox2.TabIndex = 40;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Исследования";
+            this.groupBox2.Text = "Общее число исследований";
             // 
             // pictureBox1
             // 
@@ -372,7 +367,7 @@
             this.richTextBox2.Location = new System.Drawing.Point(328, 12);
             this.richTextBox2.Name = "richTextBox2";
             this.richTextBox2.ReadOnly = true;
-            this.richTextBox2.Size = new System.Drawing.Size(306, 283);
+            this.richTextBox2.Size = new System.Drawing.Size(306, 553);
             this.richTextBox2.TabIndex = 42;
             this.richTextBox2.Text = "";
             // 
@@ -398,9 +393,6 @@
             this.Controls.Add(this.issledBox10);
             this.Controls.Add(this.issledBox9);
             this.Controls.Add(this.issledBox8);
-            this.Controls.Add(this.issledBox7);
-            this.Controls.Add(this.issledBox6);
-            this.Controls.Add(this.issledBox5);
             this.Controls.Add(this.issledBox4);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.issledBox3);
@@ -408,7 +400,9 @@
             this.Controls.Add(this.issledBox1);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.groupBox2);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "MainForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Диплом";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
@@ -429,8 +423,7 @@
         private System.Windows.Forms.TextBox issledBox2;
         private System.Windows.Forms.TextBox issledBox3;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.TextBox probeBox1;
-        private System.Windows.Forms.Label probelabel1;
+        private System.Windows.Forms.TextBox dayBox;
         private System.Windows.Forms.TextBox issledBox6;
         private System.Windows.Forms.TextBox issledBox5;
         private System.Windows.Forms.TextBox issledBox4;

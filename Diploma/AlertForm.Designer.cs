@@ -35,11 +35,12 @@
             // labelMessage
             // 
             this.labelMessage.AutoSize = true;
-            this.labelMessage.Location = new System.Drawing.Point(117, 32);
+            this.labelMessage.Location = new System.Drawing.Point(12, 37);
             this.labelMessage.Name = "labelMessage";
             this.labelMessage.Size = new System.Drawing.Size(35, 13);
             this.labelMessage.TabIndex = 0;
             this.labelMessage.Text = "label1";
+            this.labelMessage.UseWaitCursor = true;
             // 
             // progressBar1
             // 
@@ -47,6 +48,7 @@
             this.progressBar1.Name = "progressBar1";
             this.progressBar1.Size = new System.Drawing.Size(260, 23);
             this.progressBar1.TabIndex = 1;
+            this.progressBar1.UseWaitCursor = true;
             // 
             // AlertForm
             // 
@@ -55,8 +57,11 @@
             this.ClientSize = new System.Drawing.Size(284, 154);
             this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.labelMessage);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "AlertForm";
-            this.Text = "AlertForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Прогресс";
+            this.UseWaitCursor = true;
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -13,6 +13,8 @@ namespace Diploma
         //
         string name;
         int id;
+        
+
 
         public Machine(int id)
         {
@@ -36,6 +38,7 @@ namespace Diploma
             }
             this.id = id;
         }
+
 
         public string Name
         {
