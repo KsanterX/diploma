@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Diploma
 {
+    //класс аппаратов
     class Machine
     {
         //определение занятости аппарата

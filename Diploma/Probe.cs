@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Diploma
 {
+    //класс проб
     class Probe
     {
         int[,] probecount;
