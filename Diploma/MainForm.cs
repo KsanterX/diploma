@@ -69,8 +69,16 @@ namespace Diploma
         {
 
             //переменная для хранения общего времени
-            TimeSpan time = new TimeSpan();
-            TimeSpan[] times;
+            TimeSpan[] time;
+            TimeSpan[,] times;
+            TimeSpan average;
+            //массив времени аппаратов
+            TimeSpan[][] timeMachine = new TimeSpan[3][]
+            {
+                new TimeSpan[4],
+                new TimeSpan[4],
+                new TimeSpan[4],
+            };
             //переменная для подсчета кумулятивной вероятности
             double cumulative = 0.0;
             int ind = 0;
@@ -78,6 +86,7 @@ namespace Diploma
             int c = 0;
             int probe = 0;
             int probemax = 0;
+            
 
             int daybox;
             Probe pr = new Probe();
@@ -123,8 +132,8 @@ namespace Diploma
             {
                 mach[i] = new Machine(i);
             }
-            //массив времени аппаратов
-            TimeSpan[] timeMachine = new TimeSpan[4];
+
+            //проверка количества дней
             if (dayBox.Text != "")
             {
                 daybox = Convert.ToInt32(dayBox.Text);
@@ -135,12 +144,14 @@ namespace Diploma
                 dayBox.Text = daybox.ToString();
             }
 
-            times = new TimeSpan[daybox];
+            times = new TimeSpan[daybox,3];
+            time = new TimeSpan[3];
 
             for (int day = 1; day <= daybox; day++)
             {
-                
+                Invoke(new Action(() => richTextBox1.Text += "\n **********"));
                 Invoke(new Action(() => richTextBox1.Text += "\n ДЕНЬ " + day));
+                Invoke(new Action(() => richTextBox1.Text += "\n **********"));
                 
                 //выводим число проб в поле на форме, переводя его в текстовый вид
                 probe = ProbeGen();
@@ -150,8 +161,12 @@ namespace Diploma
                 cumulative = 0.0;
                 z = 0;
                 c = 0;
-                time = TimeSpan.Zero;
-                Array.Clear(timeMachine,0,timeMachine.Length);
+                Array.Clear(time,0,time.Length);
+                
+                foreach (TimeSpan[] subArray in timeMachine)
+                {
+                    Array.Clear (subArray, 0, subArray.Length);
+                }
 
                 //массив проб
                 
@@ -240,148 +255,474 @@ namespace Diploma
                     {
                         z++;
                     }
-
-                    //запускаем центрифугу
-                    for (int i = 0; i < z; i++)
+                   
+                    //3 способа
+                    for (int sposob = 0; sposob < 3; sposob++)
                     {
-                        time += TimeSpan.FromMinutes(5) + TimeSpan.FromSeconds(r.Next(1, 31));
-                    }
-
-
-                    Invoke(new Action(() => richTextBox1.Text += "\n Время центрифугирования: " + time));
-
-                    foreach (var m in mach.Values)
-                    {
-                        switch (m.Id)
+                        switch (sposob)
                         {
+#region timeMachine counting sposob 1
                             case 0:
-                                for (int i = 0; i < pr.probeCount.GetLength(0); i++)
+                                Invoke(new Action(() => richTextBox1.Text += "\n ----------"));
+                                Invoke(new Action(() => richTextBox1.Text += "\n Способ 1: "));
+                                Invoke(new Action(() => richTextBox1.Text += "\n ----------"));
+                                //запускаем центрифугу
+                                for (int i = 0; i < z; i++)
                                 {
-                                    //К
-                                    if (pr.probeCount[i, 0] != 0)
-                                    {
+                                    time[sposob] += TimeSpan.FromMinutes(5) + TimeSpan.FromSeconds(r.Next(1, 31));
+                                }
 
-                                        timeMachine[m.Id] += TimeSpan.FromSeconds(30);
+
+                                Invoke(new Action(() => richTextBox1.Text += "\n Время центрифугирования: " + time[sposob]));
+
+                                foreach (var m in mach.Values)
+                                {
+                                    switch (m.Id)
+                                    {
+                                        case 0:
+                                            for (int i = 0; i < pr.probeCount.GetLength(0); i++)
+                                            {
+                                                //К
+                                                if (pr.probeCount[i, 0] != 0)
+                                                {
+
+                                                    timeMachine[sposob][m.Id] += TimeSpan.FromSeconds(20);
+                                                }
+                                            }
+                                            Invoke(new Action(() => richTextBox1.Text += "\n" + m.Name + ": " + timeMachine[sposob][m.Id]));
+                                            break;
+                                        case 1:
+                                            for (int i = 0; i < pr.probeCount.GetLength(0); i++)
+                                            {
+                                                //глюкоза(2)
+                                                if (pr.probeCount[i, 1] != 0)
+                                                {
+
+                                                    timeMachine[sposob][m.Id] += TimeSpan.FromMinutes(1);
+                                                }
+                                            }
+                                            Invoke(new Action(() => richTextBox1.Text += "\n" + m.Name + ": " + timeMachine[sposob][m.Id]));
+                                            break;
+                                        case 2:
+                                            for (int i = 0; i < pr.probeCount.GetLength(0); i++)
+                                            {
+                                                //холестерин(3)
+                                                if (pr.probeCount[i, 2] != 0)
+                                                {
+
+                                                    timeMachine[sposob][m.Id] += TimeSpan.FromSeconds(22);
+                                                }
+                                                //Бетта-липопротеиды,триглицириды (27.30)
+                                                if (pr.probeCount[i, 3] != 0)
+                                                {
+
+                                                    timeMachine[sposob][m.Id] += TimeSpan.FromSeconds(25);
+                                                }
+                                                //Билирубин общий(3.30)
+                                                if (pr.probeCount[i, 4] != 0)
+                                                {
+
+                                                    timeMachine[sposob][m.Id] += TimeSpan.FromSeconds(20);
+                                                }
+                                                //АЛТ, АСТ(1)
+                                                if (pr.probeCount[i, 5] != 0)
+                                                {
+
+                                                    timeMachine[sposob][m.Id] += TimeSpan.FromSeconds(15);
+                                                }
+                                                //Мочев,креат(1)
+                                                if (pr.probeCount[i, 7] != 0)
+                                                {
+
+                                                    timeMachine[sposob][m.Id] += TimeSpan.FromSeconds(20);
+                                                }
+                                                //Общ бел (21)
+                                                if (pr.probeCount[i, 8] != 0)
+                                                {
+
+                                                    timeMachine[sposob][m.Id] += TimeSpan.FromMinutes(1) + TimeSpan.FromSeconds(5);
+                                                }
+                                                //Альфа амил (32)
+                                                if (pr.probeCount[i, 9] != 0)
+                                                {
+
+                                                    timeMachine[sposob][m.Id] += TimeSpan.FromMinutes(1);
+                                                }
+                                                //Щелочной фосфотазы
+                                                if (pr.probeCount[i, 11] != 0)
+                                                {
+
+                                                    timeMachine[sposob][m.Id] += TimeSpan.FromMinutes(1);
+                                                }
+                                                //ГГТП(2.15)
+                                                if (pr.probeCount[i, 12] != 0)
+                                                {
+
+                                                    timeMachine[sposob][m.Id] += TimeSpan.FromSeconds(25);
+                                                }
+                                            }
+                                            Invoke(new Action(() => richTextBox1.Text += "\n" + m.Name + ": " + timeMachine[sposob][m.Id]));
+                                            break;
+                                        case 3:
+                                            for (int i = 0; i < pr.probeCount.GetLength(0); i++)
+                                            {
+                                                //(32.30)
+                                                if (pr.probeCount[i, 6] != 0)
+                                                {
+
+                                                    timeMachine[sposob][m.Id] += TimeSpan.FromMinutes(1) + TimeSpan.FromSeconds(10);
+                                                }
+                                                //(13)
+                                                if (pr.probeCount[i, 10] != 0)
+                                                {
+
+                                                    timeMachine[sposob][m.Id] += TimeSpan.FromMinutes(1) + TimeSpan.FromSeconds(5);
+                                                }
+                                            }
+
+                                            Invoke(new Action(() => richTextBox1.Text += "\n" + m.Name + ": " + timeMachine[sposob][m.Id]));
+                                            break;
+                                        default:
+                                            break;
                                     }
                                 }
-                                Invoke(new Action(() => richTextBox1.Text += "\n" + m.Name + ": " + timeMachine[m.Id]));
+
+                                time[sposob] = timeMachine[sposob].Max() + TimeSpan.FromSeconds(r.Next(60, Convert.ToInt32(time[sposob].TotalSeconds)));
+                                Invoke(new Action(() => richTextBox2.Text += "\n time[sposob] NEW: " + time[sposob]));
+
+                                times[day - 1,sposob] = time[sposob];
+
+                                Invoke(new Action(() => richTextBox1.Text += "\n Общее затраченное время: " + times[day-1,sposob]));
+
+                                
                                 break;
+#endregion
+#region timemachine counting sposob 2
                             case 1:
-                                for (int i = 0; i < pr.probeCount.GetLength(0); i++)
-                                {
-                                    //глюкоза(2)
-                                    if (pr.probeCount[i, 1] != 0)
-                                    {
 
-                                        timeMachine[m.Id] += TimeSpan.FromMinutes(1);
+                                Invoke(new Action(() => richTextBox1.Text += "\n ----------"));
+                                Invoke(new Action(() => richTextBox1.Text += "\n Способ 2: "));
+                                Invoke(new Action(() => richTextBox1.Text += "\n ----------"));
+                                //запускаем центрифугу
+                                for (int i = 0; i < z; i++)
+                                {
+                                    time[sposob] += TimeSpan.FromMinutes(5) + TimeSpan.FromSeconds(r.Next(1, 31));
+                                }
+
+
+                                Invoke(new Action(() => richTextBox1.Text += "\n Время центрифугирования: " + time[sposob]));
+
+                                foreach (var m in mach.Values)
+                                {
+                                    switch (m.Id)
+                                    {
+                                        case 0:
+                                            for (int i = 0; i < pr.probeCount.GetLength(0); i++)
+                                            {
+                                                //К
+                                                if (pr.probeCount[i, 0] != 0)
+                                                {
+
+                                                    timeMachine[sposob][m.Id] += TimeSpan.FromSeconds(20);
+                                                }
+                                            }
+                                            Invoke(new Action(() => richTextBox1.Text += "\n" + m.Name + ": " + timeMachine[sposob][m.Id]));
+                                            break;
+                                        case 1:
+                                            for (int i = 0; i < pr.probeCount.GetLength(0); i++)
+                                            {
+                                                //глюкоза(2)
+                                                if (pr.probeCount[i, 1] != 0)
+                                                {
+
+                                                    timeMachine[sposob][m.Id] += TimeSpan.FromMinutes(1);
+                                                }
+                                            }
+                                            Invoke(new Action(() => richTextBox1.Text += "\n" + m.Name + ": " + timeMachine[sposob][m.Id]));
+                                            break;
+                                        case 2:
+                                            for (int i = 0; i < pr.probeCount.GetLength(0); i++)
+                                            {
+                                                //холестерин(3)
+                                                if (pr.probeCount[i, 2] != 0)
+                                                {
+
+                                                    timeMachine[sposob][m.Id] += TimeSpan.FromSeconds(22);
+                                                }
+                                                //Бетта-липопротеиды,триглицириды (27.30)
+                                                if (pr.probeCount[i, 3] != 0)
+                                                {
+
+                                                    timeMachine[sposob][m.Id] += TimeSpan.FromSeconds(25);
+                                                }
+                                                //Билирубин общий(3.30)
+                                                if (pr.probeCount[i, 4] != 0)
+                                                {
+
+                                                    timeMachine[sposob][m.Id] += TimeSpan.FromSeconds(20);
+                                                }
+                                                //АЛТ, АСТ(1)
+                                                if (pr.probeCount[i, 5] != 0)
+                                                {
+
+                                                    timeMachine[sposob][m.Id] += TimeSpan.FromSeconds(15);
+                                                }
+                                                //Мочев,креат(1)
+                                                if (pr.probeCount[i, 7] != 0)
+                                                {
+
+                                                    timeMachine[sposob][m.Id] += TimeSpan.FromSeconds(20);
+                                                }
+                                                //Общ бел (21)
+                                                if (pr.probeCount[i, 8] != 0)
+                                                {
+
+                                                    timeMachine[sposob][m.Id] += TimeSpan.FromMinutes(1) + TimeSpan.FromSeconds(5);
+                                                }
+                                                //Альфа амил (32)
+                                                if (pr.probeCount[i, 9] != 0)
+                                                {
+
+                                                    timeMachine[sposob][m.Id] += TimeSpan.FromMinutes(1);
+                                                }
+                                                //Щелочной фосфотазы
+                                                if (pr.probeCount[i, 11] != 0)
+                                                {
+
+                                                    timeMachine[sposob][m.Id] += TimeSpan.FromMinutes(1);
+                                                }
+                                                //ГГТП(2.15)
+                                                if (pr.probeCount[i, 12] != 0)
+                                                {
+
+                                                    timeMachine[sposob][m.Id] += TimeSpan.FromSeconds(25);
+                                                }
+                                            }
+                                            Invoke(new Action(() => richTextBox1.Text += "\n" + m.Name + ": " + timeMachine[sposob][m.Id]));
+                                            break;
+                                        case 3:
+                                            for (int i = 0; i < pr.probeCount.GetLength(0); i++)
+                                            {
+                                                //(32.30)
+                                                if (pr.probeCount[i, 6] != 0)
+                                                {
+
+                                                    timeMachine[sposob][m.Id] += TimeSpan.FromMinutes(1) + TimeSpan.FromSeconds(10);
+                                                }
+                                                //(13)
+                                                if (pr.probeCount[i, 10] != 0)
+                                                {
+
+                                                    timeMachine[sposob][m.Id] += TimeSpan.FromMinutes(1) + TimeSpan.FromSeconds(5);
+                                                }
+                                            }
+
+                                            Invoke(new Action(() => richTextBox1.Text += "\n" + m.Name + ": " + timeMachine[sposob][m.Id]));
+                                            break;
+                                        default:
+                                            break;
                                     }
                                 }
-                                Invoke(new Action(() => richTextBox1.Text += "\n" + m.Name + ": " + timeMachine[m.Id]));
+
+                                time[sposob] = timeMachine[sposob].Max() + TimeSpan.FromSeconds(r.Next(60, Convert.ToInt32(time[sposob].TotalSeconds)));
+                                Invoke(new Action(() => richTextBox2.Text += "\n time[sposob] NEW: " + time[sposob]));
+
+                                times[day - 1, sposob] = time[sposob];
+
+                                Invoke(new Action(() => richTextBox1.Text += "\n Общее затраченное время: " + times[day - 1, sposob]));
+
+
                                 break;
+#endregion
+#region timemachine counting sposob 3
                             case 2:
-                                for (int i = 0; i < pr.probeCount.GetLength(0); i++)
+                                Invoke(new Action(() => richTextBox1.Text += "\n ----------"));
+                                Invoke(new Action(() => richTextBox1.Text += "\n Способ 3: "));
+                                Invoke(new Action(() => richTextBox1.Text += "\n ----------"));
+                                //запускаем центрифугу
+                                for (int i = 0; i < z; i++)
                                 {
-                                    //холестерин(3)
-                                    if (pr.probeCount[i, 2] != 0)
-                                    {
-
-                                        timeMachine[m.Id] += TimeSpan.FromSeconds(32);
-                                    }
-                                    //Бетта-липопротеиды,триглицириды (27.30)
-                                    if (pr.probeCount[i, 3] != 0)
-                                    {
-
-                                        timeMachine[m.Id] += TimeSpan.FromSeconds(35);
-                                    }
-                                    //Билирубин общий(3.30)
-                                    if (pr.probeCount[i, 4] != 0)
-                                    {
-
-                                        timeMachine[m.Id] += TimeSpan.FromSeconds(20);
-                                    }
-                                    //АЛТ, АСТ(1)
-                                    if (pr.probeCount[i, 5] != 0)
-                                    {
-
-                                        timeMachine[m.Id] += TimeSpan.FromSeconds(15);
-                                    }
-                                    //Мочев,креат(1)
-                                    if (pr.probeCount[i, 7] != 0)
-                                    {
-
-                                        timeMachine[m.Id] += TimeSpan.FromSeconds(20);
-                                    }
-                                    //Общ бел (21)
-                                    if (pr.probeCount[i, 8] != 0)
-                                    {
-
-                                        timeMachine[m.Id] += TimeSpan.FromMinutes(1) + TimeSpan.FromSeconds(5);
-                                    }
-                                    //Альфа амил (32)
-                                    if (pr.probeCount[i, 9] != 0)
-                                    {
-
-                                        timeMachine[m.Id] += TimeSpan.FromMinutes(1);
-                                    }
-                                    //Щелочной фосфотазы
-                                    if (pr.probeCount[i, 11] != 0)
-                                    {
-
-                                        timeMachine[m.Id] += TimeSpan.FromMinutes(1);
-                                    }
-                                    //ГГТП(2.15)
-                                    if (pr.probeCount[i, 12] != 0)
-                                    {
-
-                                        timeMachine[m.Id] += TimeSpan.FromSeconds(25);
-                                    }
-                                }
-                                Invoke(new Action(() => richTextBox1.Text += "\n" + m.Name + ": " + timeMachine[m.Id]));
-                                break;
-                            case 3:
-                                for (int i = 0; i < pr.probeCount.GetLength(0); i++)
-                                {
-                                    //(32.30)
-                                    if (pr.probeCount[i, 6] != 0)
-                                    {
-
-                                        timeMachine[m.Id] += TimeSpan.FromMinutes(1) + TimeSpan.FromSeconds(10);
-                                    }
-                                    //(13)
-                                    if (pr.probeCount[i, 10] != 0)
-                                    {
-
-                                        timeMachine[m.Id] += TimeSpan.FromMinutes(1) + TimeSpan.FromSeconds(5);
-                                    }
+                                    time[sposob] += TimeSpan.FromMinutes(5) + TimeSpan.FromSeconds(r.Next(1, 31));
                                 }
 
-                                Invoke(new Action(() => richTextBox1.Text += "\n" + m.Name + ": " + timeMachine[m.Id]));
+
+                                Invoke(new Action(() => richTextBox1.Text += "\n Время центрифугирования: " + time[sposob]));
+
+                                foreach (var m in mach.Values)
+                                {
+                                    switch (m.Id)
+                                    {
+                                        case 0:
+                                            for (int i = 0; i < pr.probeCount.GetLength(0); i++)
+                                            {
+                                                //К
+                                                if (pr.probeCount[i, 0] != 0)
+                                                {
+
+                                                    timeMachine[sposob][m.Id] += TimeSpan.FromSeconds(20);
+                                                }
+                                            }
+                                            Invoke(new Action(() => richTextBox1.Text += "\n" + m.Name + ": " + timeMachine[sposob][m.Id]));
+                                            break;
+                                        case 1:
+                                            for (int i = 0; i < pr.probeCount.GetLength(0); i++)
+                                            {
+                                                //глюкоза(2)
+                                                if (pr.probeCount[i, 1] != 0)
+                                                {
+
+                                                    timeMachine[sposob][m.Id] += TimeSpan.FromMinutes(1);
+                                                }
+                                            }
+                                            Invoke(new Action(() => richTextBox1.Text += "\n" + m.Name + ": " + timeMachine[sposob][m.Id]));
+                                            break;
+                                        case 2:
+                                            for (int i = 0; i < pr.probeCount.GetLength(0); i++)
+                                            {
+                                                //холестерин(3)
+                                                if (pr.probeCount[i, 2] != 0)
+                                                {
+
+                                                    timeMachine[sposob][m.Id] += TimeSpan.FromSeconds(22);
+                                                }
+                                                //Бетта-липопротеиды,триглицириды (27.30)
+                                                if (pr.probeCount[i, 3] != 0)
+                                                {
+
+                                                    timeMachine[sposob][m.Id] += TimeSpan.FromSeconds(25);
+                                                }
+                                                //Билирубин общий(3.30)
+                                                if (pr.probeCount[i, 4] != 0)
+                                                {
+
+                                                    timeMachine[sposob][m.Id] += TimeSpan.FromSeconds(20);
+                                                }
+                                                //АЛТ, АСТ(1)
+                                                if (pr.probeCount[i, 5] != 0)
+                                                {
+
+                                                    timeMachine[sposob][m.Id] += TimeSpan.FromSeconds(15);
+                                                }
+                                                //Мочев,креат(1)
+                                                if (pr.probeCount[i, 7] != 0)
+                                                {
+
+                                                    timeMachine[sposob][m.Id] += TimeSpan.FromSeconds(20);
+                                                }
+                                                //Общ бел (21)
+                                                if (pr.probeCount[i, 8] != 0)
+                                                {
+
+                                                    timeMachine[sposob][m.Id] += TimeSpan.FromMinutes(1) + TimeSpan.FromSeconds(5);
+                                                }
+                                                //Альфа амил (32)
+                                                if (pr.probeCount[i, 9] != 0)
+                                                {
+
+                                                    timeMachine[sposob][m.Id] += TimeSpan.FromMinutes(1);
+                                                }
+                                                //Щелочной фосфотазы
+                                                if (pr.probeCount[i, 11] != 0)
+                                                {
+
+                                                    timeMachine[sposob][m.Id] += TimeSpan.FromMinutes(1);
+                                                }
+                                                //ГГТП(2.15)
+                                                if (pr.probeCount[i, 12] != 0)
+                                                {
+
+                                                    timeMachine[sposob][m.Id] += TimeSpan.FromSeconds(25);
+                                                }
+                                            }
+                                            Invoke(new Action(() => richTextBox1.Text += "\n" + m.Name + ": " + timeMachine[sposob][m.Id]));
+                                            break;
+                                        case 3:
+                                            for (int i = 0; i < pr.probeCount.GetLength(0); i++)
+                                            {
+                                                //(32.30)
+                                                if (pr.probeCount[i, 6] != 0)
+                                                {
+
+                                                    timeMachine[sposob][m.Id] += TimeSpan.FromMinutes(1) + TimeSpan.FromSeconds(10);
+                                                }
+                                                //(13)
+                                                if (pr.probeCount[i, 10] != 0)
+                                                {
+
+                                                    timeMachine[sposob][m.Id] += TimeSpan.FromMinutes(1) + TimeSpan.FromSeconds(5);
+                                                }
+                                            }
+
+                                            Invoke(new Action(() => richTextBox1.Text += "\n" + m.Name + ": " + timeMachine[sposob][m.Id]));
+                                            break;
+                                        default:
+                                            break;
+                                    }
+                                }
+
+                                time[sposob] = timeMachine[sposob].Max() + TimeSpan.FromSeconds(r.Next(60, Convert.ToInt32(time[sposob].TotalSeconds)));
+                                Invoke(new Action(() => richTextBox2.Text += "\n time[sposob] NEW: " + time[sposob]));
+
+                                times[day - 1, sposob] = time[sposob];
+
+                                Invoke(new Action(() => richTextBox1.Text += "\n Общее затраченное время: " + times[day - 1, sposob]));
+
+
                                 break;
+#endregion
                             default:
                                 break;
                         }
+                        
                     }
-                    time = timeMachine.Max() + TimeSpan.FromMinutes(r.Next(1,Convert.ToInt32(time.TotalMinutes)));
-                    times[day-1] = time;
-                    Invoke(new Action(() => richTextBox1.Text += "\n Общее затраченное время: " + time));
-                    // Report progress to 'UI' thread
                     backgroundWorker1.ReportProgress(100*day/daybox);
                 }
-                /*
-                for (int j = 0; j < 13; j++)
-                {
-                    richTextBox2.Text += "\n ID: " + j + " || ";
-                    for (int i = 0; i < pr.probeCount.GetLength(0); i++)
-                    {
-                        richTextBox2.Text += pr.probeCount[i, j].ToString();
-                    }
-                }*/
+                
+                 //меняем текст на кнопке
+                //report
+                
                 Invoke(new Action(() => richTextBox2.Text += "\n Всего дней обработано: " + daybox));
                 Invoke(new Action(() => richTextBox2.Text += "\n Всего проб взято: " + probemax));
                 Invoke(new Action(() => richTextBox2.Text += "\n Среднее число проб в день: " + probemax / daybox));
-                Invoke(new Action(() => richTextBox2.Text += "\n Среднее время выполнения работ: " + TimeSpan.FromSeconds(times.Average(i => i.TotalSeconds))));
-                 //меняем текст на кнопке
+                //
+                Invoke(new Action(() => richTextBox2.Text += "\n ------------------------------------------------"));
+                Invoke(new Action(() => richTextBox2.Text += "\n Способ 1."));
+                Invoke(new Action(() => richTextBox2.Text += "\n ------------------------------------------------"));
+                average = TimeSpan.Zero;
+                for (int i = 0; i < times.GetLength(0);i++)
+                {
+                        average += TimeSpan.FromMilliseconds(times[i,0].TotalMilliseconds);                    
+                }
+                average = TimeSpan.FromMilliseconds(average.TotalMilliseconds / daybox);
+                
+                Invoke(new Action(() => richTextBox2.Text += "\n Среднее затраченное время: " + average));
+                Invoke(new Action(() => richTextBox2.Text += "\n ------------------------------------------------"));
+                //
+                Invoke(new Action(() => richTextBox2.Text += "\n ------------------------------------------------"));
+                Invoke(new Action(() => richTextBox2.Text += "\n Способ 2."));
+                Invoke(new Action(() => richTextBox2.Text += "\n ------------------------------------------------"));
 
+                average = TimeSpan.Zero;
+                for (int i = 0; i < times.GetLength(0); i++)
+                {
+                    average += TimeSpan.FromMilliseconds(times[i, 1].TotalMilliseconds);
+                }
+                average = TimeSpan.FromMilliseconds(average.TotalMilliseconds / daybox);
+
+                Invoke(new Action(() => richTextBox2.Text += "\n Среднее затраченное время: " + average));
+                Invoke(new Action(() => richTextBox2.Text += "\n ------------------------------------------------"));
+                Invoke(new Action(() => richTextBox2.Text += "\n ------------------------------------------------"));
+                Invoke(new Action(() => richTextBox2.Text += "\n Способ 3."));
+                Invoke(new Action(() => richTextBox2.Text += "\n ------------------------------------------------"));
+
+                average = TimeSpan.Zero;
+                for (int i = 0; i < times.GetLength(0); i++)
+                {
+                    average += TimeSpan.FromMilliseconds(times[i,2].TotalMilliseconds);
+                }
+
+                Invoke(new Action(() => richTextBox2.Text += "\n Среднее затраченное время: " + TimeSpan.FromMilliseconds(average.TotalMilliseconds / daybox)));
+                Invoke(new Action(() => richTextBox2.Text += "\n ------------------------------------------------"));
                 Invoke(new Action(() => button1.Text = "Reset"));
         }
 
