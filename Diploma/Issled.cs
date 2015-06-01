@@ -9,13 +9,11 @@ namespace Diploma
     //класс исследований
     class Issled
     {
-        //имя исследования
         string name;
-        //id исследования
         byte id;
 
         //массив вероятностей исследования
-        private double[][,] probarray = new double[13][,]
+        private static double[][,] probarray = new double[13][,]
         {
             //массив значений для подсчета кумулятивной вероятности
                 
@@ -38,7 +36,7 @@ namespace Diploma
                 new double[5,2] { {0.029,1}, {0.043,1}, {0.100,1}, {0.343,1}, {0.486,1} },//ГГТП
         };
         //массив диапазонов
-        int[][,] diap = new int[13][,]
+        static int[][,] diap = new int[13][,]
         {
 
             new int[9,2] {{29,35}, {34,40}, {44,49}, {24,30}, {15,21}, {20,25}, {10,16}, {5,11}, {0,6}},//К, Na
@@ -62,14 +60,12 @@ namespace Diploma
         };
         
         //массив затрат времени на исследования (в секундах)
-        int[] timereq = new int[13] {30,120,180,1650,210,120,1950,120,1275,1920,795,60,135};
+        static int[] timereq = new int[13] {30,120,180,1650,210,120,1950,120,1275,1920,795,60,135};
 
         public Issled(byte id, string name)
         {
             this.name = name;
             this.id = id;
-            
-
         }
 
         public string Name

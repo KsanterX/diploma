@@ -7,53 +7,31 @@ using System.Threading.Tasks;
 namespace Diploma
 {
     //класс аппаратов
-    class Machine
+    class Machine : Actor
     {
         //определение занятости аппарата
         bool busy;
-        //
-        string name;
-        int id;
-        
+        public string Name { get; set; }
 
-
-        public Machine(int id)
+        public Machine(int id) : base (id)
         {
             this.busy = false;
             switch (id)
             {
                 case 0:
-                    this.name = "Анализатор электролитов";
+                    Name = "Анализатор электролитов";
                     break;
                 case 1:
-                    this.name = "Автоматический анализатор глюкозы";
+                    Name = "Автоматический анализатор глюкозы";
                     break;
                 case 2:
-                    this.name = "BS 3000";
+                    Name = "BS 3000";
                     break;
                 case 3:
-                    this.name = "ФЭК";
+                    Name = "ФЭК";
                     break;
                 default:
                     break;
-            }
-            this.id = id;
-        }
-
-
-        public string Name
-        {
-            get
-            {
-                return name;
-            }
-        }
-
-        public int Id
-        {
-            get
-            {
-                return id;
             }
         }
 

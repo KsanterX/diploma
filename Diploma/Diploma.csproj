@@ -44,12 +44,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Actor.cs" />
     <Compile Include="AlertForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="AlertForm.Designer.cs">
       <DependentUpon>AlertForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Doctor.cs" />
     <Compile Include="Issled.cs" />
     <Compile Include="Machine.cs" />
     <Compile Include="MainForm.cs">
