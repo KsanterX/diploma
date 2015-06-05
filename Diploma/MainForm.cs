@@ -68,7 +68,7 @@ namespace Diploma
         public void MainProg()
         {
 
-            //массив для хранения значений времени для каждого способа в течени одного цикла
+            //массив для хранения значений времени для каждого способа в течение одного цикла
             TimeSpan[] time;
             //массив общего времени для каждого дня и каждого способа
             TimeSpan[,] times;
@@ -268,6 +268,8 @@ namespace Diploma
                         {
 #region Способ 1
                             case 0:
+                                /*Thread s1 = new Thread(Sposob1);
+                                s1.Start();*/
                                 Invoke(new Action(() => richTextBox1.Text += "\n ----------"));
                                 Invoke(new Action(() => richTextBox1.Text += "\n Способ 1: "));
                                 Invoke(new Action(() => richTextBox1.Text += "\n ----------"));
@@ -540,13 +542,69 @@ namespace Diploma
                                             Invoke(new Action(() => richTextBox1.Text += "\n" + m.Name + ": " + timeMachine[sposob][m.Id]));
                                             break;
                                         case 3:
+                                            //по 20
+                                            for (int i = 0; i < pr.probeCount.GetLength(0); i += 20)
+                                            {
+                                                if (pr.probeCount.GetLength(0) - 20 >= i)
+                                                {
+                                                    for (int j = 0; j <= 20; j++)
+                                                    {
+                                                        if (pr.probeCount[j, 6] > 0)
+                                                        {
+                                                            timeMachine[sposob][m.Id] += TimeSpan.FromMinutes(32) + TimeSpan.FromSeconds(30);
+                                                            break;
+                                                        }
+
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    for (int j = 0; j <= i - pr.probeCount.GetLength(0); j++)
+                                                    {
+                                                        if (pr.probeCount[j, 6] > 0)
+                                                        {
+                                                            timeMachine[sposob][m.Id] += TimeSpan.FromMinutes(32) + TimeSpan.FromSeconds(30);
+                                                            break;
+                                                        }
+
+                                                    }
+                                                }
+
+                                                //
+
+                                                if (pr.probeCount.GetLength(0) - 20 >= i)
+                                                {
+                                                    for (int j = 0; j <= 20; j++)
+                                                    {
+                                                        if (pr.probeCount[j, 10] > 0)
+                                                        {
+                                                            timeMachine[sposob][m.Id] += TimeSpan.FromMinutes(13);
+                                                            break;
+                                                        }
+
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    for (int j = 0; j <= i - pr.probeCount.GetLength(0); j++)
+                                                    {
+                                                        if (pr.probeCount[j, 10] > 0)
+                                                        {
+                                                            timeMachine[sposob][m.Id] += TimeSpan.FromMinutes(13);
+                                                            break;
+                                                        }
+
+                                                    }
+                                                }
+                                            }
+                                            /*//не по 20
                                             for (int i = 0; i < pr.probeCount.GetLength(0); i++)
                                             {
                                                 //(32.30)
                                                 if (pr.probeCount[i, 6] != 0)
                                                 {
 
-                                                    timeMachine[sposob][m.Id] += TimeSpan.FromMinutes(1) + TimeSpan.FromSeconds(10);
+                                                    timeMachine[sposob][m.Id] += TimeSpan.FromMinutes(32) + TimeSpan.FromSeconds(30);
                                                 }
                                                 //(13)
                                                 if (pr.probeCount[i, 10] != 0)
@@ -555,7 +613,7 @@ namespace Diploma
                                                     timeMachine[sposob][m.Id] += TimeSpan.FromMinutes(1) + TimeSpan.FromSeconds(5);
                                                 }
                                             }
-
+                                            */
                                             Invoke(new Action(() => richTextBox1.Text += "\n" + m.Name + ": " + timeMachine[sposob][m.Id]));
                                             break;
                                         default:
@@ -847,7 +905,63 @@ namespace Diploma
                                             Invoke(new Action(() => richTextBox1.Text += "\n" + m.Name + ": " + timeMachine[sposob][m.Id]));
                                             break;
                                         case 3:
-                                            for (int i = 0; i < pr.probeCount.GetLength(0); i++)
+                                            //по 20
+                                            for (int i = 0; i < pr.probeCount.GetLength(0); i += 20)
+                                            {
+                                                if (pr.probeCount.GetLength(0) - 20 >= i)
+                                                {
+                                                    for (int j = 0; j <= 20; j++)
+                                                    {
+                                                        if (pr.probeCount[j, 6] > 0)
+                                                        {
+                                                            timeMachine[sposob][m.Id] += TimeSpan.FromMinutes(32) + TimeSpan.FromSeconds(30);
+                                                            break;
+                                                        }
+
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    for (int j = 0; j <= i - pr.probeCount.GetLength(0); j++)
+                                                    {
+                                                        if (pr.probeCount[j, 6] > 0)
+                                                        {
+                                                            timeMachine[sposob][m.Id] += TimeSpan.FromMinutes(32) + TimeSpan.FromSeconds(30);
+                                                            break;
+                                                        }
+
+                                                    }
+                                                }
+
+                                                //
+
+                                                if (pr.probeCount.GetLength(0) - 20 >= i)
+                                                {
+                                                    for (int j = 0; j <= 20; j++)
+                                                    {
+                                                        if (pr.probeCount[j, 10] > 0)
+                                                        {
+                                                            timeMachine[sposob][m.Id] += TimeSpan.FromMinutes(13);
+                                                            break;
+                                                        }
+
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    for (int j = 0; j <= i - pr.probeCount.GetLength(0); j++)
+                                                    {
+                                                        if (pr.probeCount[j, 10] > 0)
+                                                        {
+                                                            timeMachine[sposob][m.Id] += TimeSpan.FromMinutes(13);
+                                                            break;
+                                                        }
+
+                                                    }
+                                                }
+                                            }
+                                                // not 20
+                                           /* for (int i = 0; i < pr.probeCount.GetLength(0); i++)
                                             {
                                                 //(32.30)
                                                 if (pr.probeCount[i, 6] != 0)
@@ -861,7 +975,7 @@ namespace Diploma
 
                                                     timeMachine[sposob][m.Id] += TimeSpan.FromMinutes(1) + TimeSpan.FromSeconds(5);
                                                 }
-                                            }
+                                            }*/
 
                                             Invoke(new Action(() => richTextBox1.Text += "\n" + m.Name + ": " + timeMachine[sposob][m.Id]));
                                             break;
@@ -1154,7 +1268,63 @@ namespace Diploma
                                             Invoke(new Action(() => richTextBox1.Text += "\n" + m.Name + ": " + timeMachine[sposob][m.Id]));
                                             break;
                                         case 3:
-                                            for (int i = 0; i < pr.probeCount.GetLength(0); i++)
+                                            //по 20
+                                            for (int i = 0; i < pr.probeCount.GetLength(0); i += 20)
+                                            {
+                                                if (pr.probeCount.GetLength(0) - 20 >= i)
+                                                {
+                                                    for (int j = 0; j <= 20; j++)
+                                                    {
+                                                        if (pr.probeCount[j, 6] > 0)
+                                                        {
+                                                            timeMachine[sposob][m.Id] += TimeSpan.FromMinutes(32) + TimeSpan.FromSeconds(30);
+                                                            break;
+                                                        }
+
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    for (int j = 0; j <= i - pr.probeCount.GetLength(0); j++)
+                                                    {
+                                                        if (pr.probeCount[j, 6] > 0)
+                                                        {
+                                                            timeMachine[sposob][m.Id] += TimeSpan.FromMinutes(32) + TimeSpan.FromSeconds(30);
+                                                            break;
+                                                        }
+
+                                                    }
+                                                }
+
+                                                //
+
+                                                if (pr.probeCount.GetLength(0) - 20 >= i)
+                                                {
+                                                    for (int j = 0; j <= 20; j++)
+                                                    {
+                                                        if (pr.probeCount[j, 10] > 0)
+                                                        {
+                                                            timeMachine[sposob][m.Id] += TimeSpan.FromMinutes(13);
+                                                            break;
+                                                        }
+
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    for (int j = 0; j <= i - pr.probeCount.GetLength(0); j++)
+                                                    {
+                                                        if (pr.probeCount[j, 10] > 0)
+                                                        {
+                                                            timeMachine[sposob][m.Id] += TimeSpan.FromMinutes(13);
+                                                            break;
+                                                        }
+
+                                                    }
+                                                }
+                                            }
+                                            //not 20
+                                            /*for (int i = 0; i < pr.probeCount.GetLength(0); i++)
                                             {
                                                 //(32.30)
                                                 if (pr.probeCount[i, 6] != 0)
@@ -1168,7 +1338,7 @@ namespace Diploma
 
                                                     timeMachine[sposob][m.Id] += TimeSpan.FromMinutes(1) + TimeSpan.FromSeconds(5);
                                                 }
-                                            }
+                                            }*/
 
                                             Invoke(new Action(() => richTextBox1.Text += "\n" + m.Name + ": " + timeMachine[sposob][m.Id]));
                                             break;
@@ -1331,8 +1501,7 @@ namespace Diploma
         void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
          BackgroundWorker worker = sender as BackgroundWorker;
-        // Your background task goes here
-        MainProg();
+         MainProg();
         }
 
         //обновление полосы прогресса
@@ -1356,5 +1525,310 @@ namespace Diploma
                 e.Handled = true;
             }
         }
+
+        //способ1
+        /*private void Sposob1()
+        {
+            Invoke(new Action(() => richTextBox1.Text += "\n ----------"));
+            Invoke(new Action(() => richTextBox1.Text += "\n Способ 1: "));
+            Invoke(new Action(() => richTextBox1.Text += "\n ----------"));
+            //запускаем центрифугу
+            for (int i = 0; i < z; i++)
+            {
+                time[1] += TimeSpan.FromMinutes(5) + TimeSpan.FromSeconds(r.Next(1, 31));
+            }
+
+
+            Invoke(new Action(() => richTextBox1.Text += "\n Время центрифугирования: " + time[sposob]));
+
+            foreach (var m in mach.Values)
+            {
+                switch (m.Id)
+                {
+                    case 0:
+                        for (int i = 0; i < pr.probeCount.GetLength(0); i++)
+                        {
+                            //К
+                            if (pr.probeCount[i, 0] != 0)
+                            {
+
+                                timeMachine[sposob][m.Id] += TimeSpan.FromSeconds(30);
+                            }
+                        }
+                        Invoke(new Action(() => richTextBox1.Text += "\n" + m.Name + ": " + timeMachine[sposob][m.Id]));
+                        break;
+                    case 1:
+                        for (int i = 0; i < pr.probeCount.GetLength(0); i++)
+                        {
+                            //глюкоза(2)
+                            if (pr.probeCount[i, 1] != 0)
+                            {
+
+                                timeMachine[sposob][m.Id] += TimeSpan.FromMinutes(1);
+                            }
+                        }
+                        Invoke(new Action(() => richTextBox1.Text += "\n" + m.Name + ": " + timeMachine[sposob][m.Id]));
+                        break;
+                    case 2:
+                        for (int i = 0; i < pr.probeCount.GetLength(0); i += 20)
+                        {
+                            //холестерин(3)
+                            if (pr.probeCount.GetLength(0) - 20 >= i)
+                            {
+                                for (int j = 0; j <= 20; j++)
+                                {
+                                    if (pr.probeCount[j, 2] > 0)
+                                    {
+                                        timeMachine[sposob][m.Id] += TimeSpan.FromSeconds(32);
+                                        break;
+                                    }
+
+                                }
+                            }
+                            else
+                            {
+                                for (int j = 0; j <= i - pr.probeCount.GetLength(0); j++)
+                                {
+                                    if (pr.probeCount[j, 2] > 0)
+                                    {
+                                        timeMachine[sposob][m.Id] += TimeSpan.FromSeconds(32);
+                                        break;
+                                    }
+
+                                }
+                            }
+                            //Бетта-липопротеиды,триглицириды (27.30)
+                            if (pr.probeCount.GetLength(0) - 20 >= i)
+                            {
+                                for (int j = 0; j <= 20; j++)
+                                {
+                                    if (pr.probeCount[j, 3] > 0)
+                                    {
+                                        timeMachine[sposob][m.Id] += TimeSpan.FromSeconds(35);
+                                        break;
+                                    }
+
+                                }
+                            }
+                            else
+                            {
+                                for (int j = 0; j <= i - pr.probeCount.GetLength(0); j++)
+                                {
+                                    if (pr.probeCount[j, 3] > 0)
+                                    {
+                                        timeMachine[sposob][m.Id] += TimeSpan.FromSeconds(35);
+                                        break;
+                                    }
+
+                                }
+                            }
+                            //Билирубин общий(3.30)
+                            if (pr.probeCount.GetLength(0) - 20 >= i)
+                            {
+                                for (int j = 0; j <= 20; j++)
+                                {
+                                    if (pr.probeCount[j, 4] > 0)
+                                    {
+                                        timeMachine[sposob][m.Id] += TimeSpan.FromSeconds(20);
+                                        break;
+                                    }
+
+                                }
+                            }
+                            else
+                            {
+                                for (int j = 0; j <= i - pr.probeCount.GetLength(0); j++)
+                                {
+                                    if (pr.probeCount[j, 4] > 0)
+                                    {
+                                        timeMachine[sposob][m.Id] += TimeSpan.FromSeconds(20);
+                                        break;
+                                    }
+
+                                }
+                            }
+                            //АЛТ, АСТ(1)
+                            if (pr.probeCount.GetLength(0) - 20 >= i)
+                            {
+                                for (int j = 0; j <= 20; j++)
+                                {
+                                    if (pr.probeCount[j, 5] > 0)
+                                    {
+                                        timeMachine[sposob][m.Id] += TimeSpan.FromSeconds(15);
+                                        break;
+                                    }
+
+                                }
+                            }
+                            else
+                            {
+                                for (int j = 0; j <= i - pr.probeCount.GetLength(0); j++)
+                                {
+                                    if (pr.probeCount[j, 5] > 0)
+                                    {
+                                        timeMachine[sposob][m.Id] += TimeSpan.FromSeconds(15);
+                                        break;
+                                    }
+
+                                }
+                            }
+                            //Мочев,креат(1)
+                            if (pr.probeCount.GetLength(0) - 20 >= i)
+                            {
+                                for (int j = 0; j <= 20; j++)
+                                {
+                                    if (pr.probeCount[j, 7] > 0)
+                                    {
+                                        timeMachine[sposob][m.Id] += TimeSpan.FromSeconds(20);
+                                        break;
+                                    }
+
+                                }
+                            }
+                            else
+                            {
+                                for (int j = 0; j <= i - pr.probeCount.GetLength(0); j++)
+                                {
+                                    if (pr.probeCount[j, 7] > 0)
+                                    {
+                                        timeMachine[sposob][m.Id] += TimeSpan.FromSeconds(20);
+                                        break;
+                                    }
+
+                                }
+                            }
+                            //Общ бел (21)
+                            if (pr.probeCount.GetLength(0) - 20 >= i)
+                            {
+                                for (int j = 0; j <= 20; j++)
+                                {
+                                    if (pr.probeCount[j, 8] > 0)
+                                    {
+                                        timeMachine[sposob][m.Id] += TimeSpan.FromMinutes(1) + TimeSpan.FromSeconds(5);
+                                        break;
+                                    }
+
+                                }
+                            }
+                            else
+                            {
+                                for (int j = 0; j <= i - pr.probeCount.GetLength(0); j++)
+                                {
+                                    if (pr.probeCount[j, 8] > 0)
+                                    {
+                                        timeMachine[sposob][m.Id] += TimeSpan.FromMinutes(1) + TimeSpan.FromSeconds(5);
+                                        break;
+                                    }
+
+                                }
+                            }
+                            //Альфа амил (32)
+                            if (pr.probeCount.GetLength(0) - 20 >= i)
+                            {
+                                for (int j = 0; j <= 20; j++)
+                                {
+                                    if (pr.probeCount[j, 9] > 0)
+                                    {
+                                        timeMachine[sposob][m.Id] += TimeSpan.FromMinutes(1);
+                                        break;
+                                    }
+
+                                }
+                            }
+                            else
+                            {
+                                for (int j = 0; j <= i - pr.probeCount.GetLength(0); j++)
+                                {
+                                    if (pr.probeCount[j, 9] > 0)
+                                    {
+                                        timeMachine[sposob][m.Id] += TimeSpan.FromMinutes(1);
+                                        break;
+                                    }
+
+                                }
+                            }
+                            //Щелочной фосфотазы
+                            if (pr.probeCount.GetLength(0) - 20 >= i)
+                            {
+                                for (int j = 0; j <= 20; j++)
+                                {
+                                    if (pr.probeCount[j, 11] > 0)
+                                    {
+                                        timeMachine[sposob][m.Id] += TimeSpan.FromMinutes(1);
+                                        break;
+                                    }
+
+                                }
+                            }
+                            else
+                            {
+                                for (int j = 0; j <= i - pr.probeCount.GetLength(0); j++)
+                                {
+                                    if (pr.probeCount[j, 11] > 0)
+                                    {
+                                        timeMachine[sposob][m.Id] += TimeSpan.FromMinutes(1);
+                                        break;
+                                    }
+
+                                }
+                            }
+                            //ГГТП(2.15)
+                            if (pr.probeCount.GetLength(0) - 20 >= i)
+                            {
+                                for (int j = 0; j <= 20; j++)
+                                {
+                                    if (pr.probeCount[j, 12] > 0)
+                                    {
+                                        timeMachine[sposob][m.Id] += TimeSpan.FromSeconds(25);
+                                        break;
+                                    }
+
+                                }
+                            }
+                            else
+                            {
+                                for (int j = 0; j <= i - pr.probeCount.GetLength(0); j++)
+                                {
+                                    if (pr.probeCount[j, 12] > 0)
+                                    {
+                                        timeMachine[sposob][m.Id] += TimeSpan.FromSeconds(25);
+                                        break;
+                                    }
+
+                                }
+                            }
+                        }
+                        Invoke(new Action(() => richTextBox1.Text += "\n" + m.Name + ": " + timeMachine[sposob][m.Id]));
+                        break;
+                    case 3:
+                        for (int i = 0; i < pr.probeCount.GetLength(0); i++)
+                        {
+                            //(32.30)
+                            if (pr.probeCount[i, 6] != 0)
+                            {
+
+                                timeMachine[sposob][m.Id] += TimeSpan.FromMinutes(1) + TimeSpan.FromSeconds(10);
+                            }
+                            //(13)
+                            if (pr.probeCount[i, 10] != 0)
+                            {
+
+                                timeMachine[sposob][m.Id] += TimeSpan.FromMinutes(1) + TimeSpan.FromSeconds(5);
+                            }
+                        }
+
+                        Invoke(new Action(() => richTextBox1.Text += "\n" + m.Name + ": " + timeMachine[sposob][m.Id]));
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            time[1] = timeMachine[1].Max() + TimeSpan.FromSeconds(r.Next(60, Convert.ToInt32(time[1].TotalSeconds)));
+
+            times[day - 1, sposob] = time[sposob];
+
+            Invoke(new Action(() => richTextBox1.Text += "\n Общее затраченное время: " + times[day - 1, sposob]));
+        }*/
     }
 }
