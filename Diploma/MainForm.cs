@@ -1421,7 +1421,7 @@ namespace Diploma
         {
             richTextBox1.Text = "";
             richTextBox2.Text = "";
-            dayBox.Text = "1";
+            //dayBox.Text = "1";
             button1.Text = "Start";
             for (int i = 0; i < tbs.Length; i++)
             {
@@ -1517,14 +1517,14 @@ namespace Diploma
             alert.Close();
         }
 
-        //обработка ввода данных в поле количества дней (допустимы только целые числа)
+       /* //обработка ввода данных в поле количества дней (допустимы только целые числа)
         private void dayBox_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
             {
                 e.Handled = true;
             }
-        }
+        }*/
 
         //способ1
         /*private void Sposob1()

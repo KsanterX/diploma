@@ -35,7 +35,6 @@
             this.issledBox2 = new System.Windows.Forms.TextBox();
             this.issledBox3 = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.dayBox = new System.Windows.Forms.TextBox();
             this.issledBox6 = new System.Windows.Forms.TextBox();
             this.issledBox5 = new System.Windows.Forms.TextBox();
             this.issledBox4 = new System.Windows.Forms.TextBox();
@@ -62,9 +61,11 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.richTextBox2 = new System.Windows.Forms.RichTextBox();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.dayBox = new System.Windows.Forms.NumericUpDown();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dayBox)).BeginInit();
             this.SuspendLayout();
             // 
             // button1
@@ -122,22 +123,12 @@
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.dayBox);
-            this.groupBox1.Location = new System.Drawing.Point(895, 260);
+            this.groupBox1.Location = new System.Drawing.Point(932, 258);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(197, 41);
+            this.groupBox1.Size = new System.Drawing.Size(135, 41);
             this.groupBox1.TabIndex = 8;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Количество дней";
-            // 
-            // dayBox
-            // 
-            this.dayBox.Location = new System.Drawing.Point(6, 15);
-            this.dayBox.Name = "dayBox";
-            this.dayBox.Size = new System.Drawing.Size(185, 20);
-            this.dayBox.TabIndex = 1;
-            this.dayBox.Text = "1";
-            this.dayBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.dayBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.dayBox_KeyPress);
             // 
             // issledBox6
             // 
@@ -379,6 +370,28 @@
             this.backgroundWorker1.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorker1_ProgressChanged);
             this.backgroundWorker1.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker1_RunWorkerCompleted);
             // 
+            // dayBox
+            // 
+            this.dayBox.Location = new System.Drawing.Point(6, 15);
+            this.dayBox.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.dayBox.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.dayBox.Name = "dayBox";
+            this.dayBox.Size = new System.Drawing.Size(120, 20);
+            this.dayBox.TabIndex = 43;
+            this.dayBox.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -405,10 +418,10 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Диплом";
             this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dayBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -423,7 +436,6 @@
         private System.Windows.Forms.TextBox issledBox2;
         private System.Windows.Forms.TextBox issledBox3;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.TextBox dayBox;
         private System.Windows.Forms.TextBox issledBox6;
         private System.Windows.Forms.TextBox issledBox5;
         private System.Windows.Forms.TextBox issledBox4;
@@ -450,6 +462,7 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.RichTextBox richTextBox2;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
+        private System.Windows.Forms.NumericUpDown dayBox;
     }
 }
 
