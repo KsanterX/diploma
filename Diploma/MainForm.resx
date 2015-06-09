@@ -123,4 +123,81 @@
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>25</value>
   </metadata>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        AAABAAEAICAAAAEAIACoEAAAFgAAACgAAAAgAAAAQAAAAAEAIAAAAAAAABAAAAAAAAAAAAAAAAAAAAAA
+        AAAEBAT/BAQE/wQEBP8EBAT/BAQE/wQEBP8EBAT/BAQE/wQEBP8EBAT/BAQE/wQEBP8EBAT/BAQE/wQE
+        BP8EBAT/BAQE/wQEBP8EBAT/BAQE/wQEBP8EBAT/BAQE/wQEBP8EBAT/BAQE/wQEBP8EBAT/BAQE/wQE
+        BP8EBAT/BAQE/wQEBP8AgAD/AIAA/wCAAP8AgAD/AIAA/wCAAP8AgAD/AIAA/wCAAP8AgAD/AIAA/wCA
+        AP8AgAD/AIAA/wCAAP8AgAD/AIAA/wCAAP8AgAD/AIAA/wCAAP8AgAD/AIAA/wCAAP8AgAD/AIAA/wCA
+        AP8AgAD/AIAA/wCAAP8EBAT/BAQE/2b/Zv8AmQD/AJkA/wCZAP8AmQD/AJkA/wCZAP8AmQD/AJkA/wCZ
+        AP8AmQD/AJkA/wCZAP8AmQD/AJkA/wCZAP8AmQD/AJkA/wCZAP8AmQD/AJkA/wCZAP8AmQD/AJkA/wCZ
+        AP8AmQD/AJkA/wCZAP8AmQD/AIAA/wQEBP8EBAT/Zv9m/wDMAP//////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////
+        /////////////////////////////wCZAP8AgAD/BAQE/wQEBP9m/2b/AMwA////////////////////
+        ////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////AJkA/wCAAP8EBAT/BAQE/2b/Zv8AzAD/////////
+        /////////////////////////////////////////////7Kysv+ysrL/srKy/7Kysv+ysrL/srKy/7Ky
+        sv+ysrL///////////////////////////////////////////8AmQD/AIAA/wQEBP8EBAT/Zv9m/wDM
+        AP////////////////////////////////////////////////9VVVX/BAQE/wQEBP8EBAT/BAQE/wQE
+        BP8EBAT/BAQE/7Kysv///////////////////////////////////////////wCZAP8AgAD/BAQE/wQE
+        BP9m/2b/AMwA/////////////////////////////////////////////////wQEBP8AmQD/AIAA/wCA
+        AP8AgAD/AIAA/wCAAP8EBAT/srKy////////////////////////////////////////////AJkA/wCA
+        AP8EBAT/BAQE/2b/Zv8AzAD/////////////////////////////////////////////////BAQE/wDM
+        AP8AzAD/AMwA/wDMAP8AzAD/AIAA/wQEBP+ysrL/////////////////////////////////////////
+        //8AmQD/AIAA/wQEBP8EBAT/Zv9m/wDMAP//////////////////////////////////////////////
+        //8EBAT/AMwA/wDMAP8AzAD/AMwA/wDMAP8AgAD/BAQE/7Kysv//////////////////////////////
+        /////////////wCZAP8AgAD/BAQE/wQEBP9m/2b/AMwA////////////////////////////////////
+        /////////////wQEBP8AzAD/AMwA/wDMAP8AzAD/AMwA/wCAAP8EBAT/srKy////////////////////
+        ////////////////////////AJkA/wCAAP8EBAT/BAQE/2b/Zv8AzAD//////////////////////7Ky
+        sv+ysrL/srKy/7Kysv+ysrL/BAQE/wDMAP8AzAD/AMwA/wDMAP8AzAD/AIAA/wQEBP+ysrL/srKy/7Ky
+        sv+ysrL/srKy/7Kysv+ysrL///////////8AmQD/AIAA/wQEBP8EBAT/Zv9m/wDMAP//////////////
+        //9VVVX/BAQE/wQEBP8EBAT/BAQE/wQEBP8EBAT/AMwA/wDMAP8AzAD/AMwA/wDMAP8AgAD/BAQE/wQE
+        BP8EBAT/BAQE/wQEBP8EBAT/BAQE/7Kysv///////////wCZAP8AgAD/BAQE/wQEBP9m/2b/AMwA////
+        /////////////wQEBP8AmQD/AIAA/wCAAP8AgAD/AIAA/wCAAP8AmQD/AMwA/wDMAP8AzAD/AMwA/wCA
+        AP8AgAD/AIAA/wCAAP8AgAD/AIAA/wCAAP8EBAT/srKy////////////AJkA/wCAAP8EBAT/BAQE/2b/
+        Zv8AzAD/////////////////BAQE/wDMAP8AzAD/AMwA/wDMAP8AzAD/AMwA/wDMAP8AzAD/AMwA/wDM
+        AP8AzAD/AMwA/wDMAP8AzAD/AMwA/wDMAP8AzAD/AIAA/wQEBP+ysrL///////////8AmQD/AIAA/wQE
+        BP8EBAT/Zv9m/wDMAP////////////////8EBAT/AMwA/wDMAP8AzAD/AMwA/wDMAP8AzAD/AMwA/wDM
+        AP8AzAD/AMwA/wDMAP8AzAD/AMwA/wDMAP8AzAD/AMwA/wDMAP8AgAD/BAQE/7Kysv///////////wCZ
+        AP8AgAD/BAQE/wQEBP9m/2b/AMwA/////////////////wQEBP8AzAD/AMwA/wDMAP8AzAD/AMwA/wDM
+        AP8AzAD/AMwA/wDMAP8AzAD/AMwA/wDMAP8AzAD/AMwA/wDMAP8AzAD/AMwA/wCAAP8EBAT/srKy////
+        ////////AJkA/wCAAP8EBAT/BAQE/2b/Zv8AzAD/////////////////BAQE/wDMAP8AzAD/AMwA/wDM
+        AP8AzAD/AMwA/wDMAP8AzAD/AMwA/wDMAP8AzAD/AMwA/wDMAP8AzAD/AMwA/wDMAP8AzAD/AIAA/wQE
+        BP+ysrL///////////8AmQD/AIAA/wQEBP8EBAT/Zv9m/wDMAP////////////////8EBAT/mf+Z/wDM
+        AP8AzAD/AMwA/wDMAP8AzAD/AMwA/wDMAP8AzAD/AMwA/wDMAP8AmQD/AMwA/wDMAP8AzAD/AMwA/wDM
+        AP8AmQD/BAQE/7Kysv///////////wCZAP8AgAD/BAQE/wQEBP9m/2b/AMwA/////////////////1VV
+        Vf8EBAT/BAQE/wQEBP8EBAT/BAQE/wQEBP8AzAD/AMwA/wDMAP8AzAD/AMwA/wCAAP8EBAT/BAQE/wQE
+        BP8EBAT/BAQE/wQEBP9VVVX/////////////////AJkA/wCAAP8EBAT/BAQE/2b/Zv8AzAD/////////
+        ////////////////////////////////////////BAQE/wDMAP8AzAD/AMwA/wDMAP8AzAD/AIAA/wQE
+        BP+ysrL///////////////////////////////////////////8AmQD/AIAA/wQEBP8EBAT/Zv9m/wDM
+        AP////////////////////////////////////////////////8EBAT/AMwA/wDMAP8AzAD/AMwA/wDM
+        AP8AgAD/BAQE/7Kysv///////////////////////////////////////////wCZAP8AgAD/BAQE/wQE
+        BP9m/2b/AMwA/////////////////////////////////////////////////wQEBP8AzAD/AMwA/wDM
+        AP8AzAD/AMwA/wCAAP8EBAT/srKy////////////////////////////////////////////AJkA/wCA
+        AP8EBAT/BAQE/2b/Zv8AzAD/////////////////////////////////////////////////BAQE/wDM
+        AP8AzAD/AMwA/wDMAP8AzAD/AIAA/wQEBP+ysrL/////////////////////////////////////////
+        //8AmQD/AIAA/wQEBP8EBAT/Zv9m/wDMAP//////////////////////////////////////////////
+        //8EBAT/mf+Z/wD/AP8A/wD/AP8A/wD/AP8AmQD/BAQE/7Kysv//////////////////////////////
+        /////////////wCZAP8AgAD/BAQE/wQEBP9m/2b/AMwA////////////////////////////////////
+        /////////////1VVVf8EBAT/BAQE/wQEBP8EBAT/BAQE/wQEBP9VVVX/////////////////////////
+        ////////////////////////AJkA/wCAAP8EBAT/BAQE/2b/Zv8AzAD/////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////
+        //////////////////////////////////8AmQD/AIAA/wQEBP8EBAT/Zv9m/wDMAP//////////////
+        ////////////////////////////////////////////////////////////////////////////////
+        /////////////////////////////////////////////wCZAP8AgAD/BAQE/wQEBP9m/2b/AMwA////
+        ////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////AJkA/wCAAP8EBAT/BAQE/2b/
+        Zv8AzAD/AMwA/wDMAP8AzAD/AMwA/wDMAP8AzAD/AMwA/wDMAP8AzAD/AMwA/wDMAP8AzAD/AMwA/wDM
+        AP8AzAD/AMwA/wDMAP8AzAD/AMwA/wDMAP8AzAD/AMwA/wDMAP8AzAD/AMwA/wDMAP8AmQD/AIAA/wQE
+        BP8EBAT/Zv9m/2b/Zv9m/2b/Zv9m/2b/Zv9m/2b/Zv9m/2b/Zv9m/2b/Zv9m/2b/Zv9m/2b/Zv9m/2b/
+        Zv9m/2b/Zv9m/2b/Zv9m/2b/Zv9m/2b/Zv9m/2b/Zv9m/2b/Zv9m/2b/Zv9m/2b/Zv9m/2b/Zv9m/2b/
+        Zv8AgAD/BAQE/wQEBP8EBAT/BAQE/wQEBP8EBAT/BAQE/wQEBP8EBAT/BAQE/wQEBP8EBAT/BAQE/wQE
+        BP8EBAT/BAQE/wQEBP8EBAT/BAQE/wQEBP8EBAT/BAQE/wQEBP8EBAT/BAQE/wQEBP8EBAT/BAQE/wQE
+        BP8EBAT/BAQE/wQEBP8EBAT/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=
+</value>
+  </data>
 </root>

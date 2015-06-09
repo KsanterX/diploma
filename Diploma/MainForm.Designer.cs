@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.button1 = new System.Windows.Forms.Button();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -35,6 +36,7 @@
             this.issledBox2 = new System.Windows.Forms.TextBox();
             this.issledBox3 = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.dayBox = new System.Windows.Forms.NumericUpDown();
             this.issledBox6 = new System.Windows.Forms.TextBox();
             this.issledBox5 = new System.Windows.Forms.TextBox();
             this.issledBox4 = new System.Windows.Forms.TextBox();
@@ -61,11 +63,10 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.richTextBox2 = new System.Windows.Forms.RichTextBox();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.dayBox = new System.Windows.Forms.NumericUpDown();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dayBox)).BeginInit();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dayBox)).BeginInit();
             this.SuspendLayout();
             // 
             // button1
@@ -129,6 +130,28 @@
             this.groupBox1.TabIndex = 8;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Количество дней";
+            // 
+            // dayBox
+            // 
+            this.dayBox.Location = new System.Drawing.Point(6, 15);
+            this.dayBox.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.dayBox.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.dayBox.Name = "dayBox";
+            this.dayBox.Size = new System.Drawing.Size(120, 20);
+            this.dayBox.TabIndex = 43;
+            this.dayBox.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
             // issledBox6
             // 
@@ -370,28 +393,6 @@
             this.backgroundWorker1.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorker1_ProgressChanged);
             this.backgroundWorker1.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker1_RunWorkerCompleted);
             // 
-            // dayBox
-            // 
-            this.dayBox.Location = new System.Drawing.Point(6, 15);
-            this.dayBox.Maximum = new decimal(new int[] {
-            10000,
-            0,
-            0,
-            0});
-            this.dayBox.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.dayBox.Name = "dayBox";
-            this.dayBox.Size = new System.Drawing.Size(120, 20);
-            this.dayBox.TabIndex = 43;
-            this.dayBox.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -414,14 +415,15 @@
             this.Controls.Add(this.button1);
             this.Controls.Add(this.groupBox2);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Диплом";
             this.groupBox1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dayBox)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dayBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
