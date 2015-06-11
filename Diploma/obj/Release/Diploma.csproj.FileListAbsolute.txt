@@ -1,0 +1,9 @@
+E:\Users\Artem\Documents\Visual Studio 2013\Projects\diploma\Diploma\bin\Release\Diploma.exe.config
+E:\Users\Artem\Documents\Visual Studio 2013\Projects\diploma\Diploma\bin\Release\Diploma.exe
+E:\Users\Artem\Documents\Visual Studio 2013\Projects\diploma\Diploma\bin\Release\Diploma.pdb
+E:\Users\Artem\Documents\Visual Studio 2013\Projects\diploma\Diploma\obj\Release\Diploma.AlertForm.resources
+E:\Users\Artem\Documents\Visual Studio 2013\Projects\diploma\Diploma\obj\Release\Diploma.MainForm.resources
+E:\Users\Artem\Documents\Visual Studio 2013\Projects\diploma\Diploma\obj\Release\Diploma.Properties.Resources.resources
+E:\Users\Artem\Documents\Visual Studio 2013\Projects\diploma\Diploma\obj\Release\Diploma.csproj.GenerateResource.Cache
+E:\Users\Artem\Documents\Visual Studio 2013\Projects\diploma\Diploma\obj\Release\Diploma.exe
+E:\Users\Artem\Documents\Visual Studio 2013\Projects\diploma\Diploma\obj\Release\Diploma.pdb

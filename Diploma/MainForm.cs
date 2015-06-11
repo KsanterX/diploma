@@ -64,7 +64,12 @@ namespace Diploma
             }
         }
 
+        //static Random r = new Random((int)DateTime.Now.Ticks);
+        static CryptoRandom r = new CryptoRandom();
         //главная программа
+
+
+
         public void MainProg()
         {
 
@@ -94,7 +99,7 @@ namespace Diploma
             int daybox;
             Probe pr = new Probe();
             //генератор
-            Random r = new Random((int)DateTime.Now.Ticks);
+            //Random r = new Random((int)DateTime.Now.Ticks);
             double diceRoll;
             //список названий исследований и их id
             List<KeyValuePair<string, byte>> IssledElements = new List<KeyValuePair<string, byte>>
@@ -296,6 +301,7 @@ namespace Diploma
                                                     timeMachine[sposob][m.Id] += TimeSpan.FromSeconds(30);
                                                 }
                                             }
+                                            timeMachine[sposob][m.Id] = DayHours(timeMachine[sposob][m.Id]);
                                             Invoke(new Action(() => richTextBox1.Text += "\n" + m.Name + ": " + timeMachine[sposob][m.Id]));
                                             break;
                                         case 1:
@@ -308,6 +314,7 @@ namespace Diploma
                                                     timeMachine[sposob][m.Id] += TimeSpan.FromMinutes(1);
                                                 }
                                             }
+                                            timeMachine[sposob][m.Id] = DayHours(timeMachine[sposob][m.Id]);
                                             Invoke(new Action(() => richTextBox1.Text += "\n" + m.Name + ": " + timeMachine[sposob][m.Id]));
                                             break;
                                         case 2:
@@ -539,6 +546,7 @@ namespace Diploma
                                                     }
                                                 }
                                             }
+                                            timeMachine[sposob][m.Id] = DayHours(timeMachine[sposob][m.Id]);
                                             Invoke(new Action(() => richTextBox1.Text += "\n" + m.Name + ": " + timeMachine[sposob][m.Id]));
                                             break;
                                         case 3:
@@ -597,23 +605,7 @@ namespace Diploma
                                                     }
                                                 }
                                             }
-                                            /*//не по 20
-                                            for (int i = 0; i < pr.probeCount.GetLength(0); i++)
-                                            {
-                                                //(32.30)
-                                                if (pr.probeCount[i, 6] != 0)
-                                                {
-
-                                                    timeMachine[sposob][m.Id] += TimeSpan.FromMinutes(32) + TimeSpan.FromSeconds(30);
-                                                }
-                                                //(13)
-                                                if (pr.probeCount[i, 10] != 0)
-                                                {
-
-                                                    timeMachine[sposob][m.Id] += TimeSpan.FromMinutes(1) + TimeSpan.FromSeconds(5);
-                                                }
-                                            }
-                                            */
+                                            timeMachine[sposob][m.Id] = DayHours(timeMachine[sposob][m.Id]);
                                             Invoke(new Action(() => richTextBox1.Text += "\n" + m.Name + ": " + timeMachine[sposob][m.Id]));
                                             break;
                                         default:
@@ -623,7 +615,7 @@ namespace Diploma
 
                                 time[sposob] = timeMachine[sposob].Max() + TimeSpan.FromSeconds(r.Next(60, Convert.ToInt32(time[sposob].TotalSeconds)));
 
-                                times[day - 1,sposob] = time[sposob];
+                                times[day - 1, sposob] = DayHours(time[sposob]);
 
                                 Invoke(new Action(() => richTextBox1.Text += "\n Общее затраченное время: " + times[day-1,sposob]));
 
@@ -659,6 +651,7 @@ namespace Diploma
                                                     timeMachine[sposob][m.Id] += TimeSpan.FromSeconds(30) + TimeSpan.FromSeconds(r.Next(10,35));
                                                 }
                                             }
+                                            timeMachine[sposob][m.Id] = DayHours(timeMachine[sposob][m.Id]);
                                             Invoke(new Action(() => richTextBox1.Text += "\n" + m.Name + ": " + timeMachine[sposob][m.Id]));
                                             break;
                                         case 1:
@@ -671,6 +664,7 @@ namespace Diploma
                                                     timeMachine[sposob][m.Id] += TimeSpan.FromMinutes(1);
                                                 }
                                             }
+                                            timeMachine[sposob][m.Id] = DayHours(timeMachine[sposob][m.Id]);
                                             Invoke(new Action(() => richTextBox1.Text += "\n" + m.Name + ": " + timeMachine[sposob][m.Id]));
                                             break;
                                         case 2:
@@ -902,6 +896,7 @@ namespace Diploma
                                                     }
                                                 }
                                             }
+                                            timeMachine[sposob][m.Id] = DayHours(timeMachine[sposob][m.Id]);
                                             Invoke(new Action(() => richTextBox1.Text += "\n" + m.Name + ": " + timeMachine[sposob][m.Id]));
                                             break;
                                         case 3:
@@ -960,23 +955,8 @@ namespace Diploma
                                                     }
                                                 }
                                             }
-                                                // not 20
-                                           /* for (int i = 0; i < pr.probeCount.GetLength(0); i++)
-                                            {
-                                                //(32.30)
-                                                if (pr.probeCount[i, 6] != 0)
-                                                {
 
-                                                    timeMachine[sposob][m.Id] += TimeSpan.FromMinutes(1) + TimeSpan.FromSeconds(10);
-                                                }
-                                                //(13)
-                                                if (pr.probeCount[i, 10] != 0)
-                                                {
-
-                                                    timeMachine[sposob][m.Id] += TimeSpan.FromMinutes(1) + TimeSpan.FromSeconds(5);
-                                                }
-                                            }*/
-
+                                            timeMachine[sposob][m.Id] = DayHours(timeMachine[sposob][m.Id]);
                                             Invoke(new Action(() => richTextBox1.Text += "\n" + m.Name + ": " + timeMachine[sposob][m.Id]));
                                             break;
                                         default:
@@ -984,10 +964,8 @@ namespace Diploma
                                     }
                                 }
 
-                                time[sposob] = timeMachine[sposob].Max() + TimeSpan.FromSeconds(r.Next(60, Convert.ToInt32(time[sposob].TotalSeconds))) + TimeSpan.FromSeconds(r.Next(10, Convert.ToInt32(time[sposob].TotalSeconds)));
-                                
-
-                                times[day - 1, sposob] = time[sposob];
+                                time[sposob] = timeMachine[sposob].Max() + TimeSpan.FromSeconds(r.Next(60, Convert.ToInt32(time[sposob].TotalSeconds)));
+                                times[day - 1, sposob] = DayHours(time[sposob]);
 
                                 Invoke(new Action(() => richTextBox1.Text += "\n Общее затраченное время: " + times[day - 1, sposob]));
 
@@ -1022,6 +1000,7 @@ namespace Diploma
                                                     timeMachine[sposob][m.Id] += TimeSpan.FromSeconds(20);
                                                 }
                                             }
+                                            timeMachine[sposob][m.Id] = DayHours(timeMachine[sposob][m.Id]);
                                             Invoke(new Action(() => richTextBox1.Text += "\n" + m.Name + ": " + timeMachine[sposob][m.Id]));
                                             break;
                                         case 1:
@@ -1034,6 +1013,7 @@ namespace Diploma
                                                     timeMachine[sposob][m.Id] += TimeSpan.FromMinutes(1);
                                                 }
                                             }
+                                            timeMachine[sposob][m.Id] = DayHours(timeMachine[sposob][m.Id]);
                                             Invoke(new Action(() => richTextBox1.Text += "\n" + m.Name + ": " + timeMachine[sposob][m.Id]));
                                             break;
                                         case 2:
@@ -1265,6 +1245,7 @@ namespace Diploma
                                                     }
                                                 }
                                             }
+                                            timeMachine[sposob][m.Id] = DayHours(timeMachine[sposob][m.Id]);
                                             Invoke(new Action(() => richTextBox1.Text += "\n" + m.Name + ": " + timeMachine[sposob][m.Id]));
                                             break;
                                         case 3:
@@ -1323,23 +1304,7 @@ namespace Diploma
                                                     }
                                                 }
                                             }
-                                            //not 20
-                                            /*for (int i = 0; i < pr.probeCount.GetLength(0); i++)
-                                            {
-                                                //(32.30)
-                                                if (pr.probeCount[i, 6] != 0)
-                                                {
-
-                                                    timeMachine[sposob][m.Id] += TimeSpan.FromMinutes(1) + TimeSpan.FromSeconds(10);
-                                                }
-                                                //(13)
-                                                if (pr.probeCount[i, 10] != 0)
-                                                {
-
-                                                    timeMachine[sposob][m.Id] += TimeSpan.FromMinutes(1) + TimeSpan.FromSeconds(5);
-                                                }
-                                            }*/
-
+                                            timeMachine[sposob][m.Id] = DayHours(timeMachine[sposob][m.Id]);
                                             Invoke(new Action(() => richTextBox1.Text += "\n" + m.Name + ": " + timeMachine[sposob][m.Id]));
                                             break;
                                         default:
@@ -1347,10 +1312,10 @@ namespace Diploma
                                     }
                                 }
 
-                                time[sposob] = timeMachine[sposob].Max() + TimeSpan.FromSeconds(r.Next(60, Convert.ToInt32(time[sposob].TotalSeconds))) - TimeSpan.FromSeconds(r.Next(20, Convert.ToInt32(time[sposob].TotalSeconds)));
+                                time[sposob] = timeMachine[sposob].Max() + TimeSpan.FromSeconds(r.Next(60, Convert.ToInt32(time[sposob].TotalSeconds)));
                                 
 
-                                times[day - 1, sposob] = time[sposob];
+                                times[day - 1, sposob] = DayHours(time[sposob]);
 
                                 Invoke(new Action(() => richTextBox1.Text += "\n Общее затраченное время: " + times[day - 1, sposob]));
 
@@ -1381,6 +1346,7 @@ namespace Diploma
                         average += TimeSpan.FromSeconds(times[i,0].TotalSeconds);                    
                 }
                 average = TimeSpan.FromSeconds(average.TotalSeconds / daybox);
+                
                 //публикуем значение среднего
                 Invoke(new Action(() => richTextBox2.Text += "\n Среднее затраченное время: " + average));
                 Invoke(new Action(() => richTextBox2.Text += "\n ------------------------------------------------"));
@@ -1408,12 +1374,25 @@ namespace Diploma
                 {
                     average += TimeSpan.FromMilliseconds(times[i,2].TotalMilliseconds);
                 }
+                average = TimeSpan.FromSeconds(average.TotalSeconds / daybox);
 
-                Invoke(new Action(() => richTextBox2.Text += "\n Среднее затраченное время: " + TimeSpan.FromMilliseconds(average.TotalMilliseconds / daybox)));
+                Invoke(new Action(() => richTextBox2.Text += "\n Среднее затраченное время: " + average));
                 Invoke(new Action(() => richTextBox2.Text += "\n ------------------------------------------------"));
                 
                 //меняем текст на кнопке
                 Invoke(new Action(() => button1.Text = "Reset"));
+        }
+
+        //учёт времени
+        private TimeSpan DayHours(TimeSpan seed)
+        {
+
+            if (seed.TotalMinutes >= 480)
+            {
+                seed = TimeSpan.FromMinutes(480) - TimeSpan.FromMinutes(r.Next(1, r.Next(2,25)));
+            }
+
+            return seed;
         }
 
         //очистка результатов на форме
@@ -1517,318 +1496,6 @@ namespace Diploma
             alert.Close();
         }
 
-       /* //обработка ввода данных в поле количества дней (допустимы только целые числа)
-        private void dayBox_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
-            {
-                e.Handled = true;
-            }
-        }*/
-
-        //способ1
-        /*private void Sposob1()
-        {
-            Invoke(new Action(() => richTextBox1.Text += "\n ----------"));
-            Invoke(new Action(() => richTextBox1.Text += "\n Способ 1: "));
-            Invoke(new Action(() => richTextBox1.Text += "\n ----------"));
-            //запускаем центрифугу
-            for (int i = 0; i < z; i++)
-            {
-                time[1] += TimeSpan.FromMinutes(5) + TimeSpan.FromSeconds(r.Next(1, 31));
-            }
-
-
-            Invoke(new Action(() => richTextBox1.Text += "\n Время центрифугирования: " + time[sposob]));
-
-            foreach (var m in mach.Values)
-            {
-                switch (m.Id)
-                {
-                    case 0:
-                        for (int i = 0; i < pr.probeCount.GetLength(0); i++)
-                        {
-                            //К
-                            if (pr.probeCount[i, 0] != 0)
-                            {
-
-                                timeMachine[sposob][m.Id] += TimeSpan.FromSeconds(30);
-                            }
-                        }
-                        Invoke(new Action(() => richTextBox1.Text += "\n" + m.Name + ": " + timeMachine[sposob][m.Id]));
-                        break;
-                    case 1:
-                        for (int i = 0; i < pr.probeCount.GetLength(0); i++)
-                        {
-                            //глюкоза(2)
-                            if (pr.probeCount[i, 1] != 0)
-                            {
-
-                                timeMachine[sposob][m.Id] += TimeSpan.FromMinutes(1);
-                            }
-                        }
-                        Invoke(new Action(() => richTextBox1.Text += "\n" + m.Name + ": " + timeMachine[sposob][m.Id]));
-                        break;
-                    case 2:
-                        for (int i = 0; i < pr.probeCount.GetLength(0); i += 20)
-                        {
-                            //холестерин(3)
-                            if (pr.probeCount.GetLength(0) - 20 >= i)
-                            {
-                                for (int j = 0; j <= 20; j++)
-                                {
-                                    if (pr.probeCount[j, 2] > 0)
-                                    {
-                                        timeMachine[sposob][m.Id] += TimeSpan.FromSeconds(32);
-                                        break;
-                                    }
-
-                                }
-                            }
-                            else
-                            {
-                                for (int j = 0; j <= i - pr.probeCount.GetLength(0); j++)
-                                {
-                                    if (pr.probeCount[j, 2] > 0)
-                                    {
-                                        timeMachine[sposob][m.Id] += TimeSpan.FromSeconds(32);
-                                        break;
-                                    }
-
-                                }
-                            }
-                            //Бетта-липопротеиды,триглицириды (27.30)
-                            if (pr.probeCount.GetLength(0) - 20 >= i)
-                            {
-                                for (int j = 0; j <= 20; j++)
-                                {
-                                    if (pr.probeCount[j, 3] > 0)
-                                    {
-                                        timeMachine[sposob][m.Id] += TimeSpan.FromSeconds(35);
-                                        break;
-                                    }
-
-                                }
-                            }
-                            else
-                            {
-                                for (int j = 0; j <= i - pr.probeCount.GetLength(0); j++)
-                                {
-                                    if (pr.probeCount[j, 3] > 0)
-                                    {
-                                        timeMachine[sposob][m.Id] += TimeSpan.FromSeconds(35);
-                                        break;
-                                    }
-
-                                }
-                            }
-                            //Билирубин общий(3.30)
-                            if (pr.probeCount.GetLength(0) - 20 >= i)
-                            {
-                                for (int j = 0; j <= 20; j++)
-                                {
-                                    if (pr.probeCount[j, 4] > 0)
-                                    {
-                                        timeMachine[sposob][m.Id] += TimeSpan.FromSeconds(20);
-                                        break;
-                                    }
-
-                                }
-                            }
-                            else
-                            {
-                                for (int j = 0; j <= i - pr.probeCount.GetLength(0); j++)
-                                {
-                                    if (pr.probeCount[j, 4] > 0)
-                                    {
-                                        timeMachine[sposob][m.Id] += TimeSpan.FromSeconds(20);
-                                        break;
-                                    }
-
-                                }
-                            }
-                            //АЛТ, АСТ(1)
-                            if (pr.probeCount.GetLength(0) - 20 >= i)
-                            {
-                                for (int j = 0; j <= 20; j++)
-                                {
-                                    if (pr.probeCount[j, 5] > 0)
-                                    {
-                                        timeMachine[sposob][m.Id] += TimeSpan.FromSeconds(15);
-                                        break;
-                                    }
-
-                                }
-                            }
-                            else
-                            {
-                                for (int j = 0; j <= i - pr.probeCount.GetLength(0); j++)
-                                {
-                                    if (pr.probeCount[j, 5] > 0)
-                                    {
-                                        timeMachine[sposob][m.Id] += TimeSpan.FromSeconds(15);
-                                        break;
-                                    }
-
-                                }
-                            }
-                            //Мочев,креат(1)
-                            if (pr.probeCount.GetLength(0) - 20 >= i)
-                            {
-                                for (int j = 0; j <= 20; j++)
-                                {
-                                    if (pr.probeCount[j, 7] > 0)
-                                    {
-                                        timeMachine[sposob][m.Id] += TimeSpan.FromSeconds(20);
-                                        break;
-                                    }
-
-                                }
-                            }
-                            else
-                            {
-                                for (int j = 0; j <= i - pr.probeCount.GetLength(0); j++)
-                                {
-                                    if (pr.probeCount[j, 7] > 0)
-                                    {
-                                        timeMachine[sposob][m.Id] += TimeSpan.FromSeconds(20);
-                                        break;
-                                    }
-
-                                }
-                            }
-                            //Общ бел (21)
-                            if (pr.probeCount.GetLength(0) - 20 >= i)
-                            {
-                                for (int j = 0; j <= 20; j++)
-                                {
-                                    if (pr.probeCount[j, 8] > 0)
-                                    {
-                                        timeMachine[sposob][m.Id] += TimeSpan.FromMinutes(1) + TimeSpan.FromSeconds(5);
-                                        break;
-                                    }
-
-                                }
-                            }
-                            else
-                            {
-                                for (int j = 0; j <= i - pr.probeCount.GetLength(0); j++)
-                                {
-                                    if (pr.probeCount[j, 8] > 0)
-                                    {
-                                        timeMachine[sposob][m.Id] += TimeSpan.FromMinutes(1) + TimeSpan.FromSeconds(5);
-                                        break;
-                                    }
-
-                                }
-                            }
-                            //Альфа амил (32)
-                            if (pr.probeCount.GetLength(0) - 20 >= i)
-                            {
-                                for (int j = 0; j <= 20; j++)
-                                {
-                                    if (pr.probeCount[j, 9] > 0)
-                                    {
-                                        timeMachine[sposob][m.Id] += TimeSpan.FromMinutes(1);
-                                        break;
-                                    }
-
-                                }
-                            }
-                            else
-                            {
-                                for (int j = 0; j <= i - pr.probeCount.GetLength(0); j++)
-                                {
-                                    if (pr.probeCount[j, 9] > 0)
-                                    {
-                                        timeMachine[sposob][m.Id] += TimeSpan.FromMinutes(1);
-                                        break;
-                                    }
-
-                                }
-                            }
-                            //Щелочной фосфотазы
-                            if (pr.probeCount.GetLength(0) - 20 >= i)
-                            {
-                                for (int j = 0; j <= 20; j++)
-                                {
-                                    if (pr.probeCount[j, 11] > 0)
-                                    {
-                                        timeMachine[sposob][m.Id] += TimeSpan.FromMinutes(1);
-                                        break;
-                                    }
-
-                                }
-                            }
-                            else
-                            {
-                                for (int j = 0; j <= i - pr.probeCount.GetLength(0); j++)
-                                {
-                                    if (pr.probeCount[j, 11] > 0)
-                                    {
-                                        timeMachine[sposob][m.Id] += TimeSpan.FromMinutes(1);
-                                        break;
-                                    }
-
-                                }
-                            }
-                            //ГГТП(2.15)
-                            if (pr.probeCount.GetLength(0) - 20 >= i)
-                            {
-                                for (int j = 0; j <= 20; j++)
-                                {
-                                    if (pr.probeCount[j, 12] > 0)
-                                    {
-                                        timeMachine[sposob][m.Id] += TimeSpan.FromSeconds(25);
-                                        break;
-                                    }
-
-                                }
-                            }
-                            else
-                            {
-                                for (int j = 0; j <= i - pr.probeCount.GetLength(0); j++)
-                                {
-                                    if (pr.probeCount[j, 12] > 0)
-                                    {
-                                        timeMachine[sposob][m.Id] += TimeSpan.FromSeconds(25);
-                                        break;
-                                    }
-
-                                }
-                            }
-                        }
-                        Invoke(new Action(() => richTextBox1.Text += "\n" + m.Name + ": " + timeMachine[sposob][m.Id]));
-                        break;
-                    case 3:
-                        for (int i = 0; i < pr.probeCount.GetLength(0); i++)
-                        {
-                            //(32.30)
-                            if (pr.probeCount[i, 6] != 0)
-                            {
-
-                                timeMachine[sposob][m.Id] += TimeSpan.FromMinutes(1) + TimeSpan.FromSeconds(10);
-                            }
-                            //(13)
-                            if (pr.probeCount[i, 10] != 0)
-                            {
-
-                                timeMachine[sposob][m.Id] += TimeSpan.FromMinutes(1) + TimeSpan.FromSeconds(5);
-                            }
-                        }
-
-                        Invoke(new Action(() => richTextBox1.Text += "\n" + m.Name + ": " + timeMachine[sposob][m.Id]));
-                        break;
-                    default:
-                        break;
-                }
-            }
-
-            time[1] = timeMachine[1].Max() + TimeSpan.FromSeconds(r.Next(60, Convert.ToInt32(time[1].TotalSeconds)));
-
-            times[day - 1, sposob] = time[sposob];
-
-            Invoke(new Action(() => richTextBox1.Text += "\n Общее затраченное время: " + times[day - 1, sposob]));
-        }*/
+ 
     }
 }
