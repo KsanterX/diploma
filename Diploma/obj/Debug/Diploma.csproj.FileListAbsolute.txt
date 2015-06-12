@@ -32,3 +32,7 @@ E:\Users\Artem\Documents\Visual Studio 2013\Projects\diploma\Diploma\bin\Debug\D
 E:\Users\Artem\Documents\Visual Studio 2013\Projects\diploma\Diploma\bin\Debug\Diploma.application
 E:\Users\Artem\Documents\Visual Studio 2013\Projects\diploma\Diploma\obj\Debug\Diploma.exe.manifest
 E:\Users\Artem\Documents\Visual Studio 2013\Projects\diploma\Diploma\obj\Debug\Diploma.application
+C:\Users\Artem\Documents\Visual Studio 2013\Projects\diploma\Diploma\bin\Debug\Diploma.exe.manifest
+C:\Users\Artem\Documents\Visual Studio 2013\Projects\diploma\Diploma\bin\Debug\Diploma.application
+C:\Users\Artem\Documents\Visual Studio 2013\Projects\diploma\Diploma\obj\Debug\Diploma.exe.manifest
+C:\Users\Artem\Documents\Visual Studio 2013\Projects\diploma\Diploma\obj\Debug\Diploma.application

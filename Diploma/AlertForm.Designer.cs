@@ -38,9 +38,9 @@
             this.labelMessage.AutoSize = true;
             this.labelMessage.Location = new System.Drawing.Point(12, 37);
             this.labelMessage.Name = "labelMessage";
-            this.labelMessage.Size = new System.Drawing.Size(35, 13);
+            this.labelMessage.Size = new System.Drawing.Size(203, 13);
             this.labelMessage.TabIndex = 0;
-            this.labelMessage.Text = "label1";
+            this.labelMessage.Text = "Выполняется симуляция, подождите...";
             this.labelMessage.UseWaitCursor = true;
             // 
             // progressBar1

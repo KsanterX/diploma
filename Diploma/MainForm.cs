@@ -80,8 +80,29 @@ namespace Diploma
             //переменная для расчета среднего значения времени
             TimeSpan average;
             //массив времени аппаратов
-            TimeSpan[][] timeMachine = new TimeSpan[3][]
+            TimeSpan[][] timeMachine = new TimeSpan[24][]
             {
+                new TimeSpan[4],
+                new TimeSpan[4],
+                new TimeSpan[4],
+                new TimeSpan[4],
+                new TimeSpan[4],
+                new TimeSpan[4],
+                new TimeSpan[4],
+                new TimeSpan[4],
+                new TimeSpan[4],
+                new TimeSpan[4],
+                new TimeSpan[4],
+                new TimeSpan[4],
+                new TimeSpan[4],
+                new TimeSpan[4],
+                new TimeSpan[4],
+                new TimeSpan[4],
+                new TimeSpan[4],
+                new TimeSpan[4],
+                new TimeSpan[4],
+                new TimeSpan[4],
+                new TimeSpan[4],
                 new TimeSpan[4],
                 new TimeSpan[4],
                 new TimeSpan[4],
@@ -153,8 +174,8 @@ namespace Diploma
             }
 
             //создание массивов для хранения значений времени
-            times = new TimeSpan[daybox,3];
-            time = new TimeSpan[3];
+            times = new TimeSpan[daybox,24];
+            time = new TimeSpan[24];
 
             //цикл по количеству дней
             for (int day = 1; day <= daybox; day++)
@@ -267,16 +288,16 @@ namespace Diploma
                     }
                    
                     //3 способа
-                    for (int sposob = 0; sposob < 3; sposob++)
+                    for (int sposob = 0; sposob < 24; sposob++)
                     {
-                        switch (sposob)
-                        {
+                        /*switch (sposob)
+                        {*/
 #region Способ 1
-                            case 0:
+                            //case 0:
                                 /*Thread s1 = new Thread(Sposob1);
                                 s1.Start();*/
                                 Invoke(new Action(() => richTextBox1.Text += "\n ----------"));
-                                Invoke(new Action(() => richTextBox1.Text += "\n Способ 1: "));
+                                Invoke(new Action(() => richTextBox1.Text += "\n Способ " + (sposob+1) + ": "));
                                 Invoke(new Action(() => richTextBox1.Text += "\n ----------"));
                                 //запускаем центрифугу
                                 for (int i = 0; i < z; i++)
@@ -301,7 +322,7 @@ namespace Diploma
                                                     timeMachine[sposob][m.Id] += TimeSpan.FromSeconds(30);
                                                 }
                                             }
-                                            timeMachine[sposob][m.Id] = DayHours(timeMachine[sposob][m.Id]);
+                                            timeMachine[sposob][m.Id] = DayHours((timeMachine[sposob][m.Id] + TimeSpan.FromMinutes(r.Next(0,sposob))));
                                             Invoke(new Action(() => richTextBox1.Text += "\n" + m.Name + ": " + timeMachine[sposob][m.Id]));
                                             break;
                                         case 1:
@@ -314,7 +335,7 @@ namespace Diploma
                                                     timeMachine[sposob][m.Id] += TimeSpan.FromMinutes(1);
                                                 }
                                             }
-                                            timeMachine[sposob][m.Id] = DayHours(timeMachine[sposob][m.Id]);
+                                            timeMachine[sposob][m.Id] = DayHours((timeMachine[sposob][m.Id] + TimeSpan.FromMinutes(r.Next(0, sposob+r.Next(0,r.Next(30))))));
                                             Invoke(new Action(() => richTextBox1.Text += "\n" + m.Name + ": " + timeMachine[sposob][m.Id]));
                                             break;
                                         case 2:
@@ -546,7 +567,7 @@ namespace Diploma
                                                     }
                                                 }
                                             }
-                                            timeMachine[sposob][m.Id] = DayHours(timeMachine[sposob][m.Id]);
+                                            timeMachine[sposob][m.Id] = DayHours((timeMachine[sposob][m.Id] - TimeSpan.FromMinutes(r.Next(0, sposob))));
                                             Invoke(new Action(() => richTextBox1.Text += "\n" + m.Name + ": " + timeMachine[sposob][m.Id]));
                                             break;
                                         case 3:
@@ -605,7 +626,7 @@ namespace Diploma
                                                     }
                                                 }
                                             }
-                                            timeMachine[sposob][m.Id] = DayHours(timeMachine[sposob][m.Id]);
+                                            timeMachine[sposob][m.Id] = DayHours((timeMachine[sposob][m.Id] - TimeSpan.FromMinutes(r.Next(0, r.Next(0,sposob)))));
                                             Invoke(new Action(() => richTextBox1.Text += "\n" + m.Name + ": " + timeMachine[sposob][m.Id]));
                                             break;
                                         default:
@@ -620,10 +641,10 @@ namespace Diploma
                                 Invoke(new Action(() => richTextBox1.Text += "\n Общее затраченное время: " + times[day-1,sposob]));
 
                                 
-                                break;
+                                /*break;*/
 #endregion
 #region Способ 2
-                            case 1:
+                           /* case 1:
 
                                 Invoke(new Action(() => richTextBox1.Text += "\n ----------"));
                                 Invoke(new Action(() => richTextBox1.Text += "\n Способ 2: "));
@@ -1320,11 +1341,11 @@ namespace Diploma
                                 Invoke(new Action(() => richTextBox1.Text += "\n Общее затраченное время: " + times[day - 1, sposob]));
 
 
-                                break;
+                                break;*/
 #endregion
-                            default:
+                          /*  default:
                                 break;
-                        }
+                        }*/
                         
                     }
                     backgroundWorker1.ReportProgress(100*day/daybox);
@@ -1334,50 +1355,27 @@ namespace Diploma
                 Invoke(new Action(() => richTextBox2.Text += "\n Всего дней обработано: " + daybox));
                 Invoke(new Action(() => richTextBox2.Text += "\n Всего проб взято: " + probemax));
                 Invoke(new Action(() => richTextBox2.Text += "\n Среднее число проб в день: " + probemax / daybox));
-                //Способ 1
-                Invoke(new Action(() => richTextBox2.Text += "\n ------------------------------------------------"));
-                Invoke(new Action(() => richTextBox2.Text += "\n Способ 1."));
-                Invoke(new Action(() => richTextBox2.Text += "\n ------------------------------------------------"));
-                //обнуляем значение среднего
-                average = TimeSpan.Zero;
-                //вычисляем средний результат
-                for (int i = 0; i < times.GetLength(0);i++)
+
+                //Способ
+                for (int j = 0; j < 24; j++)
                 {
-                        average += TimeSpan.FromSeconds(times[i,0].TotalSeconds);                    
+                    Invoke(new Action(() => richTextBox2.Text += "\n ------------------------------------------------"));
+                    Invoke(new Action(() => richTextBox2.Text += "\n Способ " + (j + 1) + ":"));
+                    Invoke(new Action(() => richTextBox2.Text += "\n ------------------------------------------------"));
+                    //обнуляем значение среднего
+                    average = TimeSpan.Zero;
+                    //вычисляем средний результат
+                    for (int i = 0; i < times.GetLength(0); i++)
+                    {
+                        average += TimeSpan.FromSeconds(times[i, j].TotalSeconds);
+                    }
+                    average = TimeSpan.FromSeconds(average.TotalSeconds / daybox);
+
+                    //публикуем значение среднего
+                    Invoke(new Action(() => richTextBox2.Text += "\n Среднее затраченное время: " + average));
+                    Invoke(new Action(() => richTextBox2.Text += "\n ------------------------------------------------"));
                 }
-                average = TimeSpan.FromSeconds(average.TotalSeconds / daybox);
-                
-                //публикуем значение среднего
-                Invoke(new Action(() => richTextBox2.Text += "\n Среднее затраченное время: " + average));
-                Invoke(new Action(() => richTextBox2.Text += "\n ------------------------------------------------"));
-                //Способ 2
-                Invoke(new Action(() => richTextBox2.Text += "\n ------------------------------------------------"));
-                Invoke(new Action(() => richTextBox2.Text += "\n Способ 2."));
-                Invoke(new Action(() => richTextBox2.Text += "\n ------------------------------------------------"));
-
-                average = TimeSpan.Zero;
-                for (int i = 0; i < times.GetLength(0); i++)
-                {
-                    average += TimeSpan.FromSeconds(times[i, 1].TotalSeconds);
-                }
-                average = TimeSpan.FromSeconds(average.TotalSeconds / daybox);
-
-                Invoke(new Action(() => richTextBox2.Text += "\n Среднее затраченное время: " + average));
-                Invoke(new Action(() => richTextBox2.Text += "\n ------------------------------------------------"));
-                //Способ 3
-                Invoke(new Action(() => richTextBox2.Text += "\n ------------------------------------------------"));
-                Invoke(new Action(() => richTextBox2.Text += "\n Способ 3."));
-                Invoke(new Action(() => richTextBox2.Text += "\n ------------------------------------------------"));
-
-                average = TimeSpan.Zero;
-                for (int i = 0; i < times.GetLength(0); i++)
-                {
-                    average += TimeSpan.FromMilliseconds(times[i,2].TotalMilliseconds);
-                }
-                average = TimeSpan.FromSeconds(average.TotalSeconds / daybox);
-
-                Invoke(new Action(() => richTextBox2.Text += "\n Среднее затраченное время: " + average));
-                Invoke(new Action(() => richTextBox2.Text += "\n ------------------------------------------------"));
+                    
                 
                 //меняем текст на кнопке
                 Invoke(new Action(() => button1.Text = "Reset"));

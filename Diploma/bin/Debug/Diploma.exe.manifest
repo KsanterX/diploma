@@ -43,14 +43,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Diploma.exe" size="114088">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Diploma.exe" size="101800">
       <assemblyIdentity name="Diploma" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>wLNdDZPlDfAIZFGwmJX/4fUjrNndXDFk9b7VnGX/FPc=</dsig:DigestValue>
+        <dsig:DigestValue>5n3Kp4cjdySnN6cEFWCG33pHMKO2U2CPxLBA4qrq9Bg=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
