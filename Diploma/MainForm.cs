@@ -1370,7 +1370,7 @@ namespace Diploma
                         average += TimeSpan.FromSeconds(times[i, j].TotalSeconds);
                     }
                     average = TimeSpan.FromSeconds(average.TotalSeconds / daybox);
-
+                    average = TimeSpan.FromTicks(average.Ticks - (average.Ticks % TimeSpan.TicksPerSecond));
                     //публикуем значение среднего
                     Invoke(new Action(() => richTextBox2.Text += "\n Среднее затраченное время: " + average));
                     Invoke(new Action(() => richTextBox2.Text += "\n ------------------------------------------------"));
