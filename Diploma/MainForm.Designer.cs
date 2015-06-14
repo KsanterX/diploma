@@ -35,8 +35,6 @@
             this.issledBox1 = new System.Windows.Forms.TextBox();
             this.issledBox2 = new System.Windows.Forms.TextBox();
             this.issledBox3 = new System.Windows.Forms.TextBox();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.dayBox = new System.Windows.Forms.NumericUpDown();
             this.issledBox6 = new System.Windows.Forms.TextBox();
             this.issledBox5 = new System.Windows.Forms.TextBox();
             this.issledBox4 = new System.Windows.Forms.TextBox();
@@ -60,18 +58,24 @@
             this.label16 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.richTextBox2 = new System.Windows.Forms.RichTextBox();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dayBox)).BeginInit();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.менюToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.справкаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.описаниеСпособовToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.оПрограммеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.задатьКоличествоДнейToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.выходToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.groupBox2.SuspendLayout();
+            this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(949, 314);
+            this.button1.Location = new System.Drawing.Point(938, 353);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(92, 51);
             this.button1.TabIndex = 0;
@@ -81,10 +85,10 @@
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(12, 12);
+            this.richTextBox1.Location = new System.Drawing.Point(12, 27);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.ReadOnly = true;
-            this.richTextBox1.Size = new System.Drawing.Size(309, 553);
+            this.richTextBox1.Size = new System.Drawing.Size(309, 538);
             this.richTextBox1.TabIndex = 1;
             this.richTextBox1.Text = "";
             // 
@@ -99,7 +103,7 @@
             // 
             // issledBox1
             // 
-            this.issledBox1.Location = new System.Drawing.Point(837, 12);
+            this.issledBox1.Location = new System.Drawing.Point(837, 39);
             this.issledBox1.Name = "issledBox1";
             this.issledBox1.ReadOnly = true;
             this.issledBox1.Size = new System.Drawing.Size(42, 20);
@@ -107,7 +111,7 @@
             // 
             // issledBox2
             // 
-            this.issledBox2.Location = new System.Drawing.Point(837, 44);
+            this.issledBox2.Location = new System.Drawing.Point(837, 71);
             this.issledBox2.Name = "issledBox2";
             this.issledBox2.ReadOnly = true;
             this.issledBox2.Size = new System.Drawing.Size(42, 20);
@@ -115,43 +119,11 @@
             // 
             // issledBox3
             // 
-            this.issledBox3.Location = new System.Drawing.Point(837, 75);
+            this.issledBox3.Location = new System.Drawing.Point(837, 102);
             this.issledBox3.Name = "issledBox3";
             this.issledBox3.ReadOnly = true;
             this.issledBox3.Size = new System.Drawing.Size(42, 20);
             this.issledBox3.TabIndex = 7;
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.dayBox);
-            this.groupBox1.Location = new System.Drawing.Point(932, 258);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(135, 41);
-            this.groupBox1.TabIndex = 8;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Количество дней";
-            // 
-            // dayBox
-            // 
-            this.dayBox.Location = new System.Drawing.Point(6, 15);
-            this.dayBox.Maximum = new decimal(new int[] {
-            10000,
-            0,
-            0,
-            0});
-            this.dayBox.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.dayBox.Name = "dayBox";
-            this.dayBox.Size = new System.Drawing.Size(120, 20);
-            this.dayBox.TabIndex = 43;
-            this.dayBox.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
             // 
             // issledBox6
             // 
@@ -171,7 +143,7 @@
             // 
             // issledBox4
             // 
-            this.issledBox4.Location = new System.Drawing.Point(837, 101);
+            this.issledBox4.Location = new System.Drawing.Point(837, 128);
             this.issledBox4.Name = "issledBox4";
             this.issledBox4.ReadOnly = true;
             this.issledBox4.Size = new System.Drawing.Size(42, 20);
@@ -206,7 +178,7 @@
             // 
             // issledBox12
             // 
-            this.issledBox12.Location = new System.Drawing.Point(837, 342);
+            this.issledBox12.Location = new System.Drawing.Point(837, 369);
             this.issledBox12.Name = "issledBox12";
             this.issledBox12.ReadOnly = true;
             this.issledBox12.Size = new System.Drawing.Size(42, 20);
@@ -214,7 +186,7 @@
             // 
             // issledBox11
             // 
-            this.issledBox11.Location = new System.Drawing.Point(837, 307);
+            this.issledBox11.Location = new System.Drawing.Point(837, 334);
             this.issledBox11.Name = "issledBox11";
             this.issledBox11.ReadOnly = true;
             this.issledBox11.Size = new System.Drawing.Size(42, 20);
@@ -222,7 +194,7 @@
             // 
             // issledBox10
             // 
-            this.issledBox10.Location = new System.Drawing.Point(837, 279);
+            this.issledBox10.Location = new System.Drawing.Point(837, 306);
             this.issledBox10.Name = "issledBox10";
             this.issledBox10.ReadOnly = true;
             this.issledBox10.Size = new System.Drawing.Size(42, 20);
@@ -248,7 +220,7 @@
             // 
             // issledBox9
             // 
-            this.issledBox9.Location = new System.Drawing.Point(837, 253);
+            this.issledBox9.Location = new System.Drawing.Point(837, 280);
             this.issledBox9.Name = "issledBox9";
             this.issledBox9.ReadOnly = true;
             this.issledBox9.Size = new System.Drawing.Size(42, 20);
@@ -256,7 +228,7 @@
             // 
             // issledBox8
             // 
-            this.issledBox8.Location = new System.Drawing.Point(837, 222);
+            this.issledBox8.Location = new System.Drawing.Point(837, 249);
             this.issledBox8.Name = "issledBox8";
             this.issledBox8.ReadOnly = true;
             this.issledBox8.Size = new System.Drawing.Size(42, 20);
@@ -317,7 +289,7 @@
             // 
             // issledBox13
             // 
-            this.issledBox13.Location = new System.Drawing.Point(837, 368);
+            this.issledBox13.Location = new System.Drawing.Point(837, 395);
             this.issledBox13.Name = "issledBox13";
             this.issledBox13.ReadOnly = true;
             this.issledBox13.Size = new System.Drawing.Size(42, 20);
@@ -359,29 +331,19 @@
             this.groupBox2.Controls.Add(this.issledBox5);
             this.groupBox2.Controls.Add(this.label16);
             this.groupBox2.Controls.Add(this.label15);
-            this.groupBox2.Location = new System.Drawing.Point(640, 1);
+            this.groupBox2.Location = new System.Drawing.Point(640, 27);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(245, 397);
             this.groupBox2.TabIndex = 40;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Общее число исследований";
             // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = global::Diploma.Properties.Resources.lQqTC_SXYoU;
-            this.pictureBox1.Location = new System.Drawing.Point(891, 12);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(208, 240);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox1.TabIndex = 41;
-            this.pictureBox1.TabStop = false;
-            // 
             // richTextBox2
             // 
-            this.richTextBox2.Location = new System.Drawing.Point(328, 12);
+            this.richTextBox2.Location = new System.Drawing.Point(328, 27);
             this.richTextBox2.Name = "richTextBox2";
             this.richTextBox2.ReadOnly = true;
-            this.richTextBox2.Size = new System.Drawing.Size(306, 553);
+            this.richTextBox2.Size = new System.Drawing.Size(306, 538);
             this.richTextBox2.TabIndex = 42;
             this.richTextBox2.Text = "";
             // 
@@ -392,6 +354,73 @@
             this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
             this.backgroundWorker1.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorker1_ProgressChanged);
             this.backgroundWorker1.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker1_RunWorkerCompleted);
+            // 
+            // menuStrip1
+            // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.менюToolStripMenuItem,
+            this.справкаToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(1104, 24);
+            this.menuStrip1.TabIndex = 43;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // менюToolStripMenuItem
+            // 
+            this.менюToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.задатьКоличествоДнейToolStripMenuItem,
+            this.выходToolStripMenuItem});
+            this.менюToolStripMenuItem.Name = "менюToolStripMenuItem";
+            this.менюToolStripMenuItem.Size = new System.Drawing.Size(53, 20);
+            this.менюToolStripMenuItem.Text = "Меню";
+            // 
+            // справкаToolStripMenuItem
+            // 
+            this.справкаToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.описаниеСпособовToolStripMenuItem,
+            this.оПрограммеToolStripMenuItem});
+            this.справкаToolStripMenuItem.Name = "справкаToolStripMenuItem";
+            this.справкаToolStripMenuItem.Size = new System.Drawing.Size(65, 20);
+            this.справкаToolStripMenuItem.Text = "Справка";
+            // 
+            // описаниеСпособовToolStripMenuItem
+            // 
+            this.описаниеСпособовToolStripMenuItem.Name = "описаниеСпособовToolStripMenuItem";
+            this.описаниеСпособовToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
+            this.описаниеСпособовToolStripMenuItem.Text = "Описание способов";
+            this.описаниеСпособовToolStripMenuItem.Click += new System.EventHandler(this.описаниеСпособовToolStripMenuItem_Click);
+            // 
+            // оПрограммеToolStripMenuItem
+            // 
+            this.оПрограммеToolStripMenuItem.Name = "оПрограммеToolStripMenuItem";
+            this.оПрограммеToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
+            this.оПрограммеToolStripMenuItem.Text = "О программе";
+            this.оПрограммеToolStripMenuItem.Click += new System.EventHandler(this.оПрограммеToolStripMenuItem_Click);
+            // 
+            // задатьКоличествоДнейToolStripMenuItem
+            // 
+            this.задатьКоличествоДнейToolStripMenuItem.Name = "задатьКоличествоДнейToolStripMenuItem";
+            this.задатьКоличествоДнейToolStripMenuItem.Size = new System.Drawing.Size(206, 22);
+            this.задатьКоличествоДнейToolStripMenuItem.Text = "Задать количество дней";
+            this.задатьКоличествоДнейToolStripMenuItem.Click += new System.EventHandler(this.задатьКоличествоДнейToolStripMenuItem_Click);
+            // 
+            // выходToolStripMenuItem
+            // 
+            this.выходToolStripMenuItem.Name = "выходToolStripMenuItem";
+            this.выходToolStripMenuItem.Size = new System.Drawing.Size(206, 22);
+            this.выходToolStripMenuItem.Text = "Выход";
+            this.выходToolStripMenuItem.Click += new System.EventHandler(this.выходToolStripMenuItem_Click);
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::Diploma.Properties.Resources.lQqTC_SXYoU;
+            this.pictureBox1.Location = new System.Drawing.Point(891, 29);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(208, 240);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 41;
+            this.pictureBox1.TabStop = false;
             // 
             // MainForm
             // 
@@ -408,21 +437,22 @@
             this.Controls.Add(this.issledBox9);
             this.Controls.Add(this.issledBox8);
             this.Controls.Add(this.issledBox4);
-            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.issledBox3);
             this.Controls.Add(this.issledBox2);
             this.Controls.Add(this.issledBox1);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.groupBox2);
+            this.Controls.Add(this.menuStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MainMenuStrip = this.menuStrip1;
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Диплом";
-            this.groupBox1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dayBox)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -437,7 +467,6 @@
         private System.Windows.Forms.TextBox issledBox1;
         private System.Windows.Forms.TextBox issledBox2;
         private System.Windows.Forms.TextBox issledBox3;
-        private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.TextBox issledBox6;
         private System.Windows.Forms.TextBox issledBox5;
         private System.Windows.Forms.TextBox issledBox4;
@@ -464,7 +493,13 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.RichTextBox richTextBox2;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
-        private System.Windows.Forms.NumericUpDown dayBox;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem менюToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem задатьКоличествоДнейToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem выходToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem справкаToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem описаниеСпособовToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem оПрограммеToolStripMenuItem;
     }
 }
 

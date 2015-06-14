@@ -43,14 +43,38 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Diploma.exe" size="101800">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Diploma.exe" size="143272">
       <assemblyIdentity name="Diploma" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>i6ez91pvLTPK4IMGR+hxUGuWnH86ucxVdaAjYadIufU=</dsig:DigestValue>
+        <dsig:DigestValue>tmDygw7/Okoj2iowWyf3wyYjS2W6h3mqeNCoaHaCytA=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="ru-RU\Diploma.resources.dll" size="32256">
+      <assemblyIdentity name="Diploma.resources" version="1.0.0.0" language="ru-RU" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>e6PMUeHOFIa8mY4akBut7mottxKEYDiR1bJjyrRygVs=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="EPPlus.dll" size="1119744">
+      <assemblyIdentity name="EPPlus" version="4.0.4.0" publicKeyToken="EA159FDAA78159A1" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>995tu+TlCQ+VQC4xH++BcC8xBxOBza7DEf2zWyNRxik=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
