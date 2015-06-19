@@ -122,6 +122,8 @@ namespace Diploma
             };
             //переменная для подсчета кумулятивной вероятности
             double cumulative = 0.0;
+            //Реальное время
+            TimeSpan realtime = TimeSpan.Zero;
             //вспомогательные переменные
             int ind = 0;
             int z = 0;
@@ -240,6 +242,12 @@ namespace Diploma
                 ws.Cells[1, 17].Style.Fill.PatternType = ExcelFillStyle.Solid;
                 ws.Cells[1, 17].Style.Fill.BackgroundColor.SetColor(Color.LightYellow);
 
+                ws.Cells[1, 18].Value = "Время в реальности";
+                ws.Cells[1, 18].Style.WrapText = true;
+                ws.Cells[1, 18].Style.VerticalAlignment = OfficeOpenXml.Style.ExcelVerticalAlignment.Center;
+                ws.Cells[1, 18].Style.Fill.PatternType = ExcelFillStyle.Solid;
+                ws.Cells[1, 18].Style.Fill.BackgroundColor.SetColor(Color.LightYellow);
+
                 ws.Cells[10, 15].Value = "Способ";
                 ws.Cells[10, 15].Style.Fill.PatternType = ExcelFillStyle.Solid;
                 ws.Cells[10, 15].Style.Fill.BackgroundColor.SetColor(Color.LightBlue);
@@ -249,7 +257,24 @@ namespace Diploma
                 ws.Cells[10, 16].Style.VerticalAlignment = OfficeOpenXml.Style.ExcelVerticalAlignment.Center;
                 ws.Cells[10, 16].Style.Fill.PatternType = ExcelFillStyle.Solid;
                 ws.Cells[10, 16].Style.Fill.BackgroundColor.SetColor(Color.LightBlue);
-               
+
+                ws.Cells[39, 14].Value = "Макс";
+                ws.Cells[39, 14].Style.WrapText = true;
+                ws.Cells[39, 14].Style.VerticalAlignment = OfficeOpenXml.Style.ExcelVerticalAlignment.Center;
+                ws.Cells[39, 14].Style.Fill.PatternType = ExcelFillStyle.Solid;
+                ws.Cells[39, 14].Style.Fill.BackgroundColor.SetColor(Color.Coral);
+                ws.Cells[39, 16].Style.Numberformat.Format = "hh:mm:ss";
+                ws.Cells[39, 16].Formula = "MAX(P11:P37)";
+                ws.Cells[39, 15].Formula = "INDEX(O11:O37,MATCH(P39,P11:P37,0))";
+
+                ws.Cells[40, 14].Value = "Мин";
+                ws.Cells[40, 14].Style.WrapText = true;
+                ws.Cells[40, 14].Style.VerticalAlignment = OfficeOpenXml.Style.ExcelVerticalAlignment.Center;
+                ws.Cells[40, 14].Style.Fill.PatternType = ExcelFillStyle.Solid;
+                ws.Cells[40, 14].Style.Fill.BackgroundColor.SetColor(Color.Coral);
+                ws.Cells[40, 16].Style.Numberformat.Format = "hh:mm:ss";
+                ws.Cells[40, 16].Formula = "MIN(P11:P37)";
+                ws.Cells[40, 15].Formula = "INDEX(O11:O37,MATCH(P40,P11:P37,0))";
 
             //цикл по количеству дней
             for (int day = 1; day <= daybox; day++)
@@ -384,6 +409,7 @@ namespace Diploma
 
 
                                 Invoke(new Action(() => richTextBox1.Text += "\n Время центрифугирования: " + time[sposob]));
+
 
                                 foreach (var m in mach.Values)
                                 {
@@ -709,7 +735,7 @@ namespace Diploma
                                                     }
                                                 }
                                             }
-                                            timeMachine[sposob][m.Id] = DayHours((timeMachine[sposob][m.Id] - TimeSpan.FromMinutes(r.Next(0, r.Next(0,sposob)))));
+                                            timeMachine[sposob][m.Id] = DayHours((timeMachine[sposob][m.Id] - TimeSpan.FromMinutes(r.Next(0, r.Next(0,sposob)))))-TimeSpan.FromMinutes(r.Next(10,25));
                                             Invoke(new Action(() => richTextBox1.Text += "\n" + m.Name + ": " + timeMachine[sposob][m.Id]));
                                             ws.Cells[rowIndex, m.Id + 3].Style.Numberformat.Format = "hh:mm:ss";
                                             ws.Cells[rowIndex, m.Id + 3].Value = timeMachine[sposob][m.Id];
@@ -720,6 +746,8 @@ namespace Diploma
                                 }
 
                                 time[sposob] = timeMachine[sposob].Max() + TimeSpan.FromSeconds(r.Next(60, Convert.ToInt32(time[sposob].TotalSeconds)));
+                                
+                                realtime = time[sposob] + TimeSpan.FromMinutes(r.Next(10,40));
 
                                 times[day - 1, sposob] = DayHours(time[sposob]);
 
@@ -732,6 +760,7 @@ namespace Diploma
                     }
                     backgroundWorker1.ReportProgress(100*day/daybox);
             }
+
                 //Вывод общих результатов               
                 Invoke(new Action(() => richTextBox2.Text += "\n Всего дней обработано: " + daybox));
                 ws.Cells[2, 15].Value = daybox;
@@ -739,6 +768,9 @@ namespace Diploma
                 ws.Cells[2, 16].Value = probemax;
                 Invoke(new Action(() => richTextBox2.Text += "\n Среднее число проб в день: " + probemax / daybox));
                 ws.Cells[2, 17].Value = probemax/daybox;
+                Invoke(new Action(() => richTextBox2.Text += "\n Время в реальности: " + realtime));
+                ws.Cells[2, 18].Style.Numberformat.Format = "hh:mm:ss";
+                ws.Cells[2, 18].Value = realtime;
 
                 //Способ
                 for (int j = 0; j < 27; j++)
