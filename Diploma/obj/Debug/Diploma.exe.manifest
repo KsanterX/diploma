@@ -43,14 +43,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Diploma.exe" size="144808">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Diploma.exe" size="145832">
       <assemblyIdentity name="Diploma" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>Ey36YhLBXUGABhnt5wtGPqtfHdc5Era7jCjihromgTs=</dsig:DigestValue>
+        <dsig:DigestValue>qlrSy5xBevBKc8VAwDgHvmSCGHN9DkQUk6rPzobpM40=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -62,7 +62,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>lGBoi0tUEEEarQqEgN3q2dnhvyg6X7FNDe9+YilPuoM=</dsig:DigestValue>
+        <dsig:DigestValue>iLGLRw/TwY8px6URKKCUCvnZW37arRgvP+6QsltJ4Gc=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

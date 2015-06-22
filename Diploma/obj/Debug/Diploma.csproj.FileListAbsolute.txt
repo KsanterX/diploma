@@ -44,3 +44,10 @@ C:\Users\Artem\Documents\Visual Studio 2013\Projects\diploma\Diploma\obj\Debug\D
 C:\Users\Artem\Documents\Visual Studio 2013\Projects\diploma\Diploma\obj\Debug\ru-RU\Diploma.resources.dll
 C:\Users\Artem\Documents\Visual Studio 2013\Projects\diploma\Diploma\obj\Debug\Diploma.InfoForm.resources
 C:\Users\Artem\Documents\Visual Studio 2013\Projects\diploma\Diploma\obj\Debug\Diploma.InputForm.resources
+E:\Users\Artem\Documents\Visual Studio 2013\Projects\diploma\Diploma\bin\Debug\ru-RU\Diploma.resources.dll
+E:\Users\Artem\Documents\Visual Studio 2013\Projects\diploma\Diploma\bin\Debug\EPPlus.xml
+E:\Users\Artem\Documents\Visual Studio 2013\Projects\diploma\Diploma\obj\Debug\Diploma.AboutBox1.resources
+E:\Users\Artem\Documents\Visual Studio 2013\Projects\diploma\Diploma\obj\Debug\Diploma.InfoForm.resources
+E:\Users\Artem\Documents\Visual Studio 2013\Projects\diploma\Diploma\obj\Debug\Diploma.InputForm.resources
+E:\Users\Artem\Documents\Visual Studio 2013\Projects\diploma\Diploma\obj\Debug\Diploma.AboutBox1.ru-RU.resources
+E:\Users\Artem\Documents\Visual Studio 2013\Projects\diploma\Diploma\obj\Debug\ru-RU\Diploma.resources.dll

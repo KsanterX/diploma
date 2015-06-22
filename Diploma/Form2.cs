@@ -27,7 +27,7 @@ namespace Diploma
         private void button1_Click(object sender, EventArgs e)
         {
             MainForm.daybox = Convert.ToInt32(dayBox.Text);
-            this.Close();
+            this.Hide();
         }
     }
 }

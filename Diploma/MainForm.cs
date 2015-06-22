@@ -89,6 +89,8 @@ namespace Diploma
             TimeSpan[,] times;
             //переменная для расчета среднего значения времени
             TimeSpan average;
+            //Helper
+            TimeSpan helper;
             //массив времени аппаратов
             TimeSpan[][] timeMachine = new TimeSpan[27][]
             {
@@ -120,6 +122,8 @@ namespace Diploma
                 new TimeSpan[4],
                 new TimeSpan[4],
             };
+            //массив остатков времени
+            TimeSpan[] ostatok = new TimeSpan[27];
             //переменная для подсчета кумулятивной вероятности
             double cumulative = 0.0;
             //Реальное время
@@ -293,6 +297,7 @@ namespace Diploma
                 z = 0;
                 c = 0;
                 Array.Clear(time,0,time.Length);
+                helper = TimeSpan.Zero;
                 
                 foreach (TimeSpan[] subArray in timeMachine)
                 {
@@ -395,6 +400,7 @@ namespace Diploma
                                 Invoke(new Action(() => richTextBox1.Text += "\n Способ " + (sposob+1) + ": "));
                                 Invoke(new Action(() => richTextBox1.Text += "\n ----------"));
                                 rowIndex++;
+                                //Запись в таблицу Excel
                                 if (sposob == 0)
                                 {
                                     ws.Cells[rowIndex, 1].Value = day;
@@ -425,6 +431,10 @@ namespace Diploma
                                                     timeMachine[sposob][m.Id] += TimeSpan.FromSeconds(30);
                                                 }
                                             }
+                                            if (timeMachine[sposob][m.Id] > TimeSpan.FromMinutes(480))
+                                            {
+                                                ostatok[sposob] += timeMachine[sposob][m.Id]-TimeSpan.FromMinutes(480);
+                                            }
                                             timeMachine[sposob][m.Id] = DayHours((timeMachine[sposob][m.Id] + TimeSpan.FromMinutes(r.Next(0,sposob))));
                                             Invoke(new Action(() => richTextBox1.Text += "\n" + m.Name + ": " + timeMachine[sposob][m.Id]));
                                             ws.Cells[rowIndex, m.Id + 3].Style.Numberformat.Format = "hh:mm:ss";
@@ -439,6 +449,10 @@ namespace Diploma
 
                                                     timeMachine[sposob][m.Id] += TimeSpan.FromMinutes(1);
                                                 }
+                                            }
+                                            if (timeMachine[sposob][m.Id] > TimeSpan.FromMinutes(480))
+                                            {
+                                                ostatok[sposob] += timeMachine[sposob][m.Id] - TimeSpan.FromMinutes(480);
                                             }
                                             timeMachine[sposob][m.Id] = DayHours((timeMachine[sposob][m.Id] + TimeSpan.FromMinutes(r.Next(0, sposob+r.Next(0,r.Next(30))))));
                                             Invoke(new Action(() => richTextBox1.Text += "\n" + m.Name + ": " + timeMachine[sposob][m.Id]));
@@ -674,6 +688,10 @@ namespace Diploma
                                                     }
                                                 }
                                             }
+                                            if (timeMachine[sposob][m.Id] > TimeSpan.FromMinutes(480))
+                                            {
+                                                ostatok[sposob] += timeMachine[sposob][m.Id] - TimeSpan.FromMinutes(480);
+                                            }
                                             timeMachine[sposob][m.Id] = DayHours((timeMachine[sposob][m.Id] - TimeSpan.FromMinutes(r.Next(0, sposob))));
                                             Invoke(new Action(() => richTextBox1.Text += "\n" + m.Name + ": " + timeMachine[sposob][m.Id]));
                                             ws.Cells[rowIndex, m.Id + 3].Style.Numberformat.Format = "hh:mm:ss";
@@ -735,7 +753,13 @@ namespace Diploma
                                                     }
                                                 }
                                             }
-                                            timeMachine[sposob][m.Id] = DayHours((timeMachine[sposob][m.Id] - TimeSpan.FromMinutes(r.Next(0, r.Next(0,sposob)))))-TimeSpan.FromMinutes(r.Next(10,25));
+                                            //остатки
+                                            if (timeMachine[sposob][m.Id] > TimeSpan.FromMinutes(480))
+                                            {
+                                                ostatok[sposob] += timeMachine[sposob][m.Id] - TimeSpan.FromMinutes(480);
+                                            }
+
+                                            timeMachine[sposob][m.Id] = DayHours((timeMachine[sposob][m.Id] - TimeSpan.FromMinutes(r.Next(0, r.Next(0,sposob)))))-TimeSpan.FromMinutes(r.Next(20,35));
                                             Invoke(new Action(() => richTextBox1.Text += "\n" + m.Name + ": " + timeMachine[sposob][m.Id]));
                                             ws.Cells[rowIndex, m.Id + 3].Style.Numberformat.Format = "hh:mm:ss";
                                             ws.Cells[rowIndex, m.Id + 3].Value = timeMachine[sposob][m.Id];
@@ -743,15 +767,35 @@ namespace Diploma
                                         default:
                                             break;
                                     }
-                                }
-
-                                time[sposob] = timeMachine[sposob].Max() + TimeSpan.FromSeconds(r.Next(60, Convert.ToInt32(time[sposob].TotalSeconds)));
+                                }                       
                                 
-                                realtime = time[sposob] + TimeSpan.FromMinutes(r.Next(10,40));
+                                time[sposob] = timeMachine[sposob].Max();
+
+                                if (time[sposob] < TimeSpan.FromMinutes(480) && ostatok[sposob] > TimeSpan.Zero)
+                                {
+
+                                    helper = TimeSpan.FromMinutes(480) - time[sposob];
+
+                                    for (int i = 0; i < Convert.ToInt32(helper.TotalMinutes); i++)
+                                    {
+                                        time[sposob] += TimeSpan.FromMinutes(1);
+                                        ostatok[sposob] -= TimeSpan.FromMinutes(1);
+                                    }
+
+                                    if (ostatok[sposob] < TimeSpan.Zero) { ostatok[sposob] = TimeSpan.Zero; }
+                                }
+                                else
+                                {
+                                    time[sposob] += TimeSpan.FromSeconds(r.Next(60, Convert.ToInt32(time[sposob].TotalSeconds)));
+                                }      
+                        
+       
+                                realtime = time[sposob] + TimeSpan.FromMinutes(r.Next(15,40));
 
                                 times[day - 1, sposob] = DayHours(time[sposob]);
 
                                 Invoke(new Action(() => richTextBox1.Text += "\n Общее затраченное время: " + times[day-1,sposob]));
+                                Invoke(new Action(() => richTextBox1.Text += "\n Остаток времени: " + ostatok[sposob]));
                                 ws.Cells[rowIndex, 7].Style.Numberformat.Format = "hh:mm:ss";
                                 ws.Cells[rowIndex, 7].Value = times[day - 1, sposob];
 
